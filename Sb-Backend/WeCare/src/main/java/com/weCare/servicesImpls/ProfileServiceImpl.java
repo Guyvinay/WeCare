@@ -1,4 +1,4 @@
-package com.weCare.serviceImpls;
+package com.weCare.servicesImpls;
 
 import com.weCare.services.ProfileService;
 

@@ -1,8 +1,34 @@
 package com.weCare.modals;
 
-import jakarta.persistence.Entity;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "profiles")
 public class Profile {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String profile_id;
+
+    private String email;
+
+    private String userName;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String passWord;
+
+    private String profile_picture;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
 }
