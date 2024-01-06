@@ -31,4 +31,15 @@ public class Profile {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+	public Profile(String email, String userName, String passWord, String profile_picture, Role role) {
+		super();
+		this.email = email;
+		this.userName = userName;
+		this.passWord = passWord;
+		this.profile_picture = profile_picture;
+		this.role = role;
+	}
+
+    
+    
 }

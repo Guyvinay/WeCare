@@ -18,10 +18,6 @@ import java.util.List;
 @Table(name = "patients")
 public class Patient extends Profile {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private  String prescription_id;
-    
     private String name;
 
     @Enumerated(EnumType.STRING)
@@ -37,9 +33,9 @@ public class Patient extends Profile {
     
     
     
-    public Patient(String profile_id, String email, String userName, String passWord, String profile_picture, Role role,
+    public Patient(String email, String userName, String passWord, String profile_picture, Role role,
 			String name, Gender gender, LocalDate date_of_birth, String mobile, AppointmentStatus appointment_status) {
-		super(profile_id, email, userName, passWord, profile_picture, role);
+		super(email, userName, passWord, profile_picture, role);
 		this.name = name;
 		this.gender = gender;
 		this.date_of_birth = date_of_birth;
@@ -51,7 +47,9 @@ public class Patient extends Profile {
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
-
+    @OneToOne
+    private Address address;
+    
 	@OneToMany(mappedBy = "patient")
     private List<Prescription> prescriptions = new ArrayList<>();
 
