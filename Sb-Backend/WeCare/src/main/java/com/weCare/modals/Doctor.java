@@ -1,15 +1,22 @@
 package com.weCare.modals;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
 public class Doctor extends Profile {
 
@@ -21,6 +28,9 @@ public class Doctor extends Profile {
 	
 	private String specialization;
 
+	private String qualification;
+
+
 	private String mobile;
 
 	@OneToMany(mappedBy = "doctor")
@@ -31,5 +41,21 @@ public class Doctor extends Profile {
 
 	@OneToMany(mappedBy = "doctor")
 	private List<Prescription> prescriptions = new ArrayList<>();
+
+	@OneToMany(mappedBy = "doctor")
+	private List<Appointment> appointments = new ArrayList<>();
+
+	@ManyToOne
+	@JoinColumn(name = "hospital_id")
+	private Hospital hospital;
+
+	public Doctor(String profile_id, String email, String userName, String passWord, String profile_picture, Role role,
+			String doctor_name, String specialization, String qualification, String mobile) {
+		super(profile_id, email, userName, passWord, profile_picture, role);
+		this.doctor_name = doctor_name;
+		this.specialization = specialization;
+		this.qualification = qualification;
+		this.mobile = mobile;
+	}
 	
 }

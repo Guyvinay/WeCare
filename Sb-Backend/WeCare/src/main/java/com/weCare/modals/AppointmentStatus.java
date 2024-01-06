@@ -1,7 +1,7 @@
 package com.weCare.modals;
 
 public enum AppointmentStatus {
-    COMPLETE,
+    SUCCESS,
     PENDING,
-    REVOKED
+    CANCELLED
 }

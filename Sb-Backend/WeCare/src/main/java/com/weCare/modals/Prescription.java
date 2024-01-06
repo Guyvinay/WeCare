@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -13,11 +15,18 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Table(name = "prescriptions")
 public class Prescription {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private  String prescription_id;
 
     private LocalDateTime prescription_date;
+
+    @ElementCollection
+    @CollectionTable(name = "prescription_medications", joinColumns = @JoinColumn(name = "prescription_id"))
+    private List<String> prescription_medications = new ArrayList<>();
+
+    private String additional_instructions;
 
     @ManyToOne
     @JoinColumn(name = "patient_id")
