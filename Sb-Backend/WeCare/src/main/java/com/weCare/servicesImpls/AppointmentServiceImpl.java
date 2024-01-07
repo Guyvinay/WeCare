@@ -2,6 +2,7 @@ package com.weCare.servicesImpls;
 
 import com.weCare.exceptions.NotFoundException;
 import com.weCare.modals.*;
+import com.weCare.repository.AppointmentRepository;
 import com.weCare.repository.DoctorRepository;
 import com.weCare.repository.HospitalRepository;
 import com.weCare.repository.PatientRepository;
@@ -25,6 +26,9 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Autowired
     private PatientRepository patientRepository;
 
+    @Autowired
+    private AppointmentRepository appointmentRepository;
+
     @Override
     public Appointment bookAppointment(
                             Appointment appointment,
@@ -41,11 +45,17 @@ public class AppointmentServiceImpl implements AppointmentService {
 
         Department department = appointment.getDepartment();
 
-        List<Doctor> doctors_with_same_department = doctorRepository.findByDepartmentAndHospital(department,hospital_id);
+        List<Doctor> doctors_with_same_department = doctorRepository
+                                                          .findByDepartmentAndHospital(
+                                                                  department,hospital_id);
+
+        System.out.println(doctors_with_same_department);
 
         Doctor random_doctor = doctors_with_same_department.get(
                 new Random().nextInt(doctors_with_same_department.size())
         );
+
+        System.out.println(random_doctor);
 
         appointment.setDoctor(random_doctor);
         random_doctor.getAppointments().add(appointment);
@@ -61,12 +71,18 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public Appointment getAppointmentById(String appointment_id) {
-        return null;
+
+        return appointmentRepository
+                .findById(appointment_id).orElseThrow(()->
+                        new NotFoundException("Doctor with id: "+appointment_id+", not found!!!")
+                );
     }
 
     @Override
     public List<Appointment> getAllAppointments() {
-        return null;
+        List<Appointment> appointments = appointmentRepository.findAll();
+        if(appointments.isEmpty()) throw new NotFoundException("Appointment Not Found!!!");
+        return appointments;
     }
 
     @Override

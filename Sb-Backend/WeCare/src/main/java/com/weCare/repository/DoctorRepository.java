@@ -13,4 +13,6 @@ public interface DoctorRepository extends JpaRepository<Doctor, String> {
     @Query("SELECT d from Doctor d join d.hospital h where h.hospital_id=:hospital_id AND d.department=:department")
     public List<Doctor> findByDepartmentAndHospital(Department department, String hospital_id);
 
+//    @Query("SELECT d from Doctor d where d.department=:department")
+//    public List<Doctor> findByDepartmentAndHospital(Department department);
 }
