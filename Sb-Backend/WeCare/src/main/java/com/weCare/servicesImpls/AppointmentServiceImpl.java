@@ -39,10 +39,10 @@ public class AppointmentServiceImpl implements AppointmentService {
 
         Department department = appointment.getDepartment();
 
-        List<Doctor> doctor_with_same_department = doctorRepository.findByDepartmentAndHospital(department,hospital_id);
+        List<Doctor> doctors_with_same_department = doctorRepository.findByDepartmentAndHospital(department,hospital_id);
 
-        Doctor random_doctor = doctor_with_same_department.get(
-                new Random().nextInt(doctor_with_same_department.size())
+        Doctor random_doctor = doctors_with_same_department.get(
+                new Random().nextInt(doctors_with_same_department.size())
         );
 
         appointment.setDoctor(random_doctor);

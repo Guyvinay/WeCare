@@ -2,6 +2,8 @@ package com.weCare.servicesImpls;
 
 import java.util.List;
 
+import com.weCare.exceptions.NotFoundException;
+import com.weCare.modals.Doctor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,19 +19,25 @@ public class ProfileServiceImpl implements ProfileService {
 	
 	@Override
 	public Profile saveProfile(Profile profile) {
+
         return profileRepository.save(profile);
 	}
 
 	@Override
 	public Profile getProfileById(String profile_id) {
-		
-		return null;
+
+		return profileRepository
+				.findById(profile_id).orElseThrow(()->
+						new NotFoundException("Profile with id: "+profile_id+", not found!!!")
+				);
 	}
 
 	@Override
 	public List<Profile> getAllProfiles() {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<Profile> profiles = profileRepository.findAll();
+		if(profiles.isEmpty())throw new NotFoundException("No Profiles Found!!!");
+		return profiles;
 	}
 
 	@Override
@@ -40,8 +48,12 @@ public class ProfileServiceImpl implements ProfileService {
 
 	@Override
 	public String deleteProfileById(String profile_id) {
-		// TODO Auto-generated method stub
-		return null;
+		Profile profile = profileRepository
+				.findById(profile_id).orElseThrow(()->
+						new NotFoundException("Profile with id: "+profile_id+", not found!!!")
+				);
+		profileRepository.delete(profile);
+		return "Profile with id: "+profile_id+", deleted successfully";
 	}
 
 }

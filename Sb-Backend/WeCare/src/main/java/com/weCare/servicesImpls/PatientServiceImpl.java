@@ -1,25 +1,39 @@
 package com.weCare.servicesImpls;
 
+import com.weCare.exceptions.NotFoundException;
+import com.weCare.modals.Doctor;
 import com.weCare.modals.Patient;
+import com.weCare.repository.PatientRepository;
 import com.weCare.services.PatientService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public class PatientServiceImpl implements PatientService {
 
+    @Autowired
+    private PatientRepository patientRepository;
+
     @Override
     public Patient savePatient(Patient patient) {
-        return null;
+
+        return patientRepository.save(patient);
     }
 
     @Override
     public Patient getPatientById(String patient_id) {
-        return null;
+
+        return patientRepository
+                .findById(patient_id).orElseThrow(()->
+                        new NotFoundException("Hospital with id: "+patient_id+", not found!!!")
+                );
     }
 
     @Override
     public List<Patient> getAllPatients() {
-        return null;
+        List<Patient> patients = patientRepository.findAll();
+        if(patients.isEmpty())throw new NotFoundException("No Patients Found!!!");
+        return patients;
     }
 
     @Override
@@ -29,6 +43,11 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public String deletePatientById(String patient_id) {
-        return null;
+        Patient patient = patientRepository
+                .findById(patient_id).orElseThrow(()->
+                        new NotFoundException("Hospital with id: "+patient_id+", not found!!!")
+                );
+        patientRepository.delete(patient);
+        return "Patient with id: "+patient_id+", deleted successfully";
     }
 }
