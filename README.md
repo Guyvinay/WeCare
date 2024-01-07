@@ -1,5 +1,5 @@
 # WeCare
-
+(In Development)
 # Hospital Management System
 
 The Hospital Management System is a comprehensive application designed to automate and streamline various aspects of hospital operations. It provides functionalities for patient management, appointment scheduling, billing, prescription handling, and more. This system aims to enhance the efficiency of healthcare services by offering a centralized platform for both healthcare providers and patients.
