@@ -6,9 +6,11 @@ import com.weCare.modals.Patient;
 import com.weCare.repository.PatientRepository;
 import com.weCare.services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class PatientServiceImpl implements PatientService {
 
     @Autowired

@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController(value = "/profiles")
+@RestController
+@RequestMapping(value = "/profiles")
 public class ProfileController {
 
     @Autowired

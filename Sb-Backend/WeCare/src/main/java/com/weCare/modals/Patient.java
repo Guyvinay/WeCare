@@ -1,6 +1,8 @@
 package com.weCare.modals;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -18,21 +20,21 @@ import java.util.List;
 @Table(name = "patients")
 public class Patient extends Profile {
 
+    @NotBlank(message = "Patient name cannot be blank!!!")
     private String name;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
+    @NotNull(message = "date_of_birth cannot be blank!!!")
     private LocalDate date_of_birth;
 
+    @NotBlank(message = "Mobile cannot be blank!!!")
     private String mobile;
 
     @Enumerated(EnumType.STRING)
     private AppointmentStatus appointment_status;
 
-    
-    
-    
     public Patient(String email, String userName, String passWord, String profile_picture, Role role,
 			String name, Gender gender, LocalDate date_of_birth, String mobile, AppointmentStatus appointment_status) {
 		super(email, userName, passWord, profile_picture, role);
@@ -59,8 +61,12 @@ public class Patient extends Profile {
     @OneToMany(mappedBy = "patient")
     private List<Appointment> appointments =  new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name = "hospital_id")
-    private Hospital hospital;
+    @ManyToMany
+    @JoinTable(
+            name = "patient_hospital",
+            joinColumns = @JoinColumn(name = "patient_id"),
+            inverseJoinColumns = @JoinColumn(name = "hospital_id")
+    )
+    private List<Hospital> hospitals = new ArrayList<>();
 
 }

@@ -7,21 +7,23 @@ import com.weCare.repository.HospitalRepository;
 import com.weCare.repository.PatientRepository;
 import com.weCare.services.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Random;
 
+@Service
 public class AppointmentServiceImpl implements AppointmentService {
 
     @Autowired
     private HospitalRepository hospitalRepository;
 
     @Autowired
-    DoctorRepository doctorRepository;
+    private DoctorRepository doctorRepository;
 
     @Autowired
-    PatientRepository patientRepository;
+    private PatientRepository patientRepository;
 
     @Override
     public Appointment bookAppointment(

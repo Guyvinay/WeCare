@@ -25,12 +25,13 @@ public class Hospital {
     private String description;
 
     @OneToOne
+    @PrimaryKeyJoinColumn(name = "address_id")
     private Address address;
 
     @OneToMany(mappedBy = "hospital")
     private List<Doctor> doctors = new ArrayList<>();
 
-    @OneToMany(mappedBy = "hospital")
+    @ManyToMany(mappedBy = "hospitals")
     private List<Patient> patients = new ArrayList<>();
 
     @OneToMany(mappedBy = "hospital")
