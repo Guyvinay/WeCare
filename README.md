@@ -54,6 +54,9 @@ The Hospital Management System is a comprehensive application designed to automa
 
 The database schema includes the following entities:
 
+![Screenshot 2024-01-07 052913](https://github.com/Guyvinay/WeCare/assets/119345842/cbd2b4dc-fd6a-457e-a09f-bc453483219b)
+
+
 1. **User:** Represents users of the system, including doctors, nurses, and administrators.
 2. **Role:** Defines roles assigned to users (e.g., ROLE_ADMIN, ROLE_DOCTOR).
 3. **Patient:** Stores information about patients, including personal details and medical history.
