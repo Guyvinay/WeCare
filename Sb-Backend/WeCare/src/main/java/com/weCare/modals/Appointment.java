@@ -21,6 +21,9 @@ public class Appointment {
     private LocalDateTime appointment_time;
 
     @Enumerated(EnumType.STRING)
+    private Department department;
+
+    @Enumerated(EnumType.STRING)
     private AppointmentStatus status;
 
     @ManyToOne

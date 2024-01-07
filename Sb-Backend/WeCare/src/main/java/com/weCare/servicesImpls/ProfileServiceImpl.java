@@ -17,8 +17,7 @@ public class ProfileServiceImpl implements ProfileService {
 	
 	@Override
 	public Profile saveProfile(Profile profile) {
-		Profile savedProfile = profileRepository.save(profile);
-		return savedProfile;
+        return profileRepository.save(profile);
 	}
 
 	@Override
