@@ -1,9 +1,13 @@
 package com.weCare.modals;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,23 +22,35 @@ public class Hospital {
     @GeneratedValue(strategy = GenerationType.UUID)
     private  String hospital_id;
 
+    @NotBlank(message = "Hospital name cannot be blank!!!")
     private String hospital_name;
 
+    @NotNull(message = "contact cannot be blank!!!")
+    @Column(unique = true)
     private String contact;
+
 
     private String description;
 
     @OneToOne
     @PrimaryKeyJoinColumn(name = "address_id")
+    @JsonIgnore
+    @ToString.Exclude
     private Address address;
 
     @OneToMany(mappedBy = "hospital")
+    @JsonIgnore
+    @ToString.Exclude
     private List<Doctor> doctors = new ArrayList<>();
 
     @ManyToMany(mappedBy = "hospitals")
+    @JsonIgnore
+    @ToString.Exclude
     private List<Patient> patients = new ArrayList<>();
 
     @OneToMany(mappedBy = "hospital")
+    @JsonIgnore
+    @ToString.Exclude
     private List<Appointment> appointments = new ArrayList<>();
 
 }

@@ -10,6 +10,7 @@ import com.weCare.services.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Random;
@@ -38,16 +39,20 @@ public class AppointmentServiceImpl implements AppointmentService {
                              .findById(hospital_id).orElseThrow(()->
                                 new NotFoundException("Hospital with id: "+hospital_id+", not found!!!")
                               );
+        System.out.println(hospital);
         Patient patient = patientRepository
                 .findById(patient_id).orElseThrow(()->
                         new NotFoundException("Patient with id: "+patient_id+", not found!!!")
                 );
+        System.out.println(patient);
 
         Department department = appointment.getDepartment();
 
         List<Doctor> doctors_with_same_department = doctorRepository
                                                           .findByDepartmentAndHospital(
                                                                   department,hospital_id);
+        if(doctors_with_same_department.isEmpty())
+            throw new NotFoundException("Doctors with:"+department+", not found");
 
         System.out.println(doctors_with_same_department);
 
@@ -57,16 +62,24 @@ public class AppointmentServiceImpl implements AppointmentService {
 
         System.out.println(random_doctor);
 
+        appointment.setAppointment_time(LocalDateTime.now());
+
+        patient.setDoctor(random_doctor);
+        patient.setAppointment_status(AppointmentStatus.SUCCESS);
+        random_doctor.getPatients().add(patient);
+
         appointment.setDoctor(random_doctor);
         random_doctor.getAppointments().add(appointment);
 
         appointment.setPatient(patient);
         patient.getAppointments().add(appointment);
 
+        appointment.setHospital(hospital);
         hospital.getAppointments().add(appointment);
 
+        appointmentRepository.save(appointment);
 
-        return null;
+        return appointmentRepository.save(appointment);
     }
 
     @Override

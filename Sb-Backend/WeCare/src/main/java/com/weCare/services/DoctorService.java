@@ -14,6 +14,8 @@ public interface DoctorService {
 
     public Doctor updateDoctor(String doctor_id, Doctor doctor);
 
+    public Doctor updateDoctorHospital(String doctor_id, String hospital_id);
+
     public String deleteDoctorById(String doctor_id);
     
 }

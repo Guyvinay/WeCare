@@ -3,6 +3,7 @@ package com.weCare.modals;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -30,19 +31,29 @@ public class Doctor extends Profile {
 	private String mobile;
 
 	@OneToOne
+	@JsonIgnore
+	@ToString.Exclude
 	private Address address;
 
 	@OneToMany(mappedBy = "doctor")
+	@JsonIgnore
+	@ToString.Exclude
 	private List<Patient> patients = new ArrayList<>();
 
 	@OneToMany(mappedBy = "doctor")
+	@JsonIgnore
+	@ToString.Exclude
 	private List<Prescription> prescriptions = new ArrayList<>();
 
 	@OneToMany(mappedBy = "doctor")
+	@JsonIgnore
+	@ToString.Exclude
 	private List<Appointment> appointments = new ArrayList<>();
 
 	@ManyToOne
 	@JoinColumn(name = "hospital_id")
+	@JsonIgnore
+	@ToString.Exclude
 	private Hospital hospital;
 
 	public Doctor(String email, String userName, String passWord, String profile_picture, Role role,

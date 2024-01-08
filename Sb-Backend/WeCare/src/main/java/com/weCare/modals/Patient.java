@@ -1,5 +1,6 @@
 package com.weCare.modals;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -48,18 +49,23 @@ public class Patient extends Profile {
     
     @ManyToOne
     @JoinColumn(name = "doctor_id")
+    @JsonIgnore
     private Doctor doctor;
 
     @OneToOne
+    @JsonIgnore
     private Address address;
     
 	@OneToMany(mappedBy = "patient")
+    @JsonIgnore
     private List<Prescription> prescriptions = new ArrayList<>();
 
     @OneToMany(mappedBy = "patient")
+    @JsonIgnore
     private List<Invoice> invoices = new ArrayList<>();
 
     @OneToMany(mappedBy = "patient")
+    @JsonIgnore
     private List<Appointment> appointments =  new ArrayList<>();
 
     @ManyToMany
@@ -68,6 +74,7 @@ public class Patient extends Profile {
             joinColumns = @JoinColumn(name = "patient_id"),
             inverseJoinColumns = @JoinColumn(name = "hospital_id")
     )
+    @JsonIgnore
     private List<Hospital> hospitals = new ArrayList<>();
 
 }
