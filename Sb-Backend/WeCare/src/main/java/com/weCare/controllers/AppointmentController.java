@@ -28,6 +28,21 @@ public class AppointmentController {
                 HttpStatus.ACCEPTED
         );
     }
+    
+    @PostMapping(value = "/{hospital_id}/{patient_id}/{doctor_id}")
+    public ResponseEntity<Appointment> bookAppointmentWithDoctor(
+                                            @PathVariable("patient_id")String patient_id,
+                                            @PathVariable("doctor_id")String doctor_id,
+                                            @PathVariable("hospital_id")String hospital_id,
+                                            @RequestBody Appointment appointment
+                                        ){
+
+        return new ResponseEntity<Appointment>(
+                appointmentService.bookAppointmentWithDoctor(appointment, hospital_id, patient_id,doctor_id),
+                HttpStatus.ACCEPTED
+        );
+    }
+    
     @GetMapping(value = "/{appointment_id}")
     public ResponseEntity<Appointment> getAppointmentById(
                       @PathVariable("appointment_id") String appointment_id){
@@ -37,6 +52,7 @@ public class AppointmentController {
                 HttpStatus.ACCEPTED
         );
     }
+    
     @GetMapping()
     public ResponseEntity<List<Appointment>> getAllAppointments(){
         return new ResponseEntity<List<Appointment>>(
@@ -44,6 +60,7 @@ public class AppointmentController {
                 HttpStatus.ACCEPTED
         );
     }
+    
     @PutMapping(value = "/{appointment_id}")
     public ResponseEntity<Appointment> updateAppointment( @PathVariable("appointment_id") String appointment_id,
                                                   @RequestBody Appointment appointment){
@@ -52,6 +69,7 @@ public class AppointmentController {
                 HttpStatus.ACCEPTED
         );
     }
+    
     @DeleteMapping(value = "/{appointment_id}")
     public ResponseEntity<String> deleteAppointmentById(@PathVariable("appointment_id") String appointment_id){
         return new ResponseEntity<String>(

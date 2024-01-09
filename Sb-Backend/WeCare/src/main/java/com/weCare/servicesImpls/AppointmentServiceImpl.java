@@ -81,6 +81,74 @@ public class AppointmentServiceImpl implements AppointmentService {
 
         return appointmentRepository.save(appointment);
     }
+    
+    @Override
+	public Appointment bookAppointmentWithDoctor(
+			                     Appointment appointment, 
+			                     String hospital_id, 
+			                     String patient_id,
+			                     String doctor_id) {
+		
+    	Hospital hospital = hospitalRepository
+                .findById(hospital_id).orElseThrow(()->
+                   new NotFoundException("Hospital with id: "+hospital_id+", not found!!!")
+                 );
+    	
+    	Patient patient = patientRepository
+                .findById(patient_id).orElseThrow(()->
+                        new NotFoundException("Patient with id: "+patient_id+", not found!!!")
+                );
+    	Doctor doctor = doctorRepository
+                .findById(doctor_id).orElseThrow(()->
+                        new NotFoundException("Doctor with id: "+doctor_id+", not found!!!")
+                );
+
+    	Department appointment_depart = appointment.getDepartment();
+    	Department doctor_depart = doctor.getDepartment();
+    	
+    	if(!doctor_depart.equals(appointment_depart)) {
+    		
+            List<Doctor> doctors_with_same_department = doctorRepository
+                                                           .findByDepartmentAndHospital(
+                                                            		  appointment_depart,hospital_id);
+            
+            if(doctors_with_same_department.isEmpty())
+                throw new NotFoundException("Doctors with:"+appointment_depart+", not found");
+            
+            String doctors_available = "";
+            for(Doctor doc:doctors_with_same_department) {
+            	doctors_available+=doc.getProfile_id() + ", ";
+            }
+           
+    		throw new NotFoundException(
+    				"You chose "+appointment_depart+
+    				", but Selected Doctor sees "+doctor_depart+
+    				". Perhaps, You can choose any of these, " +
+    				       doctors_available
+    				);
+    		
+    	}
+    	
+    	appointment.setAppointment_time(LocalDateTime.now());
+
+        patient.setDoctor(doctor);
+        patient.setAppointment_status(AppointmentStatus.SUCCESS);
+        doctor.getPatients().add(patient);
+
+        appointment.setDoctor(doctor);
+        doctor.getAppointments().add(appointment);
+
+        appointment.setPatient(patient);
+        patient.getAppointments().add(appointment);
+
+        appointment.setHospital(hospital);
+        hospital.getAppointments().add(appointment);
+
+        appointmentRepository.save(appointment);
+
+        return appointmentRepository.save(appointment);
+
+	}
 
     @Override
     public Appointment getAppointmentById(String appointment_id) {
@@ -107,4 +175,6 @@ public class AppointmentServiceImpl implements AppointmentService {
     public String deleteAppointmentById(String appointment_id) {
         return null;
     }
+
+	
 }

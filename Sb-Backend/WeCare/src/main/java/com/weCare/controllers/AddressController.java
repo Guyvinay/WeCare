@@ -23,13 +23,16 @@ public class AddressController {
                 HttpStatus.ACCEPTED
         );
     }
+    
     @GetMapping(value = "/{address_id}")
-    public ResponseEntity<Address> getAddressById(@PathVariable("address_id") String address_id){
+    public ResponseEntity<Address> getAddressById(
+    		                           @PathVariable("address_id") String address_id){
         return new ResponseEntity<Address>(
                 addressService.getAddressById(address_id),
                 HttpStatus.ACCEPTED
         );
     }
+    
     @GetMapping()
     public ResponseEntity<List<Address>> getAllAddresses(){
         return new ResponseEntity<List<Address>>(
@@ -37,16 +40,20 @@ public class AddressController {
                 HttpStatus.ACCEPTED
         );
     }
+    
     @PutMapping("/{address_id}")
-    public ResponseEntity<Address> updateAddress( @PathVariable("address_id") String address_id,
-                                                  @RequestBody Address address){
+    public ResponseEntity<Address> updateAddress( 
+    		                         @PathVariable("address_id") String address_id,
+                                     @RequestBody Address address){
         return new ResponseEntity<Address>(
                 addressService.updateAddress(address_id, address),
                 HttpStatus.ACCEPTED
         );
     }
+    
     @DeleteMapping(value = "/{address_id}")
-    public ResponseEntity<String> deleteAddressById(@PathVariable("address_id") String address_id){
+    public ResponseEntity<String> deleteAddressById(
+    		                        @PathVariable("address_id") String address_id){
         return new ResponseEntity<String>(
                 addressService.deleteAddressById(address_id),
                 HttpStatus.ACCEPTED

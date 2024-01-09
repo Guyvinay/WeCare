@@ -10,7 +10,11 @@ public interface AppointmentService {
             Appointment appointment,
             String hospital_id, String patient_id
     );
-
+    
+    public Appointment bookAppointmentWithDoctor(
+            Appointment appointment,
+            String hospital_id, String patient_id, String doctor_id
+    );
     public Appointment getAppointmentById(String appointment_id);
 
     public List<Appointment> getAllAppointments();
