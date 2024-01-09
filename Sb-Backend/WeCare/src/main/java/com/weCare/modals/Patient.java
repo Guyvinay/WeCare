@@ -34,6 +34,7 @@ public class Patient extends Profile {
     @Column(unique = true)
     private String mobile;
 
+    //to be discontinued
     @Enumerated(EnumType.STRING)
     private AppointmentStatus appointment_status;
 
@@ -68,12 +69,7 @@ public class Patient extends Profile {
     @JsonIgnore
     private List<Appointment> appointments =  new ArrayList<>();
 
-    @ManyToMany
-    @JoinTable(
-            name = "patient_hospital",
-            joinColumns = @JoinColumn(name = "patient_id"),
-            inverseJoinColumns = @JoinColumn(name = "hospital_id")
-    )
+    @ManyToMany(mappedBy = "patients")
     @JsonIgnore
     private List<Hospital> hospitals = new ArrayList<>();
 

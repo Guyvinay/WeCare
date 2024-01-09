@@ -39,12 +39,17 @@ public class Hospital {
     private Address address;
 
     @OneToMany(mappedBy = "hospital")
-    @JsonIgnore
+//    @JsonIgnore
     @ToString.Exclude
     private List<Doctor> doctors = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "hospitals")
-    @JsonIgnore
+    @ManyToMany()
+    @JoinTable(
+            name = "patient_hospital",
+            joinColumns = @JoinColumn(name = "patient_id"),
+            inverseJoinColumns = @JoinColumn(name = "hospital_id")
+    )
+//    @JsonIgnore
     @ToString.Exclude
     private List<Patient> patients = new ArrayList<>();
 
