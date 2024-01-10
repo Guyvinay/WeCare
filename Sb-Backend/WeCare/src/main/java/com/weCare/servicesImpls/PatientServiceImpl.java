@@ -38,6 +38,12 @@ public class PatientServiceImpl implements PatientService {
                         new NotFoundException("Hospital with id: "+patient_id+", not found!!!")
                 );
     }
+    
+    @Override
+    public List<Patient> getPatientByNamePattern(String patient_name) {
+    	List<Patient> patients = patientRepository.findByNamePattern("%"+patient_name+"%");
+    	return patients;
+    }
 
     @Override
     public List<Patient> getAllPatients() {
@@ -60,4 +66,5 @@ public class PatientServiceImpl implements PatientService {
         patientRepository.delete(patient);
         return "Patient with id: "+patient_id+", deleted successfully";
     }
+
 }
