@@ -47,7 +47,7 @@ public class Doctor extends Profile {
 	private String mobile;
 
 	@OneToOne
-	@JsonIgnore
+//	@JsonIgnore
 	@ToString.Exclude
 	private Address address;
 
@@ -68,13 +68,13 @@ public class Doctor extends Profile {
 
 	@OneToMany(mappedBy = "doctor")
 	@JsonIgnore
-	@ToString.Exclude
+//	@ToString.Exclude
 	private List<Appointment> appointments = new ArrayList<>();
 
 	@ManyToOne
 	@JoinColumn(name = "hospital_id")
 	@JsonIgnore
-	@ToString.Exclude
+//	@ToString.Exclude
 	private Hospital hospital;
 
 	public Doctor(String email, String userName, String passWord, String profile_picture, Role role,

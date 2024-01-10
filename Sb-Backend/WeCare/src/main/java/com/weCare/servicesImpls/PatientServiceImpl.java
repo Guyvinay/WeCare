@@ -1,14 +1,16 @@
 package com.weCare.servicesImpls;
 
-import com.weCare.exceptions.NotFoundException;
-import com.weCare.modals.Doctor;
-import com.weCare.modals.Patient;
-import com.weCare.repository.PatientRepository;
-import com.weCare.services.PatientService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.weCare.exceptions.NotFoundException;
+import com.weCare.modals.Address;
+import com.weCare.modals.Patient;
+import com.weCare.repository.AddressRepository;
+import com.weCare.repository.PatientRepository;
+import com.weCare.services.PatientService;
 
 @Service
 public class PatientServiceImpl implements PatientService {
@@ -16,9 +18,15 @@ public class PatientServiceImpl implements PatientService {
     @Autowired
     private PatientRepository patientRepository;
 
+    @Autowired
+    private AddressRepository addressRepository;
+    
     @Override
     public Patient savePatient(Patient patient) {
 
+    	Address address = addressRepository.save(patient.getAddress());
+    	patient.setAddress(address);
+    	
         return patientRepository.save(patient);
     }
 

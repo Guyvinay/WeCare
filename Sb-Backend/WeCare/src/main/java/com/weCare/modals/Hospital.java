@@ -33,9 +33,8 @@ public class Hospital {
     private String description;
 
     @OneToOne
-    @PrimaryKeyJoinColumn(name = "address_id")
-    @JsonIgnore
-    @ToString.Exclude
+//    @JsonIgnore
+//    @ToString.Exclude
     private Address address;
 
     @OneToMany(mappedBy = "hospital")

@@ -16,12 +16,19 @@ import com.weCare.services.DoctorService;
   "email": "doctor_demo_one@gmail.com",
   "userName": "doctor_demo_one",
   "passWord": "string",
-  "profile_picture": "string",
-  "role": "ENT",
+  "profile_picture": "doctor_demo_one",
+  "role": "DOCTOR",
   "doctor_name": "doctor_demo_one",
-  "department": "DENTISTRY",
-  "qualification": "string",
-  "mobile": "9876543211"
+  "department": "ENT",
+  "qualification": "Qualifications-for-doctor_demo_one",
+  "mobile": "8765432123",
+  "address": {
+    "locality": "Sandalpur",
+    "city": "Patna",
+    "zip_code": 800006,
+    "state": "Bihar",
+    "country": "India"
+  }
 }
  */
 

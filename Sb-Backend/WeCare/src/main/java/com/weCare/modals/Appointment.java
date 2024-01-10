@@ -39,6 +39,9 @@ public class Appointment {
 //    @JsonIgnore
     private Patient patient;
 
+    @OneToOne()
+    private Prescription prescription;
+
     @ManyToOne
     @JoinColumn(name = "hospital_id")
     @JsonIgnore

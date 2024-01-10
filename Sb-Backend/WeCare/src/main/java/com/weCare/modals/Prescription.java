@@ -23,10 +23,16 @@ public class Prescription {
     private LocalDateTime prescription_date;
 
     @ElementCollection
-    @CollectionTable(name = "prescription_medications", joinColumns = @JoinColumn(name = "prescription_id"))
+    @CollectionTable(
+            name = "prescription_medications",
+            joinColumns = @JoinColumn(name = "prescription_id")
+    )
     private List<String> prescription_medications = new ArrayList<>();
 
     private String additional_instructions;
+
+    @OneToOne(mappedBy = "prescription")
+    private Appointment  appointment;
 
     @ManyToOne
     @JoinColumn(name = "patient_id")

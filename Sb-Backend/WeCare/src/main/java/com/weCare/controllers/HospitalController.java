@@ -9,6 +9,21 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/*
+ {
+  "hospital_name": "AIIMS Patna",
+  "contact": "9876543211",
+  "description": "This is AIIMS Hospital Patna",
+  "address": {
+    "locality": "Bazar Samiti",
+    "city": "Patna",
+    "zip_code": 800006,
+    "state": "Bihar",
+    "country": "India"
+  }
+}
+ */
+
 @RestController
 @RequestMapping(value = "/hospitals")
 public class HospitalController {

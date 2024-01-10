@@ -50,7 +50,7 @@ public class Patient extends Profile {
     private List<Doctor> doctors;
 
     @OneToOne
-    @JsonIgnore
+//    @JsonIgnore
     private Address address;
     
 	@OneToMany(mappedBy = "patient")

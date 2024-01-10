@@ -1,8 +1,10 @@
 package com.weCare.servicesImpls;
 
 import com.weCare.exceptions.NotFoundException;
+import com.weCare.modals.Address;
 import com.weCare.modals.Hospital;
 import com.weCare.modals.Patient;
+import com.weCare.repository.AddressRepository;
 import com.weCare.repository.HospitalRepository;
 import com.weCare.services.HospitalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +17,16 @@ public class HospitalServiceImpl implements HospitalService {
 
     @Autowired
     private HospitalRepository hospitalRepository;
-
-
+    
+    @Autowired
+    private AddressRepository addressRepository;
+    
     @Override
     public Hospital saveHospital(Hospital hospital) {
-
+    	
+    	Address address = addressRepository.save(hospital.getAddress());
+    	hospital.setAddress(address);
+    	
         return hospitalRepository.save(hospital);
     }
 

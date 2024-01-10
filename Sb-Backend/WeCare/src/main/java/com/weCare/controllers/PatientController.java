@@ -12,16 +12,22 @@ import java.util.List;
 
 /*
 {
-"email":"patientone@gmail.com",
-"userName":"patientOne",
-"passWord":"string",
-"profile_picture":"profile-pic",
-"role":"PATIENT",
-"name":"Patient One",
-"gender":"MALE",
-"date_of_birth":"2001-01-01",
-"mobile":"1234567890",
-"appointment_status":"PENDING"
+  "email": "patient_demo_one@gmail.com",
+  "userName": "patient_demo_one",
+  "passWord": "string",
+  "profile_picture": "patient_demo_one",
+  "role": "PATIENT",
+  "patient_name": "patient_demo_one",
+  "patient_gender": "MALE",
+  "date_of_birth": "2001-01-10",
+  "mobile": "7654321234",
+  "address": {
+    "locality": "NIT Patna",
+    "city": "Patna",
+    "zip_code": 800005,
+    "state": "Bihar",
+    "country": "India"
+  }
 }
 */
 

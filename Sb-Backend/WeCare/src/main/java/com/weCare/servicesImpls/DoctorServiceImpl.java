@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 import com.weCare.exceptions.DoctorNotFoundException;
 import com.weCare.exceptions.HospitalNotFoundException;
 import com.weCare.exceptions.NotFoundException;
+import com.weCare.modals.Address;
 import com.weCare.modals.Doctor;
 import com.weCare.modals.Hospital;
+import com.weCare.repository.AddressRepository;
 import com.weCare.repository.DoctorRepository;
 import com.weCare.repository.HospitalRepository;
 import com.weCare.services.DoctorService;
@@ -23,10 +25,14 @@ public class DoctorServiceImpl implements DoctorService {
     @Autowired
     private HospitalRepository hospitalRepository;
 
+    @Autowired
+    private AddressRepository addressRepository;
+    
     @Override
     public Doctor saveDoctor(Doctor doctor) {
-
-
+    	
+    	Address address = addressRepository.save(doctor.getAddress());
+    	doctor.setAddress(address);
         return doctorRepository.save(doctor);
     }
     
@@ -37,8 +43,11 @@ public class DoctorServiceImpl implements DoctorService {
                 .findById(hospital_id).orElseThrow(()->
                         new HospitalNotFoundException("Hospital with id: "+hospital_id+", not found!!!")
                 );
+    	Address address = addressRepository.save(doctor.getAddress());
     	
+    	doctor.setAddress(address);
     	doctor.setHospital(hospital);
+    	
     	hospital.getDoctors().add(doctor);
     	
 		return doctorRepository.save(doctor);
