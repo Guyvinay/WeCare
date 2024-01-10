@@ -1,7 +1,8 @@
 package com.weCare.modals;
 
 public enum PaymentStatus {
-    PENDING,
-    SUCCESS,
-    FAIL
+    
+	PAYMENT_PENDING,
+	PAYMENT_SUCCESS,
+	PAYMENT_FAILED
 }

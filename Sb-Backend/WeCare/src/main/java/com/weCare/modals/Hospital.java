@@ -34,11 +34,11 @@ public class Hospital {
 
     @OneToOne
 //    @JsonIgnore
-//    @ToString.Exclude
+    @ToString.Exclude
     private Address address;
 
     @OneToMany(mappedBy = "hospital")
-//    @JsonIgnore
+    @JsonIgnore
     @ToString.Exclude
     private List<Doctor> doctors = new ArrayList<>();
 
@@ -48,7 +48,7 @@ public class Hospital {
             joinColumns = @JoinColumn(name = "patient_id"),
             inverseJoinColumns = @JoinColumn(name = "hospital_id")
     )
-//    @JsonIgnore
+    @JsonIgnore
     @ToString.Exclude
     private List<Patient> patients = new ArrayList<>();
 

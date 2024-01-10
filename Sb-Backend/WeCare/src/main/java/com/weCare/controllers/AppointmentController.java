@@ -9,6 +9,15 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/*
+
+{
+  "department": "ENT",
+  "ailment_descriptio": "Having difficulty in going back in time to resurrection"
+}
+
+ */
+
 @RestController
 @RequestMapping(value = "/appointments")
 public class AppointmentController {

@@ -12,12 +12,12 @@ import java.util.List;
 
 /*
 {
-  "email": "patient_demo_one@gmail.com",
-  "userName": "patient_demo_one",
+  "email": "maximus@gmail.com",
+  "userName": "maximus",
   "passWord": "string",
-  "profile_picture": "patient_demo_one",
+  "profile_picture": "Maximus-Desimus-Meridious",
   "role": "PATIENT",
-  "patient_name": "patient_demo_one",
+  "patient_name": "Maximus Desimus Meridious",
   "patient_gender": "MALE",
   "date_of_birth": "2001-01-10",
   "mobile": "7654321234",

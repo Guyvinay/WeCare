@@ -1,15 +1,57 @@
 package com.weCare.servicesImpls;
 
-import com.weCare.modals.Prescription;
-import com.weCare.services.PrescriptionService;
-
+import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.weCare.exceptions.AppointmentNotFoundException;
+import com.weCare.modals.Appointment;
+import com.weCare.modals.AppointmentStatus;
+import com.weCare.modals.Department;
+import com.weCare.modals.Doctor;
+import com.weCare.modals.Patient;
+import com.weCare.modals.Prescription;
+import com.weCare.repository.AppointmentRepository;
+import com.weCare.repository.PrescriptionRepository;
+import com.weCare.services.PrescriptionService;
+
+@Service
 public class PrescriptionServiceImpl implements PrescriptionService {
 
+    @Autowired
+    private PrescriptionRepository prescriptionRepository;
+
+    @Autowired
+    AppointmentRepository appointmentRepository;
+
     @Override
-    public Prescription generatePrescription(Prescription prescription) {
-        return null;
+    public Prescription generatePrescription(String appointment_id, Prescription prescription) {
+
+        Appointment appointment = appointmentRepository
+                .findById(appointment_id).orElseThrow(()->
+                        new AppointmentNotFoundException("Hospital with id: "+appointment_id+", not found!!!")
+                );
+        appointment.setStatus(AppointmentStatus.APPOINTMENT_COMPLETED);
+        appointment.setPrescription(prescription);
+        
+        //Getting Patient from appointment
+        Patient patient = appointment.getPatient();
+        patient.getPrescriptions().add(prescription);
+
+        
+        //Getting Doctor from appointment
+        Doctor doctor = appointment.getDoctor();
+        doctor.getPrescriptions().add(prescription);
+
+        //Prescription Persistence
+        prescription.setPrescription_date(LocalDateTime.now());
+        prescription.setAppointment(appointment);
+        prescription.setDoctor(doctor);
+        prescription.setPatient(patient);
+        
+        return prescriptionRepository.save(prescription);
     }
 
     @Override

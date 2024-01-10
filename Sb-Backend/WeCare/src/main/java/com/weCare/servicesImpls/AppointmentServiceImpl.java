@@ -1,5 +1,6 @@
 package com.weCare.servicesImpls;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
@@ -45,12 +46,11 @@ public class AppointmentServiceImpl implements AppointmentService {
                              .findById(hospital_id).orElseThrow(()->
                                 new NotFoundException("Hospital with id: "+hospital_id+", not found!!!")
                               );
-//        System.out.println(hospital);
+        
         Patient patient = patientRepository
                 .findById(patient_id).orElseThrow(()->
                         new NotFoundException("Patient with id: "+patient_id+", not found!!!")
                 );
-//        System.out.println(patient);
 
         Department department = appointment.getDepartment();
 
@@ -60,13 +60,9 @@ public class AppointmentServiceImpl implements AppointmentService {
         if(doctors_with_same_department.isEmpty())
             throw new NotFoundException("Doctors with:"+department+", not found");
 
-//        System.out.println(doctors_with_same_department);
-
         Doctor random_doctor = doctors_with_same_department.get(
                 new Random().nextInt(doctors_with_same_department.size())
         );
-
-//        System.out.println(random_doctor);
 
 
         patient.getDoctors().add(random_doctor);
@@ -78,14 +74,16 @@ public class AppointmentServiceImpl implements AppointmentService {
         hospital.getAppointments().add(appointment);
         hospital.getPatients().add(patient);
 
+        
+        if(appointment.getAppointment_date()==null) 
+        	appointment.setAppointment_date(LocalDate.now());
         appointment.setPatient(patient);
         appointment.setDoctor(random_doctor);
-        appointment.setAppointment_time(LocalDateTime.now());
+        appointment.setBooking_time(LocalDateTime.now());
         appointment.setHospital(hospital);
-        appointment.setStatus(AppointmentStatus.SUCCESS);
+        appointment.setStatus(AppointmentStatus.APPOINTMENT_BOOKED);
         
-        appointmentRepository.save(appointment);
-
+//        return appointment;
         return appointmentRepository.save(appointment);
     }
     
@@ -150,8 +148,8 @@ public class AppointmentServiceImpl implements AppointmentService {
 
         //Persisting Appointment details
         appointment.setPatient(patient);
-        appointment.setAppointment_time(LocalDateTime.now());
-        appointment.setStatus(AppointmentStatus.SUCCESS);
+        appointment.setBooking_time(LocalDateTime.now());
+        appointment.setStatus(AppointmentStatus.APPOINTMENT_BOOKED);
         appointment.setDoctor(doctor);
         appointment.setHospital(hospital);
 
@@ -164,9 +162,9 @@ public class AppointmentServiceImpl implements AppointmentService {
     public Appointment getAppointmentById(String appointment_id) {
 
         return appointmentRepository
-                .findById(appointment_id).orElseThrow(()->
-                        new NotFoundException("Doctor with id: "+appointment_id+", not found!!!")
-                );
+		                .findById(appointment_id).orElseThrow(()->
+		                        new NotFoundException("Doctor with id: "+appointment_id+", not found!!!")
+		                );
     }
 
     @Override

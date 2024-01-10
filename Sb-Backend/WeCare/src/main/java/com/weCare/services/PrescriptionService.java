@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface PrescriptionService {
 
-    public Prescription generatePrescription(Prescription prescription);
+    public Prescription generatePrescription (String appointment_id, Prescription prescription);
 
     public Prescription getPrescriptionById(String prescription_id);
 

@@ -5,5 +5,5 @@ public enum Gender {
     MALE,
     FEMALE,
     TRANSGENDER,
-    DO_NOT_SPECIFY
+    NOT_TO_SPECIFY
 }

@@ -13,21 +13,21 @@ import com.weCare.services.DoctorService;
 
 /*
 {
-  "email": "doctor_demo_one@gmail.com",
-  "userName": "doctor_demo_one",
+  "email": "stefen@gmail.com",
+  "userName": "stefenn",
   "passWord": "string",
-  "profile_picture": "doctor_demo_one",
+  "profile_picture": "Dr-Stefen-Strange",
   "role": "DOCTOR",
-  "doctor_name": "doctor_demo_one",
+  "doctor_name": "Dr. Stefen Strange",
   "department": "ENT",
-  "qualification": "Qualifications-for-doctor_demo_one",
+  "qualification": "Masters-in-teleportation-hipnotism-time-manipulation-foresee",
   "mobile": "8765432123",
   "address": {
-    "locality": "Sandalpur",
-    "city": "Patna",
-    "zip_code": 800006,
-    "state": "Bihar",
-    "country": "India"
+    "locality": "Bleeker Street",
+    "city": "LA",
+    "zip_code": 200006,
+    "state": "Los Angeles",
+    "country": "USA"
   }
 }
  */
