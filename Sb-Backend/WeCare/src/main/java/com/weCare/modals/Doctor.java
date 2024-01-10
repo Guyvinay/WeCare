@@ -4,10 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Getter
@@ -20,7 +35,7 @@ public class Doctor extends Profile {
 	@NotBlank(message = "Doctor name cannot be blank!!!")
 	private String doctor_name;
 
-//	@NotBlank
+	@NotNull(message = "Department cannot be blank!!!")
 	@Enumerated(EnumType.STRING)
 	private Department department;
 
@@ -28,6 +43,7 @@ public class Doctor extends Profile {
 	private String qualification;
 
 	@NotBlank(message = "Mobile cannot be blank!!!")
+//	@Column(unique = true)
 	private String mobile;
 
 	@OneToOne
@@ -35,7 +51,12 @@ public class Doctor extends Profile {
 	@ToString.Exclude
 	private Address address;
 
-	@OneToMany(mappedBy = "doctor")
+	@ManyToMany()
+	@JoinTable(
+			name = "doctor_patient",
+			joinColumns = @JoinColumn(name = "patient_id"),
+			inverseJoinColumns = @JoinColumn(name = "doctor_id")
+	)
 	@JsonIgnore
 	@ToString.Exclude
 	private List<Patient> patients = new ArrayList<>();

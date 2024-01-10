@@ -13,15 +13,15 @@ import com.weCare.services.DoctorService;
 
 /*
 {
-"email":"docone@gmail.com",
-"userName":"doc-one",
-"passWord":"string",
-"profile_picture":"profile-pic",
-"role":"DOCTOR",
-"doctor_name":"DOC One",
-"department":"ENT",
-"qualification":"LLB Ha Ha",
-"mobile":"1234567890"
+  "email": "doctor_demo_one@gmail.com",
+  "userName": "doctor_demo_one",
+  "passWord": "string",
+  "profile_picture": "string",
+  "role": "ENT",
+  "doctor_name": "doctor_demo_one",
+  "department": "DENTISTRY",
+  "qualification": "string",
+  "mobile": "9876543211"
 }
  */
 
@@ -36,6 +36,15 @@ public class DoctorController {
     public ResponseEntity<Doctor> saveDoctor( @Valid @RequestBody Doctor doctor){
         return new ResponseEntity<Doctor>(
                 doctorService.saveDoctor(doctor),
+                HttpStatus.ACCEPTED
+        );
+    }
+    @PostMapping(value = "/{hospital_id}")
+    public ResponseEntity<Doctor> saveDoctor(@Valid @RequestBody Doctor doctor,
+    		                 @PathVariable("hospital_id") String hospital_id
+    		){
+        return new ResponseEntity<Doctor>(
+                doctorService.saveDoctorWithHospital(doctor, hospital_id),
                 HttpStatus.ACCEPTED
         );
     }

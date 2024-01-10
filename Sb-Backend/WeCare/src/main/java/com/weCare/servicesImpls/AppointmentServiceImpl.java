@@ -69,8 +69,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 //        System.out.println(random_doctor);
 
 
-        patient.setDoctor(random_doctor);
-        patient.setAppointment_status(AppointmentStatus.SUCCESS);
+        patient.getDoctors().add(random_doctor);
         patient.getAppointments().add(appointment);
 
         random_doctor.getPatients().add(patient);
@@ -138,8 +137,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     	}
     	
     	//Persisting Patient details
-        patient.setDoctor(doctor);
-        patient.setAppointment_status(AppointmentStatus.SUCCESS);
+        patient.getDoctors().add(doctor);
         patient.getAppointments().add(appointment);
 
         //Persisting doctor details

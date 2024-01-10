@@ -24,6 +24,7 @@ public class Patient extends Profile {
     @NotBlank(message = "Patient name cannot be blank!!!")
     private String patient_name;
 
+    @NotNull(message = "Gender cannot be blank!!!")
     @Enumerated(EnumType.STRING)
     private Gender patient_gender;
 
@@ -34,24 +35,19 @@ public class Patient extends Profile {
     @Column(unique = true)
     private String mobile;
 
-    //to be discontinued
-    @Enumerated(EnumType.STRING)
-    private AppointmentStatus appointment_status;
-
+   
     public Patient(String email, String userName, String passWord, String profile_picture, Role role,
-			String patient_name, Gender patient_gender, LocalDate date_of_birth, String mobile, AppointmentStatus appointment_status) {
+			String patient_name, Gender patient_gender, LocalDate date_of_birth, String mobile) {
 		super(email, userName, passWord, profile_picture, role);
 		this.patient_name = patient_name;
 		this.patient_gender = patient_gender;
 		this.date_of_birth = date_of_birth;
 		this.mobile = mobile;
-		this.appointment_status = appointment_status;
 	}
     
-    @ManyToOne
-    @JoinColumn(name = "doctor_id")
+    @ManyToMany(mappedBy = "patients")
     @JsonIgnore
-    private Doctor doctor;
+    private List<Doctor> doctors;
 
     @OneToOne
     @JsonIgnore

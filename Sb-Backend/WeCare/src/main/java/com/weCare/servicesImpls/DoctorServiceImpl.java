@@ -1,15 +1,18 @@
 package com.weCare.servicesImpls;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.weCare.exceptions.DoctorNotFoundException;
+import com.weCare.exceptions.HospitalNotFoundException;
 import com.weCare.exceptions.NotFoundException;
 import com.weCare.modals.Doctor;
 import com.weCare.modals.Hospital;
 import com.weCare.repository.DoctorRepository;
 import com.weCare.repository.HospitalRepository;
 import com.weCare.services.DoctorService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class DoctorServiceImpl implements DoctorService {
@@ -26,6 +29,20 @@ public class DoctorServiceImpl implements DoctorService {
 
         return doctorRepository.save(doctor);
     }
+    
+    @Override
+	public Doctor saveDoctorWithHospital(Doctor doctor, String hospital_id) {
+    	
+    	Hospital hospital = hospitalRepository
+                .findById(hospital_id).orElseThrow(()->
+                        new HospitalNotFoundException("Hospital with id: "+hospital_id+", not found!!!")
+                );
+    	
+    	doctor.setHospital(hospital);
+    	hospital.getDoctors().add(doctor);
+    	
+		return doctorRepository.save(doctor);
+	}
 
     @Override
     public Doctor getDoctorById(String doctor_id) {
@@ -51,11 +68,11 @@ public class DoctorServiceImpl implements DoctorService {
     public Doctor updateDoctorHospital(String doctor_id, String hospital_id) {
         Hospital hospital = hospitalRepository
                 .findById(hospital_id).orElseThrow(()->
-                        new NotFoundException("Hospital with id: "+hospital_id+", not found!!!")
+                        new HospitalNotFoundException("Hospital with id: "+hospital_id+", not found!!!")
                 );
         Doctor doctor = doctorRepository
                 .findById(doctor_id).orElseThrow(()->
-                        new NotFoundException("Doctor with id: "+doctor_id+", not found!!!")
+                        new DoctorNotFoundException("Doctor with id: "+doctor_id+", not found!!!")
                 );
         doctor.setHospital(hospital);
         return doctorRepository.save(doctor);
@@ -70,4 +87,6 @@ public class DoctorServiceImpl implements DoctorService {
         doctorRepository.delete(doctor);
         return "Doctor with id: "+doctor_id+", deleted successfully";
     }
+
+	
 }
