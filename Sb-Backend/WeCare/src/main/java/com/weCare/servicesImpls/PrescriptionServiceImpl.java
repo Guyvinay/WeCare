@@ -3,6 +3,7 @@ package com.weCare.servicesImpls;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.weCare.exceptions.PrescriptionNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,12 +57,19 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
     @Override
     public Prescription getPrescriptionById(String prescription_id) {
-        return null;
+
+        return prescriptionRepository
+                .findById(prescription_id).orElseThrow(()->
+                        new AppointmentNotFoundException("Prescription with id: "+prescription_id+", not found!!!")
+                );
     }
 
     @Override
     public List<Prescription> getAllPrescriptions() {
-        return null;
+        List<Prescription> prescriptions = prescriptionRepository.findAll();
+        if(prescriptions.isEmpty())
+            throw new PrescriptionNotFoundException("Prescriptions not found!!!");
+        return prescriptions;
     }
 
     @Override
@@ -71,6 +79,11 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
     @Override
     public String deletePrescriptionById(String prescription_id) {
-        return null;
+        Prescription prescription = prescriptionRepository
+                .findById(prescription_id).orElseThrow(()->
+                        new AppointmentNotFoundException("Prescription with id: "+prescription_id+", not found!!!")
+                );
+        prescriptionRepository.delete(prescription);
+        return "Prescription with id: "+prescription_id+", deleted";
     }
 }
