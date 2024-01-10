@@ -62,6 +62,23 @@ public class DoctorController {
                 HttpStatus.ACCEPTED
         );
     }
+    
+    @GetMapping(value = "/by_department/{doctor_department}")
+    public ResponseEntity<List<Doctor>> getDoctorByDepartmentPattern(@PathVariable("doctor_department") String doctor_department){
+        return new ResponseEntity<List<Doctor>>(
+                doctorService.getDoctorByDepartmentPattern(doctor_department),
+                HttpStatus.ACCEPTED
+        );
+    }
+    
+    @GetMapping(value = "/by_name/{doctor_name}")
+    public ResponseEntity<List<Doctor>> getDoctorByNamePattern(@PathVariable("doctor_name") String doctor_name){
+        return new ResponseEntity<List<Doctor>>(
+                doctorService.getDoctorByNamePattern(doctor_name),
+                HttpStatus.ACCEPTED
+        );
+    }
+    
     @GetMapping()
     public ResponseEntity<List<Doctor>> getAllDoctors(){
         return new ResponseEntity<List<Doctor>>(

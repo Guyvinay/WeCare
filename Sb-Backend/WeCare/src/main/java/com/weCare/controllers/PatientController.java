@@ -52,7 +52,7 @@ public class PatientController {
                 HttpStatus.ACCEPTED
         );
     }
-    @GetMapping(value = "/patientByName/{patient_name}")
+    @GetMapping(value = "/by_name/{patient_name}")
     public ResponseEntity<List<Patient>> getPatientByNamePattern(@PathVariable("patient_name") String patient_name){
         return new ResponseEntity<List<Patient>>(
                 patientService.getPatientByNamePattern(patient_name),

@@ -12,6 +12,10 @@ public interface DoctorService {
 
     public Doctor getDoctorById(String doctor_id);
 
+    public List<Doctor> getDoctorByDepartmentPattern(String doctor_department);
+
+    public List<Doctor> getDoctorByNamePattern(String doctor_name);
+
     public List<Doctor> getAllDoctors();
 
     public Doctor updateDoctor(String doctor_id, Doctor doctor);

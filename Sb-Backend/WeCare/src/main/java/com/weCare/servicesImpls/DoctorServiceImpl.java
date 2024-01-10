@@ -9,6 +9,7 @@ import com.weCare.exceptions.DoctorNotFoundException;
 import com.weCare.exceptions.HospitalNotFoundException;
 import com.weCare.exceptions.NotFoundException;
 import com.weCare.modals.Address;
+import com.weCare.modals.Department;
 import com.weCare.modals.Doctor;
 import com.weCare.modals.Hospital;
 import com.weCare.repository.AddressRepository;
@@ -60,6 +61,21 @@ public class DoctorServiceImpl implements DoctorService {
                 .findById(doctor_id).orElseThrow(()->
                         new NotFoundException("Doctor with id: "+doctor_id+", not found!!!")
                 );
+    }
+
+    @Override
+    public List<Doctor> getDoctorByDepartmentPattern(String doctor_department) {
+    	Department department = Department.valueOf(doctor_department);
+        List<Doctor> doctorList = doctorRepository.findByDepartmentPattern(department);
+        if(doctorList.isEmpty())throw new DoctorNotFoundException("Doctors not found for "+doctor_department+" department!!!");
+        return doctorList;
+    }
+
+    @Override
+    public List<Doctor> getDoctorByNamePattern(String doctor_name) {
+    	List<Doctor> doctorList = doctorRepository.findByNamePattern(doctor_name);
+        if(doctorList.isEmpty())throw new DoctorNotFoundException("Doctors '"+doctor_name+"', not found!!!");
+        return doctorList;
     }
 
     @Override
