@@ -3,14 +3,13 @@ package com.weCare.servicesImpls;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.weCare.exceptions.PrescriptionNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.weCare.exceptions.AppointmentNotFoundException;
+import com.weCare.exceptions.PrescriptionNotFoundException;
 import com.weCare.modals.Appointment;
 import com.weCare.modals.AppointmentStatus;
-import com.weCare.modals.Department;
 import com.weCare.modals.Doctor;
 import com.weCare.modals.Patient;
 import com.weCare.modals.Prescription;

@@ -2,11 +2,10 @@ package com.weCare.servicesImpls;
 
 import java.util.List;
 
-import com.weCare.exceptions.NotFoundException;
-import com.weCare.modals.Doctor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.weCare.exceptions.NotFoundException;
 import com.weCare.modals.Profile;
 import com.weCare.repository.ProfileRepository;
 import com.weCare.services.ProfileService;

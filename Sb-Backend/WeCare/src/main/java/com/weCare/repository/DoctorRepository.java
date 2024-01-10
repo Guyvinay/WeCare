@@ -1,13 +1,13 @@
 package com.weCare.repository;
 
-import com.weCare.modals.Department;
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
-import com.weCare.modals.Doctor;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.List;
+import com.weCare.modals.Department;
+import com.weCare.modals.Doctor;
 
 public interface DoctorRepository extends JpaRepository<Doctor, String> {
 

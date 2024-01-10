@@ -1,8 +1,8 @@
 package com.weCare.services;
 
-import com.weCare.modals.Appointment;
-
 import java.util.List;
+
+import com.weCare.modals.Appointment;
 
 public interface AppointmentService {
 

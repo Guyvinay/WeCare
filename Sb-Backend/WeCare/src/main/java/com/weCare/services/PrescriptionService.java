@@ -1,8 +1,8 @@
 package com.weCare.services;
 
-import com.weCare.modals.Prescription;
-
 import java.util.List;
+
+import com.weCare.modals.Prescription;
 
 public interface PrescriptionService {
 

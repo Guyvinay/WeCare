@@ -1,8 +1,8 @@
 package com.weCare.services;
 
-import com.weCare.modals.Address;
-
 import java.util.List;
+
+import com.weCare.modals.Address;
 
 public interface AddressService {
 

@@ -1,16 +1,16 @@
 package com.weCare.servicesImpls;
 
-import com.weCare.exceptions.NotFoundException;
-import com.weCare.modals.Address;
-import com.weCare.modals.Hospital;
-import com.weCare.modals.Patient;
-import com.weCare.repository.AddressRepository;
-import com.weCare.repository.HospitalRepository;
-import com.weCare.services.HospitalService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.weCare.exceptions.NotFoundException;
+import com.weCare.modals.Address;
+import com.weCare.modals.Hospital;
+import com.weCare.repository.AddressRepository;
+import com.weCare.repository.HospitalRepository;
+import com.weCare.services.HospitalService;
 
 @Service
 public class HospitalServiceImpl implements HospitalService {

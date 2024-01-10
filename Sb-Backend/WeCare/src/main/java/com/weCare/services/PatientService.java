@@ -1,8 +1,8 @@
 package com.weCare.services;
 
-import com.weCare.modals.Patient;
-
 import java.util.List;
+
+import com.weCare.modals.Patient;
 
 public interface PatientService {
 	

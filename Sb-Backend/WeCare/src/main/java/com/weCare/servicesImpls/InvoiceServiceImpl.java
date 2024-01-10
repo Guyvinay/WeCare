@@ -1,9 +1,9 @@
 package com.weCare.servicesImpls;
 
+import java.util.List;
+
 import com.weCare.modals.Invoice;
 import com.weCare.services.InvoiceService;
-
-import java.util.List;
 
 public class InvoiceServiceImpl implements InvoiceService {
 

@@ -1,8 +1,8 @@
 package com.weCare.services;
 
-import com.weCare.modals.Invoice;
-
 import java.util.List;
+
+import com.weCare.modals.Invoice;
 
 public interface InvoiceService {
 
