@@ -25,6 +25,7 @@ import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
@@ -60,7 +61,8 @@ public class Prescription {
             joinColumns = @JoinColumn(name = "prescription_id"),
             inverseJoinColumns = @JoinColumn(name = "medication_id")
     )
-//    @JsonIgnore
+    @JsonIgnore
+    @ToString.Exclude
     private List<Medication> medications = new ArrayList<>();
 
 
@@ -68,6 +70,10 @@ public class Prescription {
     @JsonIgnore
     private Appointment  appointment;
 
+    @OneToOne(mappedBy = "prescription")
+    @JsonIgnore
+    private Invoice  invoice;
+    
     @ManyToOne
     @JoinColumn(name = "patient_id")
     @JsonIgnore

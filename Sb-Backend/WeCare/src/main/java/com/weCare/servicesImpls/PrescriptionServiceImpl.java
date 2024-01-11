@@ -52,8 +52,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         List<Medication> retrived_medications_list = medicationRepository.findByMedication_idIn(expected_medication_ids_list);
 
         List<String> retrived_medication_ids_list = retrived_medications_list.stream()
-										        		.map(Medication::getMedication_id)
-										        		.collect(Collectors.toList());
+        		.map(Medication::getMedication_id).collect(Collectors.toList());
         
         //Throwing Exception with missing medications;
         if(expected_medication_ids_list.size()!=retrived_medication_ids_list.size()) {

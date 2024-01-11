@@ -65,10 +65,6 @@ public class Patient extends Profile {
 
     @OneToMany(mappedBy = "patient")
     @JsonIgnore
-    private List<Invoice> invoices = new ArrayList<>();
-
-    @OneToMany(mappedBy = "patient")
-    @JsonIgnore
     private List<Appointment> appointments =  new ArrayList<>();
 
     @ManyToMany(mappedBy = "patients")

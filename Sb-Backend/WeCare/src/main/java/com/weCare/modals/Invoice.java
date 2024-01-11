@@ -1,9 +1,12 @@
 package com.weCare.modals;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -13,10 +16,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapKeyColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
@@ -32,17 +38,20 @@ public class Invoice {
     private Double total_amount;
 
     @ElementCollection
-    @CollectionTable(name = "invoice_services", joinColumns = @JoinColumn(name = "invoice_id"))
-    private List<String> invoice_services = new ArrayList<>();
+    @CollectionTable(
+    		name = "invoice_medications",
+    		joinColumns = @JoinColumn(name = "invoice_id")
+    )
+    @MapKeyColumn(name = "medication_id")
+    @Column(name = "medication_quantity")
+    private Map<String, Integer> medications_invoice = new HashMap<>();
 
     @Enumerated(EnumType.STRING)
     private PaymentStatus paymentStatus;
 
-
-    @ManyToOne
-    @JoinColumn(name = "patient_id")
-    private Patient patient;
-
-
+    @OneToOne()
+    @JsonIgnore
+    @ToString.Exclude
+    private Prescription prescription;
 
 }

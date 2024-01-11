@@ -69,14 +69,6 @@ Medications
   "expirationDate": "2024-06-05"
 },
 {
-  "medication_name": "Diazepam",
-  "medication_description": "Anxiety and muscle spasms medication",
-  "medication_manufacturer": "Roche",
-  "medication_price": 14.99,
-  "medication_quantity": 50,
-  "expirationDate": "2024-06-05"
-},
-{
   "medication_name": "Acetaminophen",
   "medication_description": "Pain reliever and fever reducer",
   "medication_manufacturer": "Bayer",

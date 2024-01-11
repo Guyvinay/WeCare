@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.ToString;
 
 @Entity
 @Data
@@ -24,6 +25,7 @@ public class Medication {
     private String medication_id;
 
     @NotNull(message = "Medication Name cannot be blank!!!")
+    @Column(unique = true)
     private String medication_name;
 
     private String medication_description;
@@ -46,6 +48,7 @@ public class Medication {
 
     @ManyToMany(mappedBy = "medications")
     @JsonIgnore
+    @ToString.Exclude
     private List<Prescription> prescriptions = new ArrayList<>();
 
 }
