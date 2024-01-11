@@ -7,6 +7,8 @@ import java.util.List;
 public interface MedicationService {
 
     public Medication saveMedication(Medication medication);
+    
+    public List<Medication> saveMedications(List<Medication> medications);
 
     public Medication getMedicationById(String medication_id);
 

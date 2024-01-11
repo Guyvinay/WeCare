@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.weCare.exceptions.NotFoundException;
+import com.weCare.exceptions.PatientNotFoundException;
 import com.weCare.modals.Address;
 import com.weCare.modals.Patient;
 import com.weCare.repository.AddressRepository;
@@ -29,6 +30,25 @@ public class PatientServiceImpl implements PatientService {
     	
         return patientRepository.save(patient);
     }
+    
+    @Override
+	public List<Patient> savePatients(List<Patient> patients) {
+    	
+    	if(patients.isEmpty())
+    		throw new PatientNotFoundException("Patients not found to persist!!!");
+    	
+    	for(Patient patient:patients) {
+    		patient.setAddress(
+    				addressRepository.save(
+    						patient.getAddress()
+    						)
+    				);
+    	}
+    	
+    	return patientRepository.saveAll(patients);
+
+	}
+    
 
     @Override
     public Patient getPatientById(String patient_id) {
@@ -66,5 +86,7 @@ public class PatientServiceImpl implements PatientService {
         patientRepository.delete(patient);
         return "Patient with id: "+patient_id+", deleted successfully";
     }
+
+	
 
 }

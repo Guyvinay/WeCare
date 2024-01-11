@@ -16,18 +16,18 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 @ControllerAdvice
 public class GlobalExceptionHandling {
 
-	@ExceptionHandler(Exception.class)
-	public ResponseEntity<ExceptionDefinition> globalExceptionHandle(Exception ex, WebRequest wb){
-		return new ResponseEntity<ExceptionDefinition>(
-				new ExceptionDefinition(
-						LocalDateTime.now(),
-						ex.getMessage(),
-						wb.getDescription(false)
-				),
-				HttpStatus.BAD_REQUEST
-		);
-	}
-	
+//	@ExceptionHandler(Exception.class)
+//	public ResponseEntity<ExceptionDefinition> globalExceptionHandle(Exception ex, WebRequest wb){
+//		return new ResponseEntity<ExceptionDefinition>(
+//				new ExceptionDefinition(
+//						LocalDateTime.now(),
+//						ex.getMessage(),
+//						wb.getDescription(false)
+//				),
+//				HttpStatus.BAD_REQUEST
+//		);
+//	}
+//	
 	@ExceptionHandler(NoHandlerFoundException.class)
 	public ResponseEntity<ExceptionDefinition> noHandlerFoundException(NoHandlerFoundException ex, WebRequest wb){
 		return new ResponseEntity<ExceptionDefinition>(

@@ -61,7 +61,7 @@ public class Doctor extends Profile {
 	private List<Patient> patients = new ArrayList<>();
 
 	@OneToMany(mappedBy = "doctor")
-//	@JsonIgnore
+	@JsonIgnore
 	@ToString.Exclude
 	private List<Prescription> prescriptions = new ArrayList<>();
 

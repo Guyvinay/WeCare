@@ -38,6 +38,23 @@ public class DoctorServiceImpl implements DoctorService {
     }
     
     @Override
+	public List<Doctor> saveDoctors(List<Doctor> doctors) {
+    	
+    	if(doctors.isEmpty())
+    		throw new DoctorNotFoundException("Doctors not found to persist!!!");
+		
+    	for(Doctor doctor:doctors) {
+    		doctor.setAddress(
+    				addressRepository.save(
+    						doctor.getAddress()
+    						)
+    				);
+    	}
+    	
+    	return doctorRepository.saveAll(doctors);
+	}
+    
+    @Override
 	public Doctor saveDoctorWithHospital(Doctor doctor, String hospital_id) {
     	
     	Hospital hospital = hospitalRepository
@@ -54,6 +71,8 @@ public class DoctorServiceImpl implements DoctorService {
 		return doctorRepository.save(doctor);
 	}
 
+    
+    
     @Override
     public Doctor getDoctorById(String doctor_id) {
 
@@ -112,6 +131,8 @@ public class DoctorServiceImpl implements DoctorService {
         doctorRepository.delete(doctor);
         return "Doctor with id: "+doctor_id+", deleted successfully";
     }
+
+	
 
 	
 }

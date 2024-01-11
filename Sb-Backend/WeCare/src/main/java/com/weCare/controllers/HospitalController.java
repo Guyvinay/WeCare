@@ -35,6 +35,7 @@ import com.weCare.services.HospitalService;
 @RestController
 @RequestMapping(value = "/hospitals")
 public class HospitalController {
+	
     @Autowired
     private HospitalService hospitalService;
 
@@ -42,6 +43,14 @@ public class HospitalController {
     public ResponseEntity<Hospital> saveHospital(@RequestBody Hospital hospital){
         return new ResponseEntity<Hospital>(
                 hospitalService.saveHospital(hospital),
+                HttpStatus.ACCEPTED
+        );
+    }
+    
+    @PostMapping(value = "/save_all_hospitals")
+    public ResponseEntity<List<Hospital>> saveHospitals(@RequestBody List<Hospital> hospitals){
+        return new ResponseEntity<List<Hospital>>(
+                hospitalService.saveHospitals(hospitals),
                 HttpStatus.ACCEPTED
         );
     }

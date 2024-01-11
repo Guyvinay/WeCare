@@ -70,6 +70,9 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         
         
         
+        /*
+         
+         
         for(Medication med : retrived_medications_list) {
 //        	System.out.println(med.getMedication_price());
         	Integer extected_meds_quantity = expected_medication_ids_map.get(med.getMedication_id());
@@ -89,6 +92,8 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         	
         }
         
+        */
+        
         
         appointment.setStatus(AppointmentStatus.APPOINTMENT_COMPLETED);
         appointment.setPrescription(prescription);
@@ -107,10 +112,11 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         prescription.setAppointment(appointment);
         prescription.setDoctor(doctor);
         prescription.setPatient(patient);
-//        prescription.setMedications();
+        prescription.setMedications(retrived_medications_list);
         
-        return prescription;
-//        return prescriptionRepository.save(prescription);
+        	
+//        return prescription;
+        return prescriptionRepository.save(prescription);
     }
 
     @Override

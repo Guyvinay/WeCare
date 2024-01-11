@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.weCare.exceptions.HospitalNotFoundException;
 import com.weCare.exceptions.NotFoundException;
 import com.weCare.modals.Address;
 import com.weCare.modals.Hospital;
@@ -29,7 +30,24 @@ public class HospitalServiceImpl implements HospitalService {
     	
         return hospitalRepository.save(hospital);
     }
-
+    
+    @Override
+	public List<Hospital> saveHospitals(List<Hospital> hospitals) {
+    	
+    	if(hospitals.isEmpty())
+    		throw new HospitalNotFoundException("Hospitals not found to persist!!!");
+    	
+    	for(Hospital hospital:hospitals) {
+    		hospital.setAddress(
+    				addressRepository.save(
+    						hospital.getAddress()
+    						)
+    				);
+    	}
+    	
+		return hospitalRepository.saveAll(hospitals);
+	}
+    
     @Override
     public Hospital getHospitalById(String hospital_id) {
 
@@ -60,4 +78,6 @@ public class HospitalServiceImpl implements HospitalService {
         hospitalRepository.delete(hospital);
         return "Hospital with id: "+hospital_id+", deleted successfully";
     }
+
+	
 }

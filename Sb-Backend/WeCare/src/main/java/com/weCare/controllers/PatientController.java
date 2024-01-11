@@ -54,6 +54,13 @@ public class PatientController {
                 HttpStatus.ACCEPTED
         );
     }
+    @PostMapping(value = "/save_all_patients")
+    public ResponseEntity<List<Patient>> savePatients(@Valid @RequestBody List<Patient> patients){
+        return new ResponseEntity<List<Patient>>(
+                patientService.savePatients(patients),
+                HttpStatus.ACCEPTED
+        );
+    }
     @GetMapping(value = "/{patient_id}")
     public ResponseEntity<Patient> getPatientById(@PathVariable("patient_id") String patient_id){
         return new ResponseEntity<Patient>(

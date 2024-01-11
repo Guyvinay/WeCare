@@ -25,6 +25,15 @@ public class MedicationController {
                 HttpStatus.ACCEPTED
         );
     }
+    
+    @PostMapping(value = "/save_all")
+    public ResponseEntity<List<Medication>> saveAllMedications(@Valid @RequestBody List<Medication> medications){
+
+        return new ResponseEntity<List<Medication>>(
+                medicationService.saveMedications(medications),
+                HttpStatus.ACCEPTED
+        );
+    }
 
     @GetMapping(value = "/{medication_id}")
     public ResponseEntity<Medication> getMedicationById(

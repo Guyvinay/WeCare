@@ -7,6 +7,8 @@ import com.weCare.modals.Hospital;
 public interface HospitalService {
 
     public Hospital saveHospital(Hospital hospital);
+    
+    public List<Hospital> saveHospitals(List<Hospital> hospitals);
 
     public Hospital getHospitalById(String hospital_id);
 

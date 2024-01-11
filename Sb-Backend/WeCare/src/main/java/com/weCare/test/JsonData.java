@@ -13,14 +13,6 @@ Medications
   "expirationDate": "2025-11-15"
 },
 {
-  "medication_name": "Ibuprofen",
-  "medication_description": "Pain and fever reducer",
-  "medication_manufacturer": "Johnson & Johnson",
-  "medication_price": 8.99,
-  "medication_quantity": 200,
-  "expirationDate": "2025-11-15"
-},
-{
   "medication_name": "Lisinopril",
   "medication_description": "Blood pressure medication",
   "medication_manufacturer": "AstraZeneca",
@@ -195,30 +187,12 @@ Doctors
   "doctor_name": "Dr. Alex Jones",
   "department": "HOMEOPATHY",
   "qualification": "MS in Orthopedic Surgery",
-  "mobile": "8765432109",
+  "mobile": "8765432119",
   "address": {
     "locality": "Bone Avenue",
     "city": "Chicago",
     "zip_code": 60611,
     "state": "Illinois",
-    "country": "USA"
-  }
-},
-{
-  "email": "lucia.smith@gmail.com",
-  "userName": "luciasmith",
-  "passWord": "string",
-  "profile_picture": "https://dummyurl.com/Dr-Lucia-Smith.jpg",
-  "role": "DOCTOR",
-  "doctor_name": "Dr. Lucia Smith",
-  "department": "DERMATOLOGY",
-  "qualification": "Dermatology Specialist",
-  "mobile": "7654321098",
-  "address": {
-    "locality": "SkinCare Lane",
-    "city": "Miami",
-    "zip_code": 33101,
-    "state": "Florida",
     "country": "USA"
   }
 },
@@ -231,11 +205,11 @@ Doctors
   "doctor_name": "Dr. Robert Anderson",
   "department": "NEUROLOGY",
   "qualification": "Neurologist",
-  "mobile": "9876123450",
+  "mobile": "9876123453",
   "address": {
     "locality": "Brain Street",
     "city": "Boston",
-    "zip_code": 02101,
+    "zip_code": 12101,
     "state": "Massachusetts",
     "country": "USA"
   }
@@ -249,7 +223,7 @@ Doctors
   "doctor_name": "Dr. Emma Johnson",
   "department": "PAEDIATRICS",
   "qualification": "Pediatrician",
-  "mobile": "8765123456",
+  "mobile": "8765123486",
   "address": {
     "locality": "Childhood Lane",
     "city": "Denver",
@@ -267,7 +241,7 @@ Doctors
   "doctor_name": "Dr. Sara Johnson",
   "department": "ENT",
   "qualification": "ENT Specialist",
-  "mobile": "9876123456",
+  "mobile": "9876123489",
   "address": {
     "locality": "Ear & Throat Lane",
     "city": "Seattle",
@@ -285,7 +259,7 @@ Doctors
   "doctor_name": "Dr. Mike Davis",
   "department": "DENTISTRY",
   "qualification": "Dentist",
-  "mobile": "8765432109",
+  "mobile": "8765432149",
   "address": {
     "locality": "Smile Street",
     "city": "Orlando",
@@ -303,25 +277,7 @@ Doctors
   "doctor_name": "Dr. Lisa Taylor",
   "department": "DERMATOLOGY",
   "qualification": "Dermatologist",
-  "mobile": "7654321098",
-  "address": {
-    "locality": "SkinCare Boulevard",
-    "city": "Los Angeles",
-    "zip_code": 90001,
-    "state": "California",
-    "country": "USA"
-  }
-},
-{
-  "email": "lisa.derm@gmail.com",
-  "userName": "lisaderm",
-  "passWord": "string",
-  "profile_picture": "https://dummyurl.com/Dr-Lisa-Dermatologist.jpg",
-  "role": "DOCTOR",
-  "doctor_name": "Dr. Lisa Taylor",
-  "department": "DERMATOLOGY",
-  "qualification": "Dermatologist",
-  "mobile": "7654321098",
+  "mobile": "7654321178",
   "address": {
     "locality": "SkinCare Boulevard",
     "city": "Los Angeles",
@@ -339,7 +295,7 @@ Doctors
   "doctor_name": "Dr. Olivia Brown",
   "department": "NEUROLOGY",
   "qualification": "Neurologist",
-  "mobile": "8765123456",
+  "mobile": "8765123165",
   "address": {
     "locality": "Brain Avenue",
     "city": "San Diego",
@@ -351,8 +307,9 @@ Doctors
 ]
 
 Patients
+
 [
-{
+ {
   "email": "olivia@gmail.com",
   "userName": "olivia",
   "passWord": "string",
@@ -433,7 +390,7 @@ Patients
   "patient_name": "Isabella White",
   "patient_gender": "FEMALE",
   "date_of_birth": "1992-07-08",
-  "mobile": "7654321234",
+  "mobile": "7654321231",
   "address": {
     "locality": "Tulip Street",
     "city": "Seattle",
@@ -469,11 +426,11 @@ Patients
   "patient_name": "Ava Miller",
   "patient_gender": "FEMALE",
   "date_of_birth": "1994-12-30",
-  "mobile": "8765432109",
+  "mobile": "8765432101",
   "address": {
     "locality": "Rosewood Lane",
     "city": "Boston",
-    "zip_code": 02101,
+    "zip_code": 12101,
     "state": "Massachusetts",
     "country": "USA"
   }
@@ -487,7 +444,7 @@ Patients
   "patient_name": "Leo Anderson",
   "patient_gender": "MALE",
   "date_of_birth": "1999-02-05",
-  "mobile": "8765123456",
+  "mobile": "8765123453",
   "address": {
     "locality": "Leo Lane",
     "city": "San Diego",
@@ -505,30 +462,12 @@ Patients
   "patient_name": "Mia Roberts",
   "patient_gender": "FEMALE",
   "date_of_birth": "1993-06-14",
-  "mobile": "9876123450",
+  "mobile": "9876123454",
   "address": {
     "locality": "Magnolia Lane",
     "city": "Orlando",
     "zip_code": 32801,
     "state": "Florida",
-    "country": "USA"
-  }
-},
-{
-  "email": "sophie@gmail.com",
-  "userName": "sophie",
-  "passWord": "string",
-  "profile_picture": "https://dummyurl.com/Sophie.jpg",
-  "role": "PATIENT",
-  "patient_name": "Sophie Williams",
-  "patient_gender": "FEMALE",
-  "date_of_birth": "1992-04-15",
-  "mobile": "7654321234",
-  "address": {
-    "locality": "Lavender Lane",
-    "city": "Seattle",
-    "zip_code": 98101,
-    "state": "Washington",
     "country": "USA"
   }
 },
@@ -541,7 +480,7 @@ Patients
   "patient_name": "Ethan Davis",
   "patient_gender": "MALE",
   "date_of_birth": "1990-10-08",
-  "mobile": "9876543210",
+  "mobile": "9876543216",
   "address": {
     "locality": "Oakwood Street",
     "city": "New York",
@@ -559,7 +498,7 @@ Patients
   "patient_name": "Mia String",
   "patient_gender": "FEMALE",
   "date_of_birth": "1995-08-22",
-  "mobile": "8765432109",
+  "mobile": "8765432119",
   "address": {
     "locality": "Melody Lane",
     "city": "Chicago",
@@ -577,7 +516,7 @@ Patients
   "patient_name": "Noah String",
   "patient_gender": "MALE",
   "date_of_birth": "1998-01-20",
-  "mobile": "7654321098",
+  "mobile": "7654321078",
   "address": {
     "locality": "Harmony Avenue",
     "city": "San Francisco",
@@ -595,7 +534,7 @@ Patients
   "patient_name": "Olivia String",
   "patient_gender": "FEMALE",
   "date_of_birth": "1993-05-14",
-  "mobile": "9876123450",
+  "mobile": "9876123441",
   "address": {
     "locality": "Serenade Lane",
     "city": "Los Angeles",
@@ -605,5 +544,7 @@ Patients
   }
 }
 ]
+
+select * from appointments;select * from hospitals;select * from doctors; select * from patients;select * from prescriptions;select * from prescription_medications;select * from prescription_medication_quantity;
 
  */

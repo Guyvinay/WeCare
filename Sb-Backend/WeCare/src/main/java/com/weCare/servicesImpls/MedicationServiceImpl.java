@@ -22,6 +22,13 @@ public class MedicationServiceImpl implements MedicationService {
     }
 
     @Override
+	public List<Medication> saveMedications(List<Medication> medications) {
+    	if(medications.isEmpty())
+    		throw new MedicationNotFoundException("Medication cannot empty!!!");
+    	return medicationRepository.saveAll(medications);
+	}
+    
+    @Override
     public Medication getMedicationById(String medication_id) {
 
         return medicationRepository.findById(medication_id).orElseThrow(()->
@@ -50,4 +57,6 @@ public class MedicationServiceImpl implements MedicationService {
         medicationRepository.delete(medication);
         return "Medication: "+medication_id+" deleted";
     }
+
+	
 }

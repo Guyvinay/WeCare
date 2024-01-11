@@ -29,7 +29,7 @@ import jakarta.validation.Valid;
   "role": "DOCTOR",
   "doctor_name": "Dr. Stefen Strange",
   "department": "ENT",
-  "qualification": "Masters-in-teleportation-hipnotism-time-manipulation-foresee",
+  "qualification": "Masters-in-teleportation-hipnotism-time-manipulation",
   "mobile": "8765432123",
   "address": {
     "locality": "Bleeker Street",
@@ -55,6 +55,15 @@ public class DoctorController {
                 HttpStatus.ACCEPTED
         );
     }
+    
+    @PostMapping(value = "/save_all_doctors")
+    public ResponseEntity<List<Doctor>> saveDoctors( @Valid @RequestBody List<Doctor> doctors){
+        return new ResponseEntity<List<Doctor>>(
+                doctorService.saveDoctors(doctors),
+                HttpStatus.ACCEPTED
+        );
+    }
+    
     @PostMapping(value = "/{hospital_id}")
     public ResponseEntity<Doctor> saveDoctor(@Valid @RequestBody Doctor doctor,
     		                 @PathVariable("hospital_id") String hospital_id

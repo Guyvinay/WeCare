@@ -7,6 +7,8 @@ import com.weCare.modals.Patient;
 public interface PatientService {
 	
 	public Patient savePatient(Patient patient);
+	
+	public List<Patient> savePatients(List<Patient> patients);
 
     public Patient getPatientById(String patient_id);
     
