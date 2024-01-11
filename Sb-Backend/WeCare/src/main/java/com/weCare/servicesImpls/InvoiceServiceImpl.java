@@ -1,6 +1,8 @@
 package com.weCare.servicesImpls;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -8,10 +10,12 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.weCare.exceptions.InvoiceNotFoundException;
 import com.weCare.exceptions.MedicationNotFoundException;
 import com.weCare.exceptions.PrescriptionNotFoundException;
 import com.weCare.modals.Invoice;
 import com.weCare.modals.Medication;
+import com.weCare.modals.PaymentStatus;
 import com.weCare.modals.Prescription;
 import com.weCare.repository.InvoiceRepository;
 import com.weCare.repository.MedicationRepository;
@@ -38,12 +42,15 @@ public class InvoiceServiceImpl implements InvoiceService {
                 .orElseThrow(()->
                          new PrescriptionNotFoundException("Prescription with id:"+prescription_id+", not found!!!")
                 );
-      //Getting prescription_medication From Prescription
-        Map<String,Integer> prescription_medication 
-                                          = prescription.getMedication_ids();
+      
+        Double total_medication_price = 0.0;
         
         //Getting invoice_medications From invoice
         Map<String,Integer> invoice_medications = invoice.getMedications_invoice();
+        
+      //Getting prescription_medication From Prescription
+        Map<String,Integer> prescription_medication 
+                                          = prescription.getMedication_ids();
 
         //Merging prescription_medication with invoice_medications
         prescription_medication.putAll(invoice_medications);
@@ -61,16 +68,14 @@ public class InvoiceServiceImpl implements InvoiceService {
 							        		.map(Medication::getMedication_id)
 							        		.collect(Collectors.toList());
         
-        
         //Throwing exception with missing medications id;
         if(expected_medication_ids_list.size()!=retrieved_medication_ids_list.size()) {
         	
         	//Creating array with expected_medication_ids_list and removing retrieved_medication_ids_list
-        	List<String> missing_medication_ids = new ArrayList<>(expected_medication_ids_list);
+        	List<String> missing_medication_ids = 
+        			new ArrayList<>(expected_medication_ids_list);
         	missing_medication_ids.removeAll(retrieved_medication_ids_list);
-        	
-//        	missing_medication_ids.forEach(System.out::println);
-        	
+	
         	throw new MedicationNotFoundException(
         			"Medications with id: "+
         	String.join(", ", missing_medication_ids)+
@@ -79,33 +84,125 @@ public class InvoiceServiceImpl implements InvoiceService {
         }
         
         
+        for( Medication medication : retrieved_medications ) {
+        	
+        	Integer expected_medication_quantity = 
+        			prescription_medication.get(medication.getMedication_id());
+        	
+        	Integer available_medication_quantity = 
+        			medication.getMedication_quantity();
+        	
+        	if(expected_medication_quantity>available_medication_quantity)
+        		throw new MedicationNotFoundException(
+        				"You need "+
+        						expected_medication_quantity+
+        						" medications of "+
+        						medication.getMedication_id()+
+        						", but only "+
+        						available_medication_quantity+
+        						" medications available!!!"
+        				);
+        	
+              total_medication_price +=
+    		         medication.getMedication_price()*expected_medication_quantity;
+        	
+        	medication.setMedication_quantity(
+        			available_medication_quantity-expected_medication_quantity
+        			);
+        }
         
-        
-        
-//        System.out.println(retrieved_medications);
-        retrieved_medications.forEach(System.out::println);
-//        System.out.println(prescription_medication);
+        prescription.setInvoice(invoice);
+
+        invoice.setPrescription(prescription);
+        invoice.setInvoice_date_time(LocalDateTime.now());
         invoice.setMedications_invoice(prescription_medication);
-        return invoice;
+        invoice.setTotal_amount(total_medication_price);
+        invoice.setMedications(retrieved_medications);
+        invoice.setPaymentStatus(PaymentStatus.PAYMENT_PENDING);
+        
+//        return invoice;
+        return invoiceRepository.save(invoice);
     }
 
     @Override
+	public Map<String, Object> payMedicationCharges(String invoice_id, Invoice invoice) {
+		Map<String, Object> invoice_details = new HashMap<>();
+    	Invoice retrieved_invoice = invoiceRepository.findById(invoice_id)
+		    			.orElseThrow(()-> 
+		    	              new InvoiceNotFoundException(
+					    		  "Invoice with id: "+invoice_id+", not found")
+					    			 );
+    	
+    	Double amount_paying = invoice.getTotal_amount();
+    	Double amount_to_be_paid = retrieved_invoice.getTotal_amount();
+    	
+    	retrieved_invoice.setInvoice_date_time(LocalDateTime.now());
+    	retrieved_invoice.setPaymentStatus(PaymentStatus.PAYMENT_SUCCESS);
+    	
+    	
+    	if(amount_paying>amount_to_be_paid) {
+    		Invoice updated_invoice = invoiceRepository.save(retrieved_invoice);
+    		invoice_details.put(
+    				"message", 
+    				"Paying extra, Kindly collect your " +
+    				(amount_paying-amount_to_be_paid)
+    				);
+    		
+    		invoice_details.put("invoice", updated_invoice);
+    		return invoice_details;
+    	}else if(amount_paying<amount_to_be_paid) {
+    		throw new InvoiceNotFoundException(
+    				"You are paying "+
+    		          amount_paying+
+    		          ", but it costs "+
+    		          amount_to_be_paid
+    				);
+    	}
+    	
+    	
+//    	return invoice_details;
+    	Invoice updated_invoice = invoiceRepository.save(retrieved_invoice);
+    	invoice_details.put(
+    			"message", 
+    			"Thank you purchasing with us, collect your medications....");
+    	invoice_details.put("invoice", updated_invoice);
+		return invoice_details;
+	}
+    
+    @Override
     public Invoice getInvoiceById(String invoice_id) {
-        return null;
+
+        return invoiceRepository.findById(invoice_id)
+    			.orElseThrow(()-> 
+	              new InvoiceNotFoundException(
+		    		  "Invoice with id: "+invoice_id+", not found")
+		    			 );
     }
 
     @Override
     public List<Invoice> getAllInvoices() {
-        return null;
+    	List<Invoice> invoices = invoiceRepository.findAll();
+    	if(invoices.isEmpty())
+    		throw new InvoiceNotFoundException("Invoices not found!!!");
+        return invoices;
+    			
     }
 
     @Override
     public Invoice updateInvoice(String invoice_id, Invoice invoice) {
-        return null;
+        return invoice;
     }
 
     @Override
     public String deleteInvoiceById(String invoice_id) {
-        return null;
+    	Invoice invoice = invoiceRepository.findById(invoice_id)
+		.orElseThrow(()-> 
+          new InvoiceNotFoundException(
+    		  "Invoice with id: "+invoice_id+", not found")
+    			 );
+    	invoiceRepository.delete(invoice);
+        return "invoice with id: "+invoice_id+", deleted!!!";
     }
+
+	
 }

@@ -50,5 +50,10 @@ public class Medication {
     @JsonIgnore
     @ToString.Exclude
     private List<Prescription> prescriptions = new ArrayList<>();
+    
+    @ManyToMany(mappedBy = "medications")
+    @JsonIgnore
+    @ToString.Exclude
+    private List<Invoice> invoices = new ArrayList<>();
 
 }

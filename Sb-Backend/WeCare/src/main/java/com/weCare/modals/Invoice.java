@@ -1,6 +1,9 @@
 package com.weCare.modals;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -15,7 +18,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.MapKeyColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -35,23 +39,35 @@ public class Invoice {
     @GeneratedValue(strategy = GenerationType.UUID)
     private  String invoice_id;
 
+    private LocalDateTime invoice_date_time;
+    
     private Double total_amount;
+    
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus paymentStatus;
 
     @ElementCollection
     @CollectionTable(
-    		name = "invoice_medications",
+    		name = "invoice_medication_quantity",
     		joinColumns = @JoinColumn(name = "invoice_id")
     )
     @MapKeyColumn(name = "medication_id")
     @Column(name = "medication_quantity")
     private Map<String, Integer> medications_invoice = new HashMap<>();
 
-    @Enumerated(EnumType.STRING)
-    private PaymentStatus paymentStatus;
-
     @OneToOne()
     @JsonIgnore
     @ToString.Exclude
     private Prescription prescription;
+    
+    @ManyToMany
+    @JoinTable(
+    		name = "invoice_medications",
+    		joinColumns = @JoinColumn(name = "invoice_id"),
+    		inverseJoinColumns = @JoinColumn(name = "medication_id")
+    )
+    @JsonIgnore
+    @ToString.Exclude
+    private List<Medication> medications = new ArrayList<>();
 
 }
