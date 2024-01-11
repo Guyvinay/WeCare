@@ -60,7 +60,7 @@ public class Patient extends Profile {
     private Address address;
     
 	@OneToMany(mappedBy = "patient")
-    @JsonIgnore
+//    @JsonIgnore
     private List<Prescription> prescriptions = new ArrayList<>();
 
     @OneToMany(mappedBy = "patient")

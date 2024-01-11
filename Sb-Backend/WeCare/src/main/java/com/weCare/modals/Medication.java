@@ -10,6 +10,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -43,6 +45,7 @@ public class Medication {
     private LocalDate expirationDate;
 
     @ManyToMany(mappedBy = "medications")
+    @JsonIgnore
     private List<Prescription> prescriptions = new ArrayList<>();
 
 }

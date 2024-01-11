@@ -27,7 +27,7 @@ public class InvoiceServiceImpl implements InvoiceService {
                 .orElseThrow(()->
                          new PrescriptionNotFoundException("Prescription with id:"+prescription_id+", not found!!!")
                 );
-        List<Medication> prescription_medications =  prescription.getMedications();
+//        List<Medication> prescription_medications =  prescription.getMedications();
         return invoice;
     }
 
