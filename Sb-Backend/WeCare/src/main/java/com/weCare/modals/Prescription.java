@@ -6,16 +6,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.CollectionTable;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,16 +23,18 @@ public class Prescription {
     private  String prescription_id;
 
     private LocalDateTime prescription_date;
-    
-    @ElementCollection
-    @CollectionTable(
-            name = "prescription_medications",
-            joinColumns = @JoinColumn(name = "prescription_id")
-    )
-//    @JsonIgnore
-    private List<String> prescription_medications = new ArrayList<>();
 
     private String additional_instructions;
+
+    @ManyToMany
+    @JoinTable(
+            name = "prescription_medications",
+            joinColumns = @JoinColumn(name = "prescription_id"),
+            inverseJoinColumns = @JoinColumn(name = "medication_id")
+    )
+    @JsonIgnore
+    private List<Medication> medications = new ArrayList<>();
+
 
     @OneToOne(mappedBy = "prescription")
     @JsonIgnore

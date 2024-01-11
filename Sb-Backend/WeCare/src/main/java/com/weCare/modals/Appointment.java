@@ -42,7 +42,7 @@ public class Appointment {
     private Department department;
     
     @NotBlank(message = "Provide details about ailments!!!")
-    private String ailment_descriptio;
+    private String ailment_description;
 
     @Enumerated(EnumType.STRING)
     private AppointmentStatus status;

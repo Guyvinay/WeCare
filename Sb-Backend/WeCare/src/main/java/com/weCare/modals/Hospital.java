@@ -29,6 +29,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Table(name = "hospitals")
 public class Hospital {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private  String hospital_id;

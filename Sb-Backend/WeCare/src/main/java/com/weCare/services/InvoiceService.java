@@ -6,7 +6,7 @@ import com.weCare.modals.Invoice;
 
 public interface InvoiceService {
 
-    public Invoice generateInvoice(Invoice invoice);
+    public Invoice generateInvoice(String prescription_id, Invoice invoice);
 
     public Invoice getInvoiceById(String invoice_id);
 
