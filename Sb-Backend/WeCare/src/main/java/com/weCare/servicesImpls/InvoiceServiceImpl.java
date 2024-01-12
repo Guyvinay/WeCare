@@ -55,6 +55,7 @@ public class InvoiceServiceImpl implements InvoiceService {
         //Merging prescription_medication with invoice_medications
         prescription_medication.putAll(invoice_medications);
         invoice_medications.putAll(prescription_medication);
+        
         //Getting expected_medication_ids_list
         List<String> expected_medication_ids_list = new
         		                ArrayList<>(prescription_medication.keySet());
@@ -130,7 +131,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     	Invoice retrieved_invoice = invoiceRepository.findById(invoice_id)
 		    			.orElseThrow(()-> 
 		    	              new InvoiceNotFoundException(
-					    		  "Invoice with id: "+invoice_id+", not found")
+					    		  "Invoice with id: "+invoice_id+", not found!!!")
 					    			 );
     	
     	Double amount_paying = invoice.getTotal_amount();
@@ -144,7 +145,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     		Invoice updated_invoice = invoiceRepository.save(retrieved_invoice);
     		invoice_details.put(
     				"message", 
-    				"Paying extra, Kindly collect your " +
+    				"Thanks for using our service, Kindly collect your " +
     				(amount_paying-amount_to_be_paid)
     				);
     		
@@ -155,10 +156,10 @@ public class InvoiceServiceImpl implements InvoiceService {
     				"You are paying "+
     		          amount_paying+
     		          ", but it costs "+
-    		          amount_to_be_paid
+    		          amount_to_be_paid+
+    		          " !!!"
     				);
     	}
-    	
     	
 //    	return invoice_details;
     	Invoice updated_invoice = invoiceRepository.save(retrieved_invoice);
@@ -196,10 +197,10 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public String deleteInvoiceById(String invoice_id) {
     	Invoice invoice = invoiceRepository.findById(invoice_id)
-		.orElseThrow(()-> 
-          new InvoiceNotFoundException(
-    		  "Invoice with id: "+invoice_id+", not found")
-    			 );
+								.orElseThrow(()-> 
+						          new InvoiceNotFoundException(
+						    		  "Invoice with id: "+invoice_id+", not found")
+						    			 );
     	invoiceRepository.delete(invoice);
         return "invoice with id: "+invoice_id+", deleted!!!";
     }
