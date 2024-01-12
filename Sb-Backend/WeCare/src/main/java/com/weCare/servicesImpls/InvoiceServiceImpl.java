@@ -54,7 +54,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
         //Merging prescription_medication with invoice_medications
         prescription_medication.putAll(invoice_medications);
-        
+        invoice_medications.putAll(prescription_medication);
         //Getting expected_medication_ids_list
         List<String> expected_medication_ids_list = new
         		                ArrayList<>(prescription_medication.keySet());
@@ -111,11 +111,11 @@ public class InvoiceServiceImpl implements InvoiceService {
         			);
         }
         
-        prescription.setInvoice(invoice);
+        prescription.getInvoices().add(invoice);
 
         invoice.setPrescription(prescription);
         invoice.setInvoice_date_time(LocalDateTime.now());
-        invoice.setMedications_invoice(prescription_medication);
+//        invoice.setMedications_invoice(prescription_medication);
         invoice.setTotal_amount(total_medication_price);
         invoice.setMedications(retrieved_medications);
         invoice.setPaymentStatus(PaymentStatus.PAYMENT_PENDING);

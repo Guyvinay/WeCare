@@ -19,6 +19,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapKeyColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
@@ -61,7 +62,7 @@ public class Prescription {
             joinColumns = @JoinColumn(name = "prescription_id"),
             inverseJoinColumns = @JoinColumn(name = "medication_id")
     )
-    @JsonIgnore
+//    @JsonIgnore
     @ToString.Exclude
     private List<Medication> medications = new ArrayList<>();
 
@@ -70,9 +71,9 @@ public class Prescription {
     @JsonIgnore
     private Appointment  appointment;
 
-    @OneToOne(mappedBy = "prescription")
+    @OneToMany(mappedBy = "prescription")
     @JsonIgnore
-    private Invoice  invoice;
+    private List<Invoice> invoices;
     
     @ManyToOne
     @JoinColumn(name = "patient_id")

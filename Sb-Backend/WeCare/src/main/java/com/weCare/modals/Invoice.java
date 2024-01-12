@@ -20,8 +20,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapKeyColumn;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -55,7 +55,8 @@ public class Invoice {
     @Column(name = "medication_quantity")
     private Map<String, Integer> medications_invoice = new HashMap<>();
 
-    @OneToOne()
+    @ManyToOne()
+    @JoinColumn(name = "prescription_id")
     @JsonIgnore
     @ToString.Exclude
     private Prescription prescription;
