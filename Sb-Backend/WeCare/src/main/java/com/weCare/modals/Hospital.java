@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -51,6 +52,7 @@ public class Hospital {
 
     @OneToMany(mappedBy = "hospital")
     @JsonIgnore
+//    @JsonManagedReference
     @ToString.Exclude
     private List<Doctor> doctors = new ArrayList<>();
 

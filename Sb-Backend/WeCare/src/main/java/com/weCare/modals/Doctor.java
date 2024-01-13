@@ -3,6 +3,7 @@ package com.weCare.modals;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
@@ -74,6 +75,7 @@ public class Doctor extends Profile {
 	@JoinColumn(name = "hospital_id")
 	@JsonIgnore
 	@ToString.Exclude
+//	@JsonBackReference
 	private Hospital hospital;
 
 	public Doctor(String email, String userName, String passWord, String profile_picture, Role role,

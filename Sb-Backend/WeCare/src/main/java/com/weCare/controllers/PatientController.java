@@ -49,7 +49,8 @@ public class PatientController {
 
     @PostMapping()
     public ResponseEntity<Patient> savePatient(@Valid @RequestBody Patient patient){
-        return new ResponseEntity<Patient>(
+        System.out.println(patient);
+    	return new ResponseEntity<Patient>(
                 patientService.savePatient(patient),
                 HttpStatus.ACCEPTED
         );
