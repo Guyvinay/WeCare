@@ -1,6 +1,7 @@
 package com.weCare.communications;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,8 +18,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.weCare.modals.Appointment;
+import com.weCare.modals.Message;
 import com.weCare.repository.AppointmentRepository;
+import com.weCare.repository.DoctorRepository;
 import com.weCare.repository.MessageRepository;
+import com.weCare.repository.PatientRepository;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -32,6 +36,12 @@ public class DemoWebSocketHandler extends TextWebSocketHandler {
 	
 	@Autowired
 	private MessageRepository messageRepository;
+	
+	@Autowired
+	private DoctorRepository doctorRepository;
+	
+	@Autowired
+	private PatientRepository patientRepository;
 	
 	private static final Map<String, Map<String, WebSocketSession>> appointmentSessions = new HashMap<>();
 	
@@ -52,38 +62,42 @@ public class DemoWebSocketHandler extends TextWebSocketHandler {
 
     	String appointmentId = extractAppointmentId(session);
     	String userId = extractUserId(session);
+    	Message chat_message = new Message();
     	
     	Appointment appointment = appointmentRepository.findById(appointmentId).orElse(null);
     	
-    	String message_payload = message.getPayload();
     	
+    	String message_payload = message.getPayload();
     	ObjectMapper objectMapper = new ObjectMapper();
     	
     	JsonNode jsonNode = objectMapper.readTree(message_payload);
     	
     	ObjectNode objectNode = (ObjectNode)jsonNode;
-
-    	objectNode.put("sender", userId);
+    	
+        if( appointment.getDoctor().getProfile_id()
+		        .equals(userId) ) {
+        	String doctor_name = appointment.getDoctor().getDoctor_name();
+        	objectNode.put("Sender", doctor_name);
+        	objectNode.put("By", "Doctor");
+        	chat_message.setSender(doctor_name);
+        }else {
+    		String patient_name = appointment.getPatient().getPatient_name();
+    		objectNode.put("Sender", patient_name);
+    		objectNode.put("By", "Patient");
+    		chat_message.setSender(patient_name);
+    	}
     	
     	String writeValueAsString = objectMapper.writeValueAsString(objectNode);
     	
     	String text_message = jsonNode.get("message").asText();
+
+    	chat_message.setAppointment(appointment);
+    	chat_message.setDoctor(appointment.getDoctor());
+    	chat_message.setPatient(appointment.getPatient());
+    	chat_message.setMessage(text_message);
+    	chat_message.setTimeStamp(LocalDateTime.now());
     	
-//    	System.out.println(text_message);
-//    	System.out.println(writeValueAsString);
-    	
-    	
-    	
-    	
-    	if( appointment.getDoctor().getProfile_id().equals(userId) ) {
-    		
-    	}else {
-    		
-    	}
-    	
-    	String messagePayload = message.getPayload().toString();
-    	
-    	
+    	messageRepository.save(chat_message);
     	
     	broadcastMessageToReciever(appointmentId, writeValueAsString, session );
     	

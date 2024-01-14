@@ -32,6 +32,13 @@ public class Message {
 	
 	private String sender;
 	
+	public Message(String message, LocalDateTime timeStamp, String sender) {
+		super();
+		this.message = message;
+		this.timeStamp = timeStamp;
+		this.sender = sender;
+	}
+
 	@ManyToOne
 	@JoinColumn(name = "patient_id")
 	@JsonIgnore
