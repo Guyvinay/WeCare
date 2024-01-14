@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.weCare.exceptions.NotFoundException;
 import com.weCare.modals.Appointment;
 import com.weCare.modals.AppointmentStatus;
+import com.weCare.modals.Availability;
 import com.weCare.modals.Department;
 import com.weCare.modals.Doctor;
 import com.weCare.modals.Hospital;
@@ -55,8 +56,10 @@ public class AppointmentServiceImpl implements AppointmentService {
         Department department = appointment.getDepartment();
 
         List<Doctor> doctors_with_same_department = doctorRepository
-                                                          .findByDepartmentAndHospital(
-                                                                  department,hospital_id);
+        		        .findByDepartmentAvailabilityAndHospital(
+                                            department, 
+		                                    Availability.AVAILABLE ,
+                                            hospital_id);
         if(doctors_with_same_department.isEmpty())
             throw new NotFoundException("Doctors with:"+department+", not found");
 
@@ -111,11 +114,14 @@ public class AppointmentServiceImpl implements AppointmentService {
     	Department appointment_depart = appointment.getDepartment();
     	Department doctor_depart = doctor.getDepartment();
     	
-    	if(!doctor_depart.equals(appointment_depart)) {
+    	if(!doctor_depart.equals(appointment_depart) ||
+    			doctor.getAvailability()!=Availability.AVAILABLE) {
     		
             List<Doctor> doctors_with_same_department = doctorRepository
-                                                           .findByDepartmentAndHospital(
-                                                            		  appointment_depart,hospital_id);
+    		        .findByDepartmentAvailabilityAndHospital(
+                            appointment_depart,
+                            Availability.AVAILABLE,
+                            hospital_id);
             
             if(doctors_with_same_department.isEmpty())
                 throw new NotFoundException("Doctors with:"+appointment_depart+", not found");

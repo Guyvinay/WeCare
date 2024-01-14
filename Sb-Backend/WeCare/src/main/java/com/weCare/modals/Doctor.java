@@ -81,6 +81,11 @@ public class Doctor extends Profile {
 	@ToString.Exclude
 //	@JsonBackReference
 	private Hospital hospital;
+	
+	@OneToMany(mappedBy = "doctor")
+	@JsonIgnore
+	@ToString.Exclude
+	private List<Message> messages = new ArrayList<>();
 
 	public Doctor(String email, String userName, String passWord, String profile_picture, Role role,
 			String doctor_name, Department department, String qualification, String mobile, Availability availability) {
