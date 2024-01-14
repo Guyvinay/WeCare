@@ -51,8 +51,9 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         //Retrieved Medications List
         List<Medication> retrived_medications_list = medicationRepository.findByMedication_idIn(expected_medication_ids_list);
 
-        List<String> retrived_medication_ids_list = retrived_medications_list.stream()
-        		.map(Medication::getMedication_id).collect(Collectors.toList());
+        List<String> retrived_medication_ids_list = retrived_medications_list
+        		.stream().map(Medication::getMedication_id)
+        		.collect(Collectors.toList());
         
         //Throwing Exception with missing medications;
         if(expected_medication_ids_list.size()!=retrived_medication_ids_list.size()) {
@@ -66,34 +67,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         	", not available!!!"
         			);
         }
-        
-        
-        
-        /*
-         
-         
-        for(Medication med : retrived_medications_list) {
-//        	System.out.println(med.getMedication_price());
-        	Integer extected_meds_quantity = expected_medication_ids_map.get(med.getMedication_id());
-        	Integer available_medication_quantity = med.getMedication_quantity();
-        	if(available_medication_quantity<extected_meds_quantity)
-        		throw new MedicationNotFoundException(
-        				"You need "+
-        						extected_meds_quantity+
-        						" medications of "+
-        						med.getMedication_id()+
-        						", but only"+
-        						available_medication_quantity+
-        						" medications available!!!"
-        				);        	
-        	med.setMedication_quantity(available_medication_quantity-extected_meds_quantity);
-//        	System.out.println(med.getMedication_quantity());
-        	
-        }
-        
-        */
-        
-        
+     
         appointment.setStatus(AppointmentStatus.APPOINTMENT_COMPLETED);
         appointment.setPrescription(prescription);
         

@@ -9,6 +9,7 @@ import com.weCare.exceptions.DoctorNotFoundException;
 import com.weCare.exceptions.HospitalNotFoundException;
 import com.weCare.exceptions.NotFoundException;
 import com.weCare.modals.Address;
+import com.weCare.modals.Availability;
 import com.weCare.modals.Department;
 import com.weCare.modals.Doctor;
 import com.weCare.modals.Hospital;
@@ -38,18 +39,25 @@ public class DoctorServiceImpl implements DoctorService {
     }
     
     @Override
-	public List<Doctor> saveDoctors(List<Doctor> doctors) {
+	public List<Doctor> saveDoctors(List<Doctor> doctors, String hospital_id) {
     	
     	if(doctors.isEmpty())
     		throw new DoctorNotFoundException("Doctors not found to persist!!!");
+    	
+    	Hospital hospital = hospitalRepository
+                .findById(hospital_id).orElseThrow(()->
+                        new HospitalNotFoundException("Hospital with id: "+hospital_id+", not found!!!")
+                );
 		
     	for(Doctor doctor:doctors) {
     		doctor.setAddress(
-    				addressRepository.save(
-    						doctor.getAddress()
-    						)
-    				);
+    				addressRepository.save(doctor.getAddress()));
+    		doctor.setHospital(hospital);
+    		doctor.setAvailability(Availability.AVAILABLE);
+
+    		hospital.getDoctors().add(doctor);
     	}
+    	
     	
     	return doctorRepository.saveAll(doctors);
 	}
@@ -63,6 +71,7 @@ public class DoctorServiceImpl implements DoctorService {
                 );
     	Address address = addressRepository.save(doctor.getAddress());
     	
+    	doctor.setAvailability(Availability.AVAILABLE);
     	doctor.setAddress(address);
     	doctor.setHospital(hospital);
     	
@@ -84,8 +93,8 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public List<Doctor> getDoctorByDepartmentPattern(String doctor_department) {
-    	Department department = Department.valueOf(doctor_department);
-        List<Doctor> doctorList = doctorRepository.findByDepartmentPattern(department);
+
+        List<Doctor> doctorList = doctorRepository.findByDepartmentContaining(doctor_department);
         if(doctorList.isEmpty())throw new DoctorNotFoundException("Doctors not found for "+doctor_department+" department!!!");
         return doctorList;
     }
@@ -106,7 +115,22 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public Doctor updateDoctor(String doctor_id, Doctor doctor) {
-        return null;
+    	
+    	Doctor retrieved_doctor = doctorRepository
+        .findById(doctor_id).orElseThrow(()->
+                new NotFoundException("Doctor with id: "+doctor_id+", not found!!!")
+        );
+    	if(doctor.getAvailability()!=null) {
+    		retrieved_doctor.setAvailability(doctor.getAvailability());
+    	}
+    	if(doctor.getDoctor_name()!=null&&doctor.getDoctor_name().length()>0) {
+    		retrieved_doctor.setDoctor_name(doctor.getDoctor_name());
+    	}
+    	if(doctor.getDepartment()!=null) {
+    		retrieved_doctor.setDepartment(doctor.getDepartment());
+    	}
+    	
+        return doctorRepository.save(retrieved_doctor);
     }
     @Override
     public Doctor updateDoctorHospital(String doctor_id, String hospital_id) {
@@ -119,6 +143,7 @@ public class DoctorServiceImpl implements DoctorService {
                         new DoctorNotFoundException("Doctor with id: "+doctor_id+", not found!!!")
                 );
         doctor.setHospital(hospital);
+        hospital.getDoctors().add(doctor);
         return doctorRepository.save(doctor);
     }
 

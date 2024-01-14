@@ -114,10 +114,12 @@ public class InvoiceServiceImpl implements InvoiceService {
         
         prescription.getInvoices().add(invoice);
 
+        total_medication_price = (double) (Math.round(total_medication_price*100)/100);
+        
+        invoice.setTotal_amount(total_medication_price);
         invoice.setPrescription(prescription);
         invoice.setInvoice_date_time(LocalDateTime.now());
 //        invoice.setMedications_invoice(prescription_medication);
-        invoice.setTotal_amount(total_medication_price);
         invoice.setMedications(retrieved_medications);
         invoice.setPaymentStatus(PaymentStatus.PAYMENT_PENDING);
         
