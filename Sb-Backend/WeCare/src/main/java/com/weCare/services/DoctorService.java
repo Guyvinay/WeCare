@@ -8,7 +8,7 @@ public interface DoctorService {
 
     public Doctor saveDoctor(Doctor doctor);
     
-    public List<Doctor> saveDoctors(List<Doctor> doctors);
+    public List<Doctor> saveDoctors(List<Doctor> doctors, String hospital_id);
 
     public Doctor saveDoctorWithHospital(Doctor doctor, String hospital_id);
     

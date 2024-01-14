@@ -15,16 +15,10 @@ public interface DoctorRepository extends JpaRepository<Doctor, String> {
     @Query("SELECT d FROM Doctor d JOIN d.hospital h WHERE h.hospital_id=:hospital_id AND d.department=:department")
     public List<Doctor> findByDepartmentAndHospital(Department department, String hospital_id);
 
-    //SQL specific native query
-//    @Query(value = "SELECT * FROM Doctors d WHERE UPPER(d.department) LIKE UPPER(CONCAT('%', :department, '%'))", nativeQuery = true)
-    
-//    @Query(value = "SELECT * FROM Doctors d WHERE UPPER(d.department) LIKE UPPER(CONCAT('%', :department, '%'))", nativeQuery = true)
-    @Query("SELECT d FROM Doctor d WHERE d.department = :department")
-    public List<Doctor> findByDepartmentPattern(@Param("department") Department department);
+    @Query("SELECT d FROM Doctor d WHERE UPPER(d.department) LIKE UPPER(CONCAT('%', :department, '%'))")
+    public List<Doctor> findByDepartmentContaining(String department);
 
-    @Query("SELECT d FROM Doctor d  WHERE d.doctor_name LIKE %:doctor_name%")
+    @Query("SELECT d FROM Doctor d  WHERE LOWER(d.doctor_name) LIKE LOWER(CONCAT('%',:doctor_name,'%'))")
     public List<Doctor> findByNamePattern(@Param("doctor_name")String doctor_name);
 
-//    @Query("SELECT d from Doctor d where d.department=:department")
-//    public List<Doctor> findByDepartmentAndHospital(Department department);
 }

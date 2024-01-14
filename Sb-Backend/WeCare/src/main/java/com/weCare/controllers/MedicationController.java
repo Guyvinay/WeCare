@@ -56,7 +56,8 @@ public class MedicationController {
 
     @PutMapping(value = "/{medication_id}")
     public ResponseEntity<Medication> updateMedication(
-            @PathVariable("medication_id") String medication_id, Medication medication){
+            @PathVariable("medication_id") String medication_id, 
+            @RequestBody Medication medication){
 
         return new ResponseEntity<Medication>(
                 medicationService.updateMedication(medication_id, medication),

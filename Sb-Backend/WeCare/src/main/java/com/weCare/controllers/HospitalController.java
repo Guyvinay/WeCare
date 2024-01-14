@@ -17,20 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.weCare.modals.Hospital;
 import com.weCare.services.HospitalService;
 
-/*
- {
-  "hospital_name": "AIIMS Patna",
-  "contact": "9876543211",
-  "description": "This is AIIMS Hospital Patna",
-  "address": {
-    "locality": "Bazar Samiti",
-    "city": "Patna",
-    "zip_code": 800006,
-    "state": "Bihar",
-    "country": "India"
-  }
-}
- */
 
 @RestController
 @RequestMapping(value = "/hospitals")
@@ -69,8 +55,9 @@ public class HospitalController {
         );
     }
     @PutMapping("/{hospital_id}")
-    public ResponseEntity<Hospital> updateHospital( @PathVariable("hospital_id") String hospital_id,
-                                                  @RequestBody Hospital hospital){
+    public ResponseEntity<Hospital> updateHospital( 
+    		@PathVariable("hospital_id") String hospital_id, 
+    		@RequestBody Hospital hospital){
         return new ResponseEntity<Hospital>(
                 hospitalService.updateHospital(hospital_id, hospital),
                 HttpStatus.ACCEPTED

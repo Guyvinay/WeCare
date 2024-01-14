@@ -17,17 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.weCare.modals.Prescription;
 import com.weCare.services.PrescriptionService;
 
-/*
-
-{
-  "prescription_medications": [
-    "stay right there i am coming","he has taken the time stone","nothing can be done"
-  ],
-  "additional_instructions": "do not mess with time i don't have time stone"
-}
-
- */
-
 @RestController
 @RequestMapping(value = "/prescriptions")
 public class PrescriptionController {
@@ -67,7 +56,7 @@ public class PrescriptionController {
 	@PutMapping(value = "/{prescription_id}")
 	public ResponseEntity<Prescription> updatePrescription(
 			@PathVariable("prescription_id") String prescription_id,
-			Prescription prescription){
+			@RequestBody Prescription prescription){
 
 		return new ResponseEntity<Prescription>(
 				prescriptionService.updatePrescription(prescription_id, prescription),

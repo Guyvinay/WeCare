@@ -17,15 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.weCare.modals.Appointment;
 import com.weCare.services.AppointmentService;
 
-/*
-
-{
-  "department": "ENT",
-  "ailment_descriptio": "Having difficulty in going back in time to resurrection"
-}
-
- */
-
 @RestController
 @RequestMapping(value = "/appointments")
 public class AppointmentController {
@@ -35,9 +26,9 @@ public class AppointmentController {
 
     @PostMapping(value = "/{hospital_id}/{patient_id}")
     public ResponseEntity<Appointment> bookAppointment(
-                                            @PathVariable("patient_id")String patient_id,
-                                            @PathVariable("hospital_id")String hospital_id,
-                                            @RequestBody Appointment appointment
+                                @PathVariable("patient_id")String patient_id,
+                                @PathVariable("hospital_id")String hospital_id,
+                                @RequestBody Appointment appointment
                                         ){
 
         return new ResponseEntity<Appointment>(
@@ -48,10 +39,10 @@ public class AppointmentController {
     
     @PostMapping(value = "/{hospital_id}/{patient_id}/{doctor_id}")
     public ResponseEntity<Appointment> bookAppointmentWithDoctor(
-                                            @PathVariable("patient_id")String patient_id,
-                                            @PathVariable("doctor_id")String doctor_id,
-                                            @PathVariable("hospital_id")String hospital_id,
-                                            @RequestBody Appointment appointment
+                                @PathVariable("patient_id")String patient_id,
+                                @PathVariable("doctor_id")String doctor_id,
+                                @PathVariable("hospital_id")String hospital_id,
+                                @RequestBody Appointment appointment
                                         ){
 
         return new ResponseEntity<Appointment>(
@@ -80,7 +71,7 @@ public class AppointmentController {
     
     @PutMapping(value = "/{appointment_id}")
     public ResponseEntity<Appointment> updateAppointment( @PathVariable("appointment_id") String appointment_id,
-                                                  @RequestBody Appointment appointment){
+                      @RequestBody Appointment appointment){
         return new ResponseEntity<Appointment>(
                 appointmentService.updateAppointment(appointment_id, appointment),
                 HttpStatus.ACCEPTED
@@ -88,7 +79,8 @@ public class AppointmentController {
     }
     
     @DeleteMapping(value = "/{appointment_id}")
-    public ResponseEntity<String> deleteAppointmentById(@PathVariable("appointment_id") String appointment_id){
+    public ResponseEntity<String> deleteAppointmentById(
+    		@PathVariable("appointment_id") String appointment_id){
         return new ResponseEntity<String>(
                 appointmentService.deleteAppointmentById(appointment_id),
                 HttpStatus.ACCEPTED

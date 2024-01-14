@@ -17,47 +17,23 @@ Medications
   "medication_description": "Blood pressure medication",
   "medication_manufacturer": "AstraZeneca",
   "medication_price": 15.50,
-  "medication_quantity": 30,
+  "medication_quantity": 200,
   "expirationDate": "2024-05-22"
-},
-{
-  "medication_name": "Omeprazole",
-  "medication_description": "Acid reflux and heartburn relief",
-  "medication_manufacturer": "GlaxoSmithKline",
-  "medication_price": 12.75,
-  "medication_quantity": 60,
-  "expirationDate": "2025-12-01"
-},
-{
-  "medication_name": "Simvastatin",
-  "medication_description": "Cholesterol-lowering medication",
-  "medication_manufacturer": "Merck",
-  "medication_price": 18.99,
-  "medication_quantity": 90,
-  "expirationDate": "2024-04-10"
 },
 {
   "medication_name": "Cetirizine",
   "medication_description": "Antihistamine for allergies",
   "medication_manufacturer": "Novartis",
   "medication_price": 7.25,
-  "medication_quantity": 120,
+  "medication_quantity": 220,
   "expirationDate": "2025-09-08"
-},
-{
-  "medication_name": "Metformin",
-  "medication_description": "Diabetes medication",
-  "medication_manufacturer": "Pfizer",
-  "medication_price": 11.99,
-  "medication_quantity": 100,
-  "expirationDate": "2024-02-28"
 },
 {
   "medication_name": "Atorvastatin",
   "medication_description": "Statin medication for heart health",
   "medication_manufacturer": "Sanofi",
   "medication_price": 22.50,
-  "medication_quantity": 30,
+  "medication_quantity": 230,
   "expirationDate": "2025-10-15"
 },
 {
@@ -65,7 +41,7 @@ Medications
   "medication_description": "Anxiety and muscle spasms medication",
   "medication_manufacturer": "Roche",
   "medication_price": 14.99,
-  "medication_quantity": 50,
+  "medication_quantity": 250,
   "expirationDate": "2024-06-05"
 },
 {
@@ -73,7 +49,7 @@ Medications
   "medication_description": "Pain reliever and fever reducer",
   "medication_manufacturer": "Bayer",
   "medication_price": 9.25,
-  "medication_quantity": 150,
+  "medication_quantity": 250,
   "expirationDate": "2025-11-30"
 },
 {
@@ -81,9 +57,82 @@ Medications
   "medication_description": "Thyroid hormone replacement",
   "medication_manufacturer": "Abbott",
   "medication_price": 16.99,
-  "medication_quantity": 90,
+  "medication_quantity": 290,
   "expirationDate": "2026-03-20"
+},
+{
+  "medication_name": "Aspirin",
+  "medication_description": "Analgesic and anti-inflammatory",
+  "medication_manufacturer": "Bayer",
+  "medication_price": 5.49,
+  "medication_quantity": 150,
+  "expirationDate": "2025-09-30"
+},
+{
+  "medication_name": "Paracetamol",
+  "medication_description": "Fever reducer",
+  "medication_manufacturer": "Tylenol",
+  "medication_price": 6.75,
+  "medication_quantity": 180,
+  "expirationDate": "2025-12-25"
+},
+{
+  "medication_name": "Loratadine",
+  "medication_description": "Antihistamine",
+  "medication_manufacturer": "Claritin",
+  "medication_price": 10.25,
+  "medication_quantity": 220,
+  "expirationDate": "2025-08-15"
+},
+{
+  "medication_name": "Amoxicillin",
+  "medication_description": "Antibiotic",
+  "medication_manufacturer": "Pfizer",
+  "medication_price": 15.99,
+  "medication_quantity": 300,
+  "expirationDate": "2026-10-20"
+},
+{
+  "medication_name": "Omeprazole",
+  "medication_description": "Proton pump inhibitor",
+  "medication_manufacturer": "Prilosec",
+  "medication_price": 12.49,
+  "medication_quantity": 190,
+  "expirationDate": "2026-02-28"
+},
+{
+  "medication_name": "Simvastatin",
+  "medication_description": "Cholesterol-lowering medication",
+  "medication_manufacturer": "Zocor",
+  "medication_price": 14.75,
+  "medication_quantity": 180,
+  "expirationDate": "2025-09-15"
+},
+{
+  "medication_name": "Morphine",
+  "medication_description": "Pain reliever",
+  "medication_manufacturer": "Purdue Pharma",
+  "medication_price": 25.99,
+  "medication_quantity": 170,
+  "expirationDate": "2026-04-05"
+},
+{
+  "medication_name": "Metformin",
+  "medication_description": "Antidiabetic medication",
+  "medication_manufacturer": "Glucophage",
+  "medication_price": 9.99,
+  "medication_quantity": 160,
+  "expirationDate": "2025-01-12"
+},
+{
+  "medication_name": "Warfarin",
+  "medication_description": "Anticoagulant",
+  "medication_manufacturer": "Coumadin",
+  "medication_price": 7.49,
+  "medication_quantity": 150,
+  "expirationDate": "2025-11-30"
 }
+
 ]
 
 Hospitals 
@@ -153,6 +202,63 @@ Hospitals
 Doctors
 [
 {
+  "email": "mathew.ent@gmail.com",
+  "userName": "mathew_lame",
+  "passWord": "string",
+  "profile_picture": "https://dummyurl.com/Dr-mathew-lame-ENT.jpg",
+  "role": "DOCTOR",
+  "doctor_name": "Dr. Mathew Lame",
+  "department": "ENT",
+  "qualification": "ENT Specialist",
+  "mobile": "9876123181",
+  "availability": "AVAILABLE",
+  "address": {
+    "locality": "Ear & Throat Lane",
+    "city": "Seattle",
+    "zip_code": 98101,
+    "state": "HS, Washington",
+    "country": "USA"
+  }
+},
+{
+  "email": "jonas.ent@gmail.com",
+  "userName": "Jonas_Rick",
+  "passWord": "string",
+  "profile_picture": "https://dummyurl.com/Dr-Jonas_Rick-ENT.jpg",
+  "role": "DOCTOR",
+  "doctor_name": "Dr. Jonas Rick",
+  "department": "ENT",
+  "qualification": "ENT Specialist",
+  "mobile": "9876123122",
+  "availability": "AVAILABLE",
+  "address": {
+    "locality": "Ear & Throat Lane",
+    "city": "Seattle",
+    "zip_code": 98101,
+    "state": "WS, Washington",
+    "country": "USA"
+  }
+},
+{
+  "email": "mike_ruster@gmail.com",
+  "userName": "mike_ruster",
+  "passWord": "string",
+  "profile_picture": "https://dummyurl.com/Dr-mike_ruster-ENT.jpg",
+  "role": "DOCTOR",
+  "doctor_name": "Dr. Mike Ruster",
+  "department": "ENT",
+  "qualification": "ENT Specialist",
+  "mobile": "9876113192",
+  "availability": "AVAILABLE",
+  "address": {
+    "locality": "Ear & Throat Lane",
+    "city": "Seattle",
+    "zip_code": 98101,
+    "state": "CS, Washington",
+    "country": "USA"
+  }
+},
+{
   "email": "grace.wong@gmail.com",
   "userName": "gracewong",
   "passWord": "string",
@@ -162,6 +268,7 @@ Doctors
   "department": "PSYCHIATRY",
   "qualification": "MD in Cardiology",
   "mobile": "9876543210",
+  "availability": "AVAILABLE",
   "address": {
     "locality": "Cardio Plaza",
     "city": "San Francisco",
@@ -180,6 +287,7 @@ Doctors
   "department": "HOMEOPATHY",
   "qualification": "MS in Orthopedic Surgery",
   "mobile": "8765432119",
+  "availability": "AVAILABLE",
   "address": {
     "locality": "Bone Avenue",
     "city": "Chicago",
@@ -198,6 +306,7 @@ Doctors
   "department": "NEUROLOGY",
   "qualification": "Neurologist",
   "mobile": "9876123453",
+  "availability": "AVAILABLE",
   "address": {
     "locality": "Brain Street",
     "city": "Boston",
@@ -216,6 +325,7 @@ Doctors
   "department": "PAEDIATRICS",
   "qualification": "Pediatrician",
   "mobile": "8765123486",
+  "availability": "AVAILABLE",
   "address": {
     "locality": "Childhood Lane",
     "city": "Denver",
@@ -234,6 +344,7 @@ Doctors
   "department": "ENT",
   "qualification": "ENT Specialist",
   "mobile": "9876123489",
+  "availability": "AVAILABLE",
   "address": {
     "locality": "Ear & Throat Lane",
     "city": "Seattle",
@@ -252,6 +363,7 @@ Doctors
   "department": "DENTISTRY",
   "qualification": "Dentist",
   "mobile": "8765432149",
+  "availability": "AVAILABLE",
   "address": {
     "locality": "Smile Street",
     "city": "Orlando",
@@ -270,6 +382,7 @@ Doctors
   "department": "DERMATOLOGY",
   "qualification": "Dermatologist",
   "mobile": "7654321178",
+  "availability": "AVAILABLE",
   "address": {
     "locality": "SkinCare Boulevard",
     "city": "Los Angeles",
@@ -288,6 +401,7 @@ Doctors
   "department": "NEUROLOGY",
   "qualification": "Neurologist",
   "mobile": "8765123165",
+  "availability": "AVAILABLE",
   "address": {
     "locality": "Brain Avenue",
     "city": "San Diego",

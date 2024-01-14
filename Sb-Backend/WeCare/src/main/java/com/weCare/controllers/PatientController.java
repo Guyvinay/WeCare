@@ -19,27 +19,6 @@ import com.weCare.services.PatientService;
 
 import jakarta.validation.Valid;
 
-/*
-{
-  "email": "maximus@gmail.com",
-  "userName": "maximus",
-  "passWord": "string",
-  "profile_picture": "Maximus-Desimus-Meridious",
-  "role": "PATIENT",
-  "patient_name": "Maximus Desimus Meridious",
-  "patient_gender": "MALE",
-  "date_of_birth": "2001-01-10",
-  "mobile": "7654321234",
-  "address": {
-    "locality": "NIT Patna",
-    "city": "Patna",
-    "zip_code": 800005,
-    "state": "Bihar",
-    "country": "India"
-  }
-}
-*/
-
 @RestController
 @RequestMapping(value = "/patients")
 public class PatientController {
@@ -49,7 +28,6 @@ public class PatientController {
 
     @PostMapping()
     public ResponseEntity<Patient> savePatient(@Valid @RequestBody Patient patient){
-        System.out.println(patient);
     	return new ResponseEntity<Patient>(
                 patientService.savePatient(patient),
                 HttpStatus.ACCEPTED
@@ -84,8 +62,9 @@ public class PatientController {
         );
     }
     @PutMapping("/{patient_id}")
-    public ResponseEntity<Patient> updatePatient( @PathVariable("patient_id") String patient_id,
-                                                @RequestBody Patient patient){
+    public ResponseEntity<Patient> updatePatient( 
+    		@PathVariable("patient_id") String patient_id,
+            @RequestBody Patient patient){
         return new ResponseEntity<Patient>(
                 patientService.updatePatient(patient_id, patient),
                 HttpStatus.ACCEPTED

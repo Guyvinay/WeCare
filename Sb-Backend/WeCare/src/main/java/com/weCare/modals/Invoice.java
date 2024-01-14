@@ -67,7 +67,7 @@ public class Invoice {
     		joinColumns = @JoinColumn(name = "invoice_id"),
     		inverseJoinColumns = @JoinColumn(name = "medication_id")
     )
-    @JsonIgnore
+//    @JsonIgnore
     @ToString.Exclude
     private List<Medication> medications = new ArrayList<>();
 

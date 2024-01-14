@@ -46,8 +46,9 @@ public class ProfileController {
         );
     }
     @PutMapping("/{profile_id}")
-    public ResponseEntity<Profile> updateProfile( @PathVariable("profile_id") String profile_id,
-                                                  @RequestBody Profile profile){
+    public ResponseEntity<Profile> updateProfile( 
+    		@PathVariable("profile_id") String profile_id,
+            @RequestBody Profile profile){
         return new ResponseEntity<Profile>(
                 profileService.updateProfile(profile_id, profile),
                 HttpStatus.ACCEPTED

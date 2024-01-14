@@ -20,26 +20,6 @@ import com.weCare.services.DoctorService;
 
 import jakarta.validation.Valid;
 
-/*
-{
-  "email": "stefen@gmail.com",
-  "userName": "stefenn",
-  "passWord": "string",
-  "profile_picture": "Dr-Stefen-Strange",
-  "role": "DOCTOR",
-  "doctor_name": "Dr. Stefen Strange",
-  "department": "ENT",
-  "qualification": "Masters-in-teleportation-hipnotism-time-manipulation",
-  "mobile": "8765432123",
-  "address": {
-    "locality": "Bleeker Street",
-    "city": "LA",
-    "zip_code": 200006,
-    "state": "Los Angeles",
-    "country": "USA"
-  }
-}
- */
 
 @RestController
 @RequestMapping(value = "/doctors")
@@ -56,10 +36,12 @@ public class DoctorController {
         );
     }
     
-    @PostMapping(value = "/save_all_doctors")
-    public ResponseEntity<List<Doctor>> saveDoctors( @Valid @RequestBody List<Doctor> doctors){
+    @PostMapping(value = "/save_all_doctors/{hospital_id}")
+    public ResponseEntity<List<Doctor>> saveDoctors(
+    		@PathVariable("hospital_id")String hospital_id,
+    		@Valid @RequestBody List<Doctor> doctors){
         return new ResponseEntity<List<Doctor>>(
-                doctorService.saveDoctors(doctors),
+                doctorService.saveDoctors(doctors, hospital_id),
                 HttpStatus.ACCEPTED
         );
     }
@@ -105,8 +87,9 @@ public class DoctorController {
         );
     }
     @PutMapping("/{doctor_id}")
-    public ResponseEntity<Doctor> updateDoctor( @PathVariable("doctor_id") String doctor_id,
-                                                  @RequestBody Doctor doctor){
+    public ResponseEntity<Doctor> updateDoctor(
+    		@PathVariable("doctor_id") String doctor_id,
+            @RequestBody Doctor doctor){
         return new ResponseEntity<Doctor>(
                 doctorService.updateDoctor(doctor_id, doctor),
                 HttpStatus.ACCEPTED
@@ -114,8 +97,9 @@ public class DoctorController {
     }
 
     @PatchMapping("/{doctor_id}/{hospital_id}")
-    public ResponseEntity<Doctor> updateDoctorHospital( @PathVariable("doctor_id") String doctor_id,
-                                                @PathVariable("hospital_id") String hospital_id){
+    public ResponseEntity<Doctor> updateDoctorHospital( 
+    		@PathVariable("doctor_id") String doctor_id,
+            @PathVariable("hospital_id") String hospital_id){
         return new ResponseEntity<Doctor>(
                 doctorService.updateDoctorHospital(doctor_id, hospital_id),
                 HttpStatus.ACCEPTED
@@ -123,7 +107,8 @@ public class DoctorController {
     }
 
     @DeleteMapping(value = "/{doctor_id}")
-    public ResponseEntity<String> deleteDoctorById(@PathVariable("doctor_id") String doctor_id){
+    public ResponseEntity<String> deleteDoctorById(
+    		@PathVariable("doctor_id") String doctor_id){
         return new ResponseEntity<String>(
                 doctorService.deleteDoctorById(doctor_id),
                 HttpStatus.ACCEPTED

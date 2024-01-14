@@ -45,6 +45,10 @@ public class Doctor extends Profile {
 	@NotBlank(message = "Mobile cannot be blank!!!")
 	@Column(unique = true)
 	private String mobile;
+	
+	@NotNull(message = "Availability cannot be null!!!")
+	@Enumerated(EnumType.STRING)
+	private Availability availability;
 
 	@OneToOne
 //	@JsonIgnore
@@ -79,12 +83,13 @@ public class Doctor extends Profile {
 	private Hospital hospital;
 
 	public Doctor(String email, String userName, String passWord, String profile_picture, Role role,
-			String doctor_name, Department department, String qualification, String mobile) {
+			String doctor_name, Department department, String qualification, String mobile, Availability availability) {
 		super(email, userName, passWord, profile_picture, role);
 		this.doctor_name = doctor_name;
 		this.department = department;
 		this.qualification = qualification;
 		this.mobile = mobile;
+		this.availability = availability;
 	}
 	
 }
