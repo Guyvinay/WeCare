@@ -203,7 +203,6 @@ Doctors
 [
 {
   "email": "mathew.ent@gmail.com",
-  "userName": "mathew_lame",
   "passWord": "string",
   "profile_picture": "https://dummyurl.com/Dr-mathew-lame-ENT.jpg",
   "role": "DOCTOR",
@@ -222,7 +221,6 @@ Doctors
 },
 {
   "email": "jonas.ent@gmail.com",
-  "userName": "Jonas_Rick",
   "passWord": "string",
   "profile_picture": "https://dummyurl.com/Dr-Jonas_Rick-ENT.jpg",
   "role": "DOCTOR",
@@ -241,7 +239,6 @@ Doctors
 },
 {
   "email": "mike_ruster@gmail.com",
-  "userName": "mike_ruster",
   "passWord": "string",
   "profile_picture": "https://dummyurl.com/Dr-mike_ruster-ENT.jpg",
   "role": "DOCTOR",
@@ -260,7 +257,6 @@ Doctors
 },
 {
   "email": "grace.wong@gmail.com",
-  "userName": "gracewong",
   "passWord": "string",
   "profile_picture": "https://dummyurl.com/Dr-Grace-Wong.jpg",
   "role": "DOCTOR",
@@ -279,7 +275,6 @@ Doctors
 },
 {
   "email": "alex.jones@gmail.com",
-  "userName": "alexjones",
   "passWord": "string",
   "profile_picture": "https://dummyurl.com/Dr-Alex-Jones.jpg",
   "role": "DOCTOR",
@@ -298,7 +293,6 @@ Doctors
 },
 {
   "email": "robert.anderson@gmail.com",
-  "userName": "robertanderson",
   "passWord": "string",
   "profile_picture": "https://dummyurl.com/Dr-Robert-Anderson.jpg",
   "role": "DOCTOR",
@@ -317,7 +311,6 @@ Doctors
 },
 {
   "email": "emma.johnson@gmail.com",
-  "userName": "emmajohnson",
   "passWord": "string",
   "profile_picture": "https://dummyurl.com/Dr-Emma-Johnson.jpg",
   "role": "DOCTOR",
@@ -336,7 +329,6 @@ Doctors
 },
 {
   "email": "sara.ent@gmail.com",
-  "userName": "saraent",
   "passWord": "string",
   "profile_picture": "https://dummyurl.com/Dr-Sara-ENT.jpg",
   "role": "DOCTOR",
@@ -355,7 +347,6 @@ Doctors
 },
 {
   "email": "mike.dentist@gmail.com",
-  "userName": "mikedentist",
   "passWord": "string",
   "profile_picture": "https://dummyurl.com/Dr-Mike-Dentist.jpg",
   "role": "DOCTOR",
@@ -374,7 +365,6 @@ Doctors
 },
 {
   "email": "lisa.derm@gmail.com",
-  "userName": "lisaderm",
   "passWord": "string",
   "profile_picture": "https://dummyurl.com/Dr-Lisa-Dermatologist.jpg",
   "role": "DOCTOR",
@@ -393,7 +383,6 @@ Doctors
 },
 {
   "email": "olivia.neuro@gmail.com",
-  "userName": "olivianeuro",
   "passWord": "string",
   "profile_picture": "https://dummyurl.com/Dr-Olivia-Neurologist.jpg",
   "role": "DOCTOR",
@@ -412,12 +401,13 @@ Doctors
 }
 ]
 
+
+
 Patients
 
 [
  {
   "email": "olivia@gmail.com",
-  "userName": "olivia",
   "passWord": "string",
   "profile_picture": "https://dummyurl.com/Olivia.jpg",
   "role": "PATIENT",
@@ -435,7 +425,6 @@ Patients
 },
 {
   "email": "samuel@gmail.com",
-  "userName": "samuel",
   "passWord": "string",
   "profile_picture": "https://dummyurl.com/Samuel.jpg",
   "role": "PATIENT",
@@ -453,7 +442,6 @@ Patients
 },
 {
   "email": "emma@gmail.com",
-  "userName": "emma",
   "passWord": "string",
   "profile_picture": "https://dummyurl.com/Emma.jpg",
   "role": "PATIENT",
@@ -471,7 +459,6 @@ Patients
 },
 {
   "email": "nathan@gmail.com",
-  "userName": "nathan",
   "passWord": "string",
   "profile_picture": "https://dummyurl.com/Nathan.jpg",
   "role": "PATIENT",
@@ -489,7 +476,6 @@ Patients
 },
 {
   "email": "isabella@gmail.com",
-  "userName": "isabella",
   "passWord": "string",
   "profile_picture": "https://dummyurl.com/Isabella.jpg",
   "role": "PATIENT",
@@ -507,7 +493,6 @@ Patients
 },
 {
   "email": "daniel@gmail.com",
-  "userName": "daniel",
   "passWord": "string",
   "profile_picture": "https://dummyurl.com/Daniel.jpg",
   "role": "PATIENT",
@@ -525,7 +510,6 @@ Patients
 },
 {
   "email": "ava@gmail.com",
-  "userName": "ava",
   "passWord": "string",
   "profile_picture": "https://dummyurl.com/Ava.jpg",
   "role": "PATIENT",
@@ -543,7 +527,6 @@ Patients
 },
 {
   "email": "leo@gmail.com",
-  "userName": "leo",
   "passWord": "string",
   "profile_picture": "https://dummyurl.com/Leo.jpg",
   "role": "PATIENT",
@@ -561,7 +544,6 @@ Patients
 },
 {
   "email": "mia@gmail.com",
-  "userName": "mia",
   "passWord": "string",
   "profile_picture": "https://dummyurl.com/Mia.jpg",
   "role": "PATIENT",
@@ -579,7 +561,6 @@ Patients
 },
 {
   "email": "ethan@gmail.com",
-  "userName": "ethan",
   "passWord": "string",
   "profile_picture": "https://dummyurl.com/Ethan.jpg",
   "role": "PATIENT",
@@ -597,7 +578,6 @@ Patients
 },
 {
   "email": "mia.string@gmail.com",
-  "userName": "miastring",
   "passWord": "string",
   "profile_picture": "https://dummyurl.com/Mia-String.jpg",
   "role": "PATIENT",
@@ -615,7 +595,6 @@ Patients
 },
 {
   "email": "noah.string@gmail.com",
-  "userName": "noahstring",
   "passWord": "string",
   "profile_picture": "https://dummyurl.com/Noah-String.jpg",
   "role": "PATIENT",
@@ -633,7 +612,6 @@ Patients
 },
 {
   "email": "olivia.string@gmail.com",
-  "userName": "oliviastring",
   "passWord": "string",
   "profile_picture": "https://dummyurl.com/Olivia-String.jpg",
   "role": "PATIENT",
@@ -652,5 +630,7 @@ Patients
 ]
 
 select * from appointments;select * from hospitals;select * from doctors; select * from patients;select * from prescriptions;select * from prescription_medications;select * from prescription_medication_quantity;
+
+select * from medications;select * from hospitals;select * from doctors;select * from patients;select * from profiles;select * from appointments;select * from prescriptions;select * from invoices;select * from messages order by time_stamp desc;
 
  */

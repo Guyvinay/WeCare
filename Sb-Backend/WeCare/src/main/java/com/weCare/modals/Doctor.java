@@ -87,9 +87,9 @@ public class Doctor extends Profile {
 	@ToString.Exclude
 	private List<Message> messages = new ArrayList<>();
 
-	public Doctor(String email, String userName, String passWord, String profile_picture, Role role,
+	public Doctor(String email, String passWord, String profile_picture, Role role,
 			String doctor_name, Department department, String qualification, String mobile, Availability availability) {
-		super(email, userName, passWord, profile_picture, role);
+		super(email, passWord, profile_picture, role);
 		this.doctor_name = doctor_name;
 		this.department = department;
 		this.qualification = qualification;

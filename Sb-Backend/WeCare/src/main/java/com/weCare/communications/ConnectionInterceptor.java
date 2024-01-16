@@ -11,6 +11,7 @@ import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.server.HandshakeInterceptor;
 
+import com.weCare.exceptions.AppointmentNotFoundException;
 import com.weCare.exceptions.NotFoundException;
 import com.weCare.modals.Appointment;
 import com.weCare.repository.AppointmentRepository;
@@ -22,6 +23,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ConnectionInterceptor implements HandshakeInterceptor {
 
+	@Autowired
 	private AppointmentRepository appointmentRepository;
 	
 	@Override
@@ -32,7 +34,9 @@ public class ConnectionInterceptor implements HandshakeInterceptor {
 		String userId = extractUserId(uri);
 		String appointmentId = extractAppointmentId(uri);
 
-		Appointment appointment = appointmentRepository.findById(appointmentId).orElse(null);
+		Appointment appointment = appointmentRepository.findById(appointmentId).orElseThrow(()->
+        new AppointmentNotFoundException("Appointment with id: "+appointmentId+", not found!!!")
+);
 		
 		if( appointment.getDoctor().getProfile_id().equals(userId)) return true;
 		else if(appointment.getPatient().getProfile_id().equals(userId)) return true;

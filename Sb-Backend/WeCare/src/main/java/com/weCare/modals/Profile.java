@@ -39,9 +39,6 @@ public class Profile {
     )
     private String email;
 
-    @NotBlank(message = "Username cannot be blank!!!")
-    @Column(unique = true)
-    private String userName;
 
     @NotBlank(message = "Password cannot be blank!!!")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -53,10 +50,9 @@ public class Profile {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-	public Profile(String email, String userName, String passWord, String profile_picture, Role role) {
+	public Profile(String email, String passWord, String profile_picture, Role role) {
 		super();
 		this.email = email;
-		this.userName = userName;
 		this.passWord = passWord;
 		this.profile_picture = profile_picture;
 		this.role = role;

@@ -27,10 +27,6 @@ public class MessageController {
 		@RequestParam(required=false,defaultValue="DESC",name= "direction")String direction,
 		@RequestParam(required=false,defaultValue="timeStamp",name="field")String field
 			){
-		System.out.println(page);
-		System.out.println(limit);
-		System.out.println(direction);
-		System.out.println(field);
 		return  new ResponseEntity<List<Message>>(
 				messageService.getAllMessagesByPagination(page,limit,direction,field), 
 				HttpStatus.ACCEPTED);
