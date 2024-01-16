@@ -5,21 +5,19 @@ import java.util.List;
 import com.weCare.modals.Patient;
 
 public interface PatientService {
-	
+
 	public Patient savePatient(Patient patient);
-	
+
 	public List<Patient> savePatients(List<Patient> patients);
 
-    public Patient getPatientById(String patient_id);
-    
-    public List<Patient> getPatientByNamePattern(String patient_name);
+	public Patient getPatientById(String patient_id);
 
-    public List<Patient> getAllPatients();
+	public List<Patient> getPatientByNamePattern(String patient_name);
 
-    public Patient updatePatient(String patient_id, Patient patient);
+	public List<Patient> getAllPatients();
 
-    public String deletePatientById(String patient_id);
+	public Patient updatePatient(String patient_id, Patient patient);
 
-
+	public String deletePatientById(String patient_id);
 
 }

@@ -25,13 +25,13 @@ public class Message {
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private String message_id;
-	
+
 	private String message;
-	
+
 	private LocalDateTime timeStamp;
-	
+
 	private String sender;
-	
+
 	public Message(String message, LocalDateTime timeStamp, String sender) {
 		super();
 		this.message = message;
@@ -43,15 +43,15 @@ public class Message {
 	@JoinColumn(name = "patient_id")
 	@JsonIgnore
 	private Patient patient;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "doctor_id")
 	@JsonIgnore
 	private Doctor doctor;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "appointment_id")
 	@JsonIgnore
 	private Appointment appointment;
-	
+
 }

@@ -6,14 +6,14 @@ import com.weCare.modals.Address;
 
 public interface AddressService {
 
-    public Address saveAddress(Address address);
+	public Address saveAddress(Address address);
 
-    public Address getAddressById(String address_id);
+	public Address getAddressById(String address_id);
 
-    public List<Address> getAllAddresses();
+	public List<Address> getAllAddresses();
 
-    public Address updateAddress(String address_id, Address address);
+	public Address updateAddress(String address_id, Address address);
 
-    public String deleteAddressById(String address_id);
-    
+	public String deleteAddressById(String address_id);
+
 }

@@ -15,27 +15,26 @@ public class ProfileServiceImpl implements ProfileService {
 
 	@Autowired
 	private ProfileRepository profileRepository;
-	
+
 	@Override
 	public Profile saveProfile(Profile profile) {
 
-        return profileRepository.save(profile);
+		return profileRepository.save(profile);
 	}
 
 	@Override
 	public Profile getProfileById(String profile_id) {
 
-		return profileRepository
-				.findById(profile_id).orElseThrow(()->
-						new NotFoundException("Profile with id: "+profile_id+", not found!!!")
-				);
+		return profileRepository.findById(profile_id)
+				.orElseThrow(() -> new NotFoundException("Profile with id: " + profile_id + ", not found!!!"));
 	}
 
 	@Override
 	public List<Profile> getAllProfiles() {
 
 		List<Profile> profiles = profileRepository.findAll();
-		if(profiles.isEmpty())throw new NotFoundException("No Profiles Found!!!");
+		if (profiles.isEmpty())
+			throw new NotFoundException("No Profiles Found!!!");
 		return profiles;
 	}
 
@@ -47,12 +46,10 @@ public class ProfileServiceImpl implements ProfileService {
 
 	@Override
 	public String deleteProfileById(String profile_id) {
-		Profile profile = profileRepository
-				.findById(profile_id).orElseThrow(()->
-						new NotFoundException("Profile with id: "+profile_id+", not found!!!")
-				);
+		Profile profile = profileRepository.findById(profile_id)
+				.orElseThrow(() -> new NotFoundException("Profile with id: " + profile_id + ", not found!!!"));
 		profileRepository.delete(profile);
-		return "Profile with id: "+profile_id+", deleted successfully";
+		return "Profile with id: " + profile_id + ", deleted successfully";
 	}
 
 }

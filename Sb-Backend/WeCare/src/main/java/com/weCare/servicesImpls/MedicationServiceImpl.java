@@ -12,51 +12,48 @@ import java.util.List;
 @Service
 public class MedicationServiceImpl implements MedicationService {
 
-    @Autowired
-    private MedicationRepository medicationRepository;
+	@Autowired
+	private MedicationRepository medicationRepository;
 
-    @Override
-    public Medication saveMedication(Medication medication) {
+	@Override
+	public Medication saveMedication(Medication medication) {
 
-        return medicationRepository.save(medication);
-    }
-
-    @Override
-	public List<Medication> saveMedications(List<Medication> medications) {
-    	if(medications.isEmpty())
-    		throw new MedicationNotFoundException("Medication cannot empty!!!");
-    	return medicationRepository.saveAll(medications);
+		return medicationRepository.save(medication);
 	}
-    
-    @Override
-    public Medication getMedicationById(String medication_id) {
 
-        return medicationRepository.findById(medication_id).orElseThrow(()->
-                        new MedicationNotFoundException("Medication with id:"+medication_id+", not found")
-                    );
-    }
+	@Override
+	public List<Medication> saveMedications(List<Medication> medications) {
+		if (medications.isEmpty())
+			throw new MedicationNotFoundException("Medication cannot empty!!!");
+		return medicationRepository.saveAll(medications);
+	}
 
-    @Override
-    public List<Medication> getAllMedications() {
-        List<Medication> medications =  medicationRepository.findAll();
-        if(medications.isEmpty())
-            throw new MedicationNotFoundException("Medications not found!!!");
-        return medications;
-    }
+	@Override
+	public Medication getMedicationById(String medication_id) {
 
-    @Override
-    public Medication updateMedication(String medication_id, Medication medication) {
-        return null;
-    }
+		return medicationRepository.findById(medication_id).orElseThrow(
+				() -> new MedicationNotFoundException("Medication with id:" + medication_id + ", not found"));
+	}
 
-    @Override
-    public String deleteMedicationById(String medication_id) {
-        Medication medication =  medicationRepository.findById(medication_id).orElseThrow(()->
-                new MedicationNotFoundException("Medication with id:"+medication_id+", not found")
-        );
-        medicationRepository.delete(medication);
-        return "Medication: "+medication_id+" deleted";
-    }
+	@Override
+	public List<Medication> getAllMedications() {
+		List<Medication> medications = medicationRepository.findAll();
+		if (medications.isEmpty())
+			throw new MedicationNotFoundException("Medications not found!!!");
+		return medications;
+	}
 
-	
+	@Override
+	public Medication updateMedication(String medication_id, Medication medication) {
+		return null;
+	}
+
+	@Override
+	public String deleteMedicationById(String medication_id) {
+		Medication medication = medicationRepository.findById(medication_id).orElseThrow(
+				() -> new MedicationNotFoundException("Medication with id:" + medication_id + ", not found"));
+		medicationRepository.delete(medication);
+		return "Medication: " + medication_id + " deleted";
+	}
+
 }

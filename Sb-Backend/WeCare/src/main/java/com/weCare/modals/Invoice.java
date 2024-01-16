@@ -35,40 +35,33 @@ import lombok.ToString;
 @Table(name = "invoices")
 public class Invoice {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private  String invoice_id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.UUID)
+	private String invoice_id;
 
-    private LocalDateTime invoice_date_time;
-    
-    private Double total_amount;
-    
-    @Enumerated(EnumType.STRING)
-    private PaymentStatus paymentStatus;
+	private LocalDateTime invoice_date_time;
 
-    @ElementCollection
-    @CollectionTable(
-    		name = "invoice_medication_quantity",
-    		joinColumns = @JoinColumn(name = "invoice_id")
-    )
-    @MapKeyColumn(name = "medication_id")
-    @Column(name = "medication_quantity")
-    private Map<String, Integer> medications_invoice = new HashMap<>();
+	private Double total_amount;
 
-    @ManyToOne()
-    @JoinColumn(name = "prescription_id")
-    @JsonIgnore
-    @ToString.Exclude
-    private Prescription prescription;
-    
-    @ManyToMany
-    @JoinTable(
-    		name = "invoice_medications",
-    		joinColumns = @JoinColumn(name = "invoice_id"),
-    		inverseJoinColumns = @JoinColumn(name = "medication_id")
-    )
+	@Enumerated(EnumType.STRING)
+	private PaymentStatus paymentStatus;
+
+	@ElementCollection
+	@CollectionTable(name = "invoice_medication_quantity", joinColumns = @JoinColumn(name = "invoice_id"))
+	@MapKeyColumn(name = "medication_id")
+	@Column(name = "medication_quantity")
+	private Map<String, Integer> medications_invoice = new HashMap<>();
+
+	@ManyToOne()
+	@JoinColumn(name = "prescription_id")
+	@JsonIgnore
+	@ToString.Exclude
+	private Prescription prescription;
+
+	@ManyToMany
+	@JoinTable(name = "invoice_medications", joinColumns = @JoinColumn(name = "invoice_id"), inverseJoinColumns = @JoinColumn(name = "medication_id"))
 //    @JsonIgnore
-    @ToString.Exclude
-    private List<Medication> medications = new ArrayList<>();
+	@ToString.Exclude
+	private List<Medication> medications = new ArrayList<>();
 
 }

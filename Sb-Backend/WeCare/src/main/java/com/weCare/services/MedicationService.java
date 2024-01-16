@@ -6,17 +6,16 @@ import java.util.List;
 
 public interface MedicationService {
 
-    public Medication saveMedication(Medication medication);
-    
-    public List<Medication> saveMedications(List<Medication> medications);
+	public Medication saveMedication(Medication medication);
 
-    public Medication getMedicationById(String medication_id);
+	public List<Medication> saveMedications(List<Medication> medications);
 
-    public List<Medication> getAllMedications();
+	public Medication getMedicationById(String medication_id);
 
-    public Medication updateMedication(String medication_id, Medication medication);
+	public List<Medication> getAllMedications();
 
-    public String deleteMedicationById(String medication_id);
+	public Medication updateMedication(String medication_id, Medication medication);
 
+	public String deleteMedicationById(String medication_id);
 
 }

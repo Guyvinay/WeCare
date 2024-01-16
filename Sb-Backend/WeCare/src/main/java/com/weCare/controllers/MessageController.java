@@ -22,22 +22,18 @@ public class MessageController {
 
 	@GetMapping(value = "/paged_messages")
 	public ResponseEntity<List<Message>> getAllMessagesByPagination(
-		@RequestParam(required=false,defaultValue="0",name="page")Integer page,
-		@RequestParam(required=false,defaultValue="10",name="limit") Integer limit,
-		@RequestParam(required=false,defaultValue="DESC",name= "direction")String direction,
-		@RequestParam(required=false,defaultValue="timeStamp",name="field")String field
-			){
-		return  new ResponseEntity<List<Message>>(
-				messageService.getAllMessagesByPagination(page,limit,direction,field), 
-				HttpStatus.ACCEPTED);
+			@RequestParam(required = false, defaultValue = "0", name = "page") Integer page,
+			@RequestParam(required = false, defaultValue = "10", name = "limit") Integer limit,
+			@RequestParam(required = false, defaultValue = "DESC", name = "direction") String direction,
+			@RequestParam(required = false, defaultValue = "timeStamp", name = "field") String field) {
+		return new ResponseEntity<List<Message>>(
+				messageService.getAllMessagesByPagination(page, limit, direction, field), HttpStatus.ACCEPTED);
 	}
-	
-	@GetMapping
-	public ResponseEntity<List<Message>> getAllMessages(){
 
-		return  new ResponseEntity<List<Message>>(
-				messageService.getAllMessages(), 
-				HttpStatus.ACCEPTED);
+	@GetMapping
+	public ResponseEntity<List<Message>> getAllMessages() {
+
+		return new ResponseEntity<List<Message>>(messageService.getAllMessages(), HttpStatus.ACCEPTED);
 	}
-	
+
 }

@@ -27,22 +27,21 @@ import lombok.Setter;
 @Table(name = "patients")
 public class Patient extends Profile {
 
-    @NotBlank(message = "Patient name cannot be blank!!!")
-    private String patient_name;
+	@NotBlank(message = "Patient name cannot be blank!!!")
+	private String patient_name;
 
-    @NotNull(message = "Gender cannot be blank!!!")
-    @Enumerated(EnumType.STRING)
-    private Gender patient_gender;
+	@NotNull(message = "Gender cannot be blank!!!")
+	@Enumerated(EnumType.STRING)
+	private Gender patient_gender;
 
-    @NotNull(message = "date_of_birth cannot be blank!!!")
-    private LocalDate date_of_birth;
+	@NotNull(message = "date_of_birth cannot be blank!!!")
+	private LocalDate date_of_birth;
 
-    @NotBlank(message = "Mobile cannot be blank!!!")
-    @Column(unique = true)
-    private String mobile;
+	@NotBlank(message = "Mobile cannot be blank!!!")
+	@Column(unique = true)
+	private String mobile;
 
-   
-    public Patient(String email, String userName, String passWord, String profile_picture, Role role,
+	public Patient(String email, String userName, String passWord, String profile_picture, Role role,
 			String patient_name, Gender patient_gender, LocalDate date_of_birth, String mobile) {
 		super(email, userName, passWord, profile_picture, role);
 		this.patient_name = patient_name;
@@ -50,29 +49,29 @@ public class Patient extends Profile {
 		this.date_of_birth = date_of_birth;
 		this.mobile = mobile;
 	}
-    
-    @ManyToMany(mappedBy = "patients")
-    @JsonIgnore
-    private List<Doctor> doctors;
 
-    @OneToOne
+	@ManyToMany(mappedBy = "patients")
+	@JsonIgnore
+	private List<Doctor> doctors;
+
+	@OneToOne
 //    @JsonIgnore
-    private Address address;
-    
+	private Address address;
+
 	@OneToMany(mappedBy = "patient")
-    @JsonIgnore
-    private List<Prescription> prescriptions = new ArrayList<>();
+	@JsonIgnore
+	private List<Prescription> prescriptions = new ArrayList<>();
 
-    @OneToMany(mappedBy = "patient")
-    @JsonIgnore
-    private List<Appointment> appointments =  new ArrayList<>();
+	@OneToMany(mappedBy = "patient")
+	@JsonIgnore
+	private List<Appointment> appointments = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "patients")
-    @JsonIgnore
-    private List<Hospital> hospitals = new ArrayList<>();
-    
-    @OneToMany(mappedBy = "patient")
-    @JsonIgnore
-    private List<Message> messages = new ArrayList<>() ;
+	@ManyToMany(mappedBy = "patients")
+	@JsonIgnore
+	private List<Hospital> hospitals = new ArrayList<>();
+
+	@OneToMany(mappedBy = "patient")
+	@JsonIgnore
+	private List<Message> messages = new ArrayList<>();
 
 }

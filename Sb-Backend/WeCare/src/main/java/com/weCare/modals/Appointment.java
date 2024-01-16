@@ -31,52 +31,51 @@ import lombok.ToString;
 @NoArgsConstructor
 @Table(name = "appointments")
 public class Appointment {
-	
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private  String appointment_id;
+	@GeneratedValue(strategy = GenerationType.UUID)
+	private String appointment_id;
 
-    private LocalDateTime booking_time;
-    
-    private LocalDate appointment_date;
+	private LocalDateTime booking_time;
 
-    @NotNull(message = "Department cannot be blank!!!")
-    @Enumerated(EnumType.STRING)
-    private Department department;
-    
-    @NotBlank(message = "Provide details about ailments!!!")
-    private String ailment_description;
+	private LocalDate appointment_date;
 
-    @Enumerated(EnumType.STRING)
-    private AppointmentStatus status;
+	@NotNull(message = "Department cannot be blank!!!")
+	@Enumerated(EnumType.STRING)
+	private Department department;
 
-    @ManyToOne
-    @JoinColumn(name = "doctor_id")
-    @JsonIgnore
-    @ToString.Exclude
-    private Doctor doctor;
+	@NotBlank(message = "Provide details about ailments!!!")
+	private String ailment_description;
 
-    @ManyToOne
-    @JoinColumn(name = "patient_id")
-    @JsonIgnore
-    @ToString.Exclude
-    private Patient patient;
+	@Enumerated(EnumType.STRING)
+	private AppointmentStatus status;
 
-    @OneToOne()
-    @JsonIgnore
-    @ToString.Exclude
-    private Prescription prescription;
+	@ManyToOne
+	@JoinColumn(name = "doctor_id")
+	@JsonIgnore
+	@ToString.Exclude
+	private Doctor doctor;
 
-    @ManyToOne
-    @JoinColumn(name = "hospital_id")
-    @JsonIgnore
-    @ToString.Exclude
-    private Hospital hospital;
-    
-    @OneToMany(mappedBy = "appointment")
-    @JsonIgnore
-    @ToString.Exclude
-    private List<Message> messages = new ArrayList<>() ;
+	@ManyToOne
+	@JoinColumn(name = "patient_id")
+	@JsonIgnore
+	@ToString.Exclude
+	private Patient patient;
 
+	@OneToOne()
+	@JsonIgnore
+	@ToString.Exclude
+	private Prescription prescription;
+
+	@ManyToOne
+	@JoinColumn(name = "hospital_id")
+	@JsonIgnore
+	@ToString.Exclude
+	private Hospital hospital;
+
+	@OneToMany(mappedBy = "appointment")
+	@JsonIgnore
+	@ToString.Exclude
+	private List<Message> messages = new ArrayList<>();
 
 }

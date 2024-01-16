@@ -26,101 +26,90 @@ import com.weCare.services.PrescriptionService;
 @Service
 public class PrescriptionServiceImpl implements PrescriptionService {
 
-    @Autowired
-    private PrescriptionRepository prescriptionRepository;
+	@Autowired
+	private PrescriptionRepository prescriptionRepository;
 
-    @Autowired
-    private AppointmentRepository appointmentRepository;
-    
-    @Autowired
-    private MedicationRepository medicationRepository;
+	@Autowired
+	private AppointmentRepository appointmentRepository;
 
-    @Override
-    public Prescription generatePrescription(String appointment_id, Prescription prescription) {
+	@Autowired
+	private MedicationRepository medicationRepository;
 
-    	//Finding Appointment with appointment_id
-        Appointment appointment = appointmentRepository
-                .findById(appointment_id).orElseThrow(()->
-                        new AppointmentNotFoundException("Appointment with id: "+appointment_id+", not found!!!")
-                );
-        
-        Map<String,Integer> expected_medication_ids_map = prescription.getMedication_ids();
-        
-        List<String> expected_medication_ids_list = new ArrayList<>(expected_medication_ids_map.keySet());
-     
-        //Retrieved Medications List
-        List<Medication> retrived_medications_list = medicationRepository.findByMedication_idIn(expected_medication_ids_list);
+	@Override
+	public Prescription generatePrescription(String appointment_id, Prescription prescription) {
 
-        List<String> retrived_medication_ids_list = retrived_medications_list
-        		.stream().map(Medication::getMedication_id)
-        		.collect(Collectors.toList());
-        
-        //Throwing Exception with missing medications;
-        if(expected_medication_ids_list.size()!=retrived_medication_ids_list.size()) {
-        	
-        	List<String> missing_medications_ids = new ArrayList<>(expected_medication_ids_list);
-        	missing_medications_ids.removeAll(retrived_medication_ids_list);
-        	
-        	throw new MedicationNotFoundException(
-        			"Medications with id: "+
-        	String.join(", ", missing_medications_ids)+
-        	", not available!!!"
-        			);
-        }
-     
-        appointment.setStatus(AppointmentStatus.APPOINTMENT_COMPLETED);
-        appointment.setPrescription(prescription);
-        
-        //Getting Patient from appointment
-        Patient patient = appointment.getPatient();
-        patient.getPrescriptions().add(prescription);
+		// Finding Appointment with appointment_id
+		Appointment appointment = appointmentRepository.findById(appointment_id).orElseThrow(
+				() -> new AppointmentNotFoundException("Appointment with id: " + appointment_id + ", not found!!!"));
 
-        
-        //Getting Doctor from appointment
-        Doctor doctor = appointment.getDoctor();
-        doctor.getPrescriptions().add(prescription);
+		Map<String, Integer> expected_medication_ids_map = prescription.getMedication_ids();
 
-        //Prescription Persistence
-        prescription.setPrescription_date(LocalDateTime.now());
-        prescription.setAppointment(appointment);
-        prescription.setDoctor(doctor);
-        prescription.setPatient(patient);
-        prescription.setMedications(retrived_medications_list);
-        
-        	
+		List<String> expected_medication_ids_list = new ArrayList<>(expected_medication_ids_map.keySet());
+
+		// Retrieved Medications List
+		List<Medication> retrived_medications_list = medicationRepository
+				.findByMedication_idIn(expected_medication_ids_list);
+
+		List<String> retrived_medication_ids_list = retrived_medications_list.stream().map(Medication::getMedication_id)
+				.collect(Collectors.toList());
+
+		// Throwing Exception with missing medications;
+		if (expected_medication_ids_list.size() != retrived_medication_ids_list.size()) {
+
+			List<String> missing_medications_ids = new ArrayList<>(expected_medication_ids_list);
+			missing_medications_ids.removeAll(retrived_medication_ids_list);
+
+			throw new MedicationNotFoundException(
+					"Medications with id: " + String.join(", ", missing_medications_ids) + ", not available!!!");
+		}
+
+		appointment.setStatus(AppointmentStatus.APPOINTMENT_COMPLETED);
+		appointment.setPrescription(prescription);
+
+		// Getting Patient from appointment
+		Patient patient = appointment.getPatient();
+		patient.getPrescriptions().add(prescription);
+
+		// Getting Doctor from appointment
+		Doctor doctor = appointment.getDoctor();
+		doctor.getPrescriptions().add(prescription);
+
+		// Prescription Persistence
+		prescription.setPrescription_date(LocalDateTime.now());
+		prescription.setAppointment(appointment);
+		prescription.setDoctor(doctor);
+		prescription.setPatient(patient);
+		prescription.setMedications(retrived_medications_list);
+
 //        return prescription;
-        return prescriptionRepository.save(prescription);
-    }
+		return prescriptionRepository.save(prescription);
+	}
 
-    @Override
-    public Prescription getPrescriptionById(String prescription_id) {
+	@Override
+	public Prescription getPrescriptionById(String prescription_id) {
 
-        return prescriptionRepository
-                .findById(prescription_id).orElseThrow(()->
-                        new AppointmentNotFoundException("Prescription with id: "+prescription_id+", not found!!!")
-                );
-    }
+		return prescriptionRepository.findById(prescription_id).orElseThrow(
+				() -> new AppointmentNotFoundException("Prescription with id: " + prescription_id + ", not found!!!"));
+	}
 
-    @Override
-    public List<Prescription> getAllPrescriptions() {
-        List<Prescription> prescriptions = prescriptionRepository.findAll();
-        if(prescriptions.isEmpty())
-            throw new PrescriptionNotFoundException("Prescriptions not found!!!");
-        return prescriptions;
-    }
+	@Override
+	public List<Prescription> getAllPrescriptions() {
+		List<Prescription> prescriptions = prescriptionRepository.findAll();
+		if (prescriptions.isEmpty())
+			throw new PrescriptionNotFoundException("Prescriptions not found!!!");
+		return prescriptions;
+	}
 
-    @Override
-    public Prescription updatePrescription(String prescription_id, Prescription prescription) {
-        return null;
-    }
+	@Override
+	public Prescription updatePrescription(String prescription_id, Prescription prescription) {
+		return null;
+	}
 
-    @Override
-    public String deletePrescriptionById(String prescription_id) {
-        Prescription prescription = prescriptionRepository
-                .findById(prescription_id).orElseThrow(()->
-                        new AppointmentNotFoundException("Prescription with id: "+prescription_id+", not found!!!")
-                );
-        prescriptionRepository.delete(prescription);
-        return "Prescription with id: "+prescription_id+", deleted";
-    }
+	@Override
+	public String deletePrescriptionById(String prescription_id) {
+		Prescription prescription = prescriptionRepository.findById(prescription_id).orElseThrow(
+				() -> new AppointmentNotFoundException("Prescription with id: " + prescription_id + ", not found!!!"));
+		prescriptionRepository.delete(prescription);
+		return "Prescription with id: " + prescription_id + ", deleted";
+	}
 }

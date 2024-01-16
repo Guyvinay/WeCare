@@ -14,65 +14,46 @@ import java.util.List;
 @RequestMapping(value = "/medications")
 public class MedicationController {
 
-    @Autowired
-    private MedicationService medicationService;
+	@Autowired
+	private MedicationService medicationService;
 
-    @PostMapping()
-    public ResponseEntity<Medication> saveMedication(@Valid @RequestBody Medication medication){
+	@PostMapping()
+	public ResponseEntity<Medication> saveMedication(@Valid @RequestBody Medication medication) {
 
-        return new ResponseEntity<Medication>(
-                medicationService.saveMedication(medication),
-                HttpStatus.ACCEPTED
-        );
-    }
-    
-    @PostMapping(value = "/save_all")
-    public ResponseEntity<List<Medication>> saveAllMedications(@Valid @RequestBody List<Medication> medications){
+		return new ResponseEntity<Medication>(medicationService.saveMedication(medication), HttpStatus.ACCEPTED);
+	}
 
-        return new ResponseEntity<List<Medication>>(
-                medicationService.saveMedications(medications),
-                HttpStatus.ACCEPTED
-        );
-    }
+	@PostMapping(value = "/save_all")
+	public ResponseEntity<List<Medication>> saveAllMedications(@Valid @RequestBody List<Medication> medications) {
 
-    @GetMapping(value = "/{medication_id}")
-    public ResponseEntity<Medication> getMedicationById(
-            @PathVariable("medication_id") String medication_id){
+		return new ResponseEntity<List<Medication>>(medicationService.saveMedications(medications),
+				HttpStatus.ACCEPTED);
+	}
 
-        return new ResponseEntity<Medication>(
-                medicationService.getMedicationById(medication_id),
-                HttpStatus.ACCEPTED
-        );
-    }
+	@GetMapping(value = "/{medication_id}")
+	public ResponseEntity<Medication> getMedicationById(@PathVariable("medication_id") String medication_id) {
 
-    @GetMapping()
-    public ResponseEntity<List<Medication>> getAllMedications(){
+		return new ResponseEntity<Medication>(medicationService.getMedicationById(medication_id), HttpStatus.ACCEPTED);
+	}
 
-        return new ResponseEntity<List<Medication>>(
-                medicationService.getAllMedications(),
-                HttpStatus.ACCEPTED
-        );
-    }
+	@GetMapping()
+	public ResponseEntity<List<Medication>> getAllMedications() {
 
-    @PutMapping(value = "/{medication_id}")
-    public ResponseEntity<Medication> updateMedication(
-            @PathVariable("medication_id") String medication_id, 
-            @RequestBody Medication medication){
+		return new ResponseEntity<List<Medication>>(medicationService.getAllMedications(), HttpStatus.ACCEPTED);
+	}
 
-        return new ResponseEntity<Medication>(
-                medicationService.updateMedication(medication_id, medication),
-                HttpStatus.ACCEPTED
-        );
-    }
+	@PutMapping(value = "/{medication_id}")
+	public ResponseEntity<Medication> updateMedication(@PathVariable("medication_id") String medication_id,
+			@RequestBody Medication medication) {
 
-    @DeleteMapping(value = "/{medication_id}")
-    public ResponseEntity<String> deleteMedicationById(
-            @PathVariable("medication_id")String medication_id){
+		return new ResponseEntity<Medication>(medicationService.updateMedication(medication_id, medication),
+				HttpStatus.ACCEPTED);
+	}
 
-        return new ResponseEntity<String>(
-                medicationService.deleteMedicationById(medication_id),
-                HttpStatus.ACCEPTED
-        );
-    }
+	@DeleteMapping(value = "/{medication_id}")
+	public ResponseEntity<String> deleteMedicationById(@PathVariable("medication_id") String medication_id) {
+
+		return new ResponseEntity<String>(medicationService.deleteMedicationById(medication_id), HttpStatus.ACCEPTED);
+	}
 
 }

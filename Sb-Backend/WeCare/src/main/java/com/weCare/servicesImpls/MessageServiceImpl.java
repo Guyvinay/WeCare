@@ -19,35 +19,35 @@ public class MessageServiceImpl implements MessageService {
 
 	@Autowired
 	private MessageRepository messageRepository;
-	
-	@Override
-	public List<Message> getAllMessagesByPagination(
-			int page_no, int limit, String direction, String field) {
 
-		Pageable  pageRequest = PageRequest.of(page_no, limit, Sort.by(direction.equals("ASC")?Sort.Direction.ASC:Sort.Direction.DESC, field));
-		
+	@Override
+	public List<Message> getAllMessagesByPagination(int page_no, int limit, String direction, String field) {
+
+		Pageable pageRequest = PageRequest.of(page_no, limit,
+				Sort.by(direction.equals("ASC") ? Sort.Direction.ASC : Sort.Direction.DESC, field));
+
 //		List<Message> list = messageRepository.findAll(Sort.by(Sort.Direction.DESC, "timeStamp"));
-		
+
 		Page<Message> pages = messageRepository.findAll(pageRequest);
-		
+
 		List<Message> all_messages = pages.getContent();
-		if(all_messages.isEmpty())
+		if (all_messages.isEmpty())
 			throw new MessageNotFoundException("No Messages found!!!");
-		
+
 		return all_messages;
 	}
-	
+
 	@Override
 	public List<Message> getAllMessages() {
 		List<Message> all_messages = messageRepository.findAll();
-		if(all_messages.isEmpty())
+		if (all_messages.isEmpty())
 			throw new MessageNotFoundException("No Messages found!!!");
 		return all_messages;
 	}
 
 	@Override
 	public List<Message> getAllMessagesByAppointmentId(String appointment_id) {
-		
+
 		return null;
 	}
 

@@ -7,16 +7,16 @@ import com.weCare.modals.Invoice;
 
 public interface InvoiceService {
 
-    public Invoice generateInvoice(String prescription_id, Invoice invoice);
-    
-    public Map<String, Object> payMedicationCharges(String invoice_id, Invoice invoice);
+	public Invoice generateInvoice(String prescription_id, Invoice invoice);
 
-    public Invoice getInvoiceById(String invoice_id);
+	public Map<String, Object> payMedicationCharges(String invoice_id, Invoice invoice);
 
-    public List<Invoice> getAllInvoices();
+	public Invoice getInvoiceById(String invoice_id);
 
-    public Invoice updateInvoice(String invoice_id, Invoice invoice);
+	public List<Invoice> getAllInvoices();
 
-    public String deleteInvoiceById(String invoice_id);
-    
+	public Invoice updateInvoice(String invoice_id, Invoice invoice);
+
+	public String deleteInvoiceById(String invoice_id);
+
 }

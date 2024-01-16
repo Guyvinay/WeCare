@@ -27,28 +27,24 @@ import lombok.NoArgsConstructor;
 @Table(name = "profiles")
 public class Profile {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String profile_id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.UUID)
+	private String profile_id;
 
-    @NotBlank(message = "Email cannot be blank!!!")
-    @Column(unique = true)
-    @Email(
-            regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
-            message = "email should be in proper format i.e : johndoe@example.com"
-    )
-    private String email;
+	@NotBlank(message = "Email cannot be blank!!!")
+	@Column(unique = true)
+	@Email(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "email should be in proper format i.e : johndoe@example.com")
+	private String email;
 
+	@NotBlank(message = "Password cannot be blank!!!")
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	private String passWord;
 
-    @NotBlank(message = "Password cannot be blank!!!")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private String passWord;
+	private String profile_picture;
 
-    private String profile_picture;
-
-    @NotNull(message = "Role cannot be blank!!!") 
-    @Enumerated(EnumType.STRING)
-    private Role role;
+	@NotNull(message = "Role cannot be blank!!!")
+	@Enumerated(EnumType.STRING)
+	private Role role;
 
 	public Profile(String email, String passWord, String profile_picture, Role role) {
 		super();
@@ -58,6 +54,4 @@ public class Profile {
 		this.role = role;
 	}
 
-    
-    
 }

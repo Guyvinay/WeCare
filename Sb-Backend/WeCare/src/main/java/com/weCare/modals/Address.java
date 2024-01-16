@@ -8,6 +8,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 /*
 {
         "locality":"Sandalpur",
@@ -24,17 +25,17 @@ import lombok.NoArgsConstructor;
 @Table(name = "addresses")
 public class Address {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String address_id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.UUID)
+	private String address_id;
 
-    private String locality;
+	private String locality;
 
-    private String city;
+	private String city;
 
-    private Integer zip_code;
+	private Integer zip_code;
 
-    private String state;
+	private String state;
 
-    private String country;
+	private String country;
 }

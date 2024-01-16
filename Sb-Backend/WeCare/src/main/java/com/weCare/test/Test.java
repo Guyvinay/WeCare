@@ -12,10 +12,10 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping(value = "/tests")
 public class Test {
-	
+
 	@PostMapping()
-	public ResponseEntity<TestEntity> medicationTest(@Valid @RequestBody TestEntity entity){
-		return new ResponseEntity<TestEntity>(entity,HttpStatus.ACCEPTED);
+	public ResponseEntity<TestEntity> medicationTest(@Valid @RequestBody TestEntity entity) {
+		return new ResponseEntity<TestEntity>(entity, HttpStatus.ACCEPTED);
 	}
-	
+
 }

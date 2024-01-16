@@ -16,77 +16,67 @@ import com.weCare.services.PatientService;
 @Service
 public class PatientServiceImpl implements PatientService {
 
-    @Autowired
-    private PatientRepository patientRepository;
+	@Autowired
+	private PatientRepository patientRepository;
 
-    @Autowired
-    private AddressRepository addressRepository;
-    
-    @Override
-    public Patient savePatient(Patient patient) {
+	@Autowired
+	private AddressRepository addressRepository;
 
-    	Address address = addressRepository.save(patient.getAddress());
-    	patient.setAddress(address);
-    	
-        return patientRepository.save(patient);
-    }
-    
-    @Override
+	@Override
+	public Patient savePatient(Patient patient) {
+
+		Address address = addressRepository.save(patient.getAddress());
+		patient.setAddress(address);
+
+		return patientRepository.save(patient);
+	}
+
+	@Override
 	public List<Patient> savePatients(List<Patient> patients) {
-    	
-    	if(patients.isEmpty())
-    		throw new PatientNotFoundException("Patients not found to persist!!!");
-    	
-    	for(Patient patient:patients) {
-    		patient.setAddress(
-    				addressRepository.save(
-    						patient.getAddress()
-    						)
-    				);
-    	}
-    	
-    	return patientRepository.saveAll(patients);
+
+		if (patients.isEmpty())
+			throw new PatientNotFoundException("Patients not found to persist!!!");
+
+		for (Patient patient : patients) {
+			patient.setAddress(addressRepository.save(patient.getAddress()));
+		}
+
+		return patientRepository.saveAll(patients);
 
 	}
-    
 
-    @Override
-    public Patient getPatientById(String patient_id) {
+	@Override
+	public Patient getPatientById(String patient_id) {
 
-        return patientRepository
-                .findById(patient_id).orElseThrow(()->
-                        new NotFoundException("Hospital with id: "+patient_id+", not found!!!")
-                );
-    }
-    
-    @Override
-    public List<Patient> getPatientByNamePattern(String patient_name) {
-    	List<Patient> patients = patientRepository.findByNamePattern("%"+patient_name+"%");
-    	return patients;
-    }
+		return patientRepository.findById(patient_id)
+				.orElseThrow(() -> new NotFoundException("Hospital with id: " + patient_id + ", not found!!!"));
+	}
 
-    @Override
-    public List<Patient> getAllPatients() {
-        List<Patient> patients = patientRepository.findAll();
-        if(patients.isEmpty())throw new NotFoundException("No Patients Found!!!");
-        return patients;
-    }
+	@Override
+	public List<Patient> getPatientByNamePattern(String patient_name) {
+		List<Patient> patients = patientRepository.findByNamePattern("%" + patient_name + "%");
+		return patients;
+	}
 
-    @Override
-    public Patient updatePatient(String patient_id, Patient patient) {
-        return null;
-    }
+	@Override
+	public List<Patient> getAllPatients() {
+		List<Patient> patients = patientRepository.findAll();
+		if (patients.isEmpty())
+			throw new NotFoundException("No Patients Found!!!");
+		return patients;
+	}
 
-    @Override
-    public String deletePatientById(String patient_id) {
-        Patient patient = patientRepository
-                .findById(patient_id).orElseThrow(()->
-                        new NotFoundException("Hospital with id: "+patient_id+", not found!!!")
-                );
-        patientRepository.delete(patient);
-        return "Patient with id: "+patient_id+", deleted successfully";
-    }
+	@Override
+	public Patient updatePatient(String patient_id, Patient patient) {
+		return null;
+	}
 
-	
+	@Override
+	public String deletePatientById(String patient_id) {
+		Patient patient = patientRepository.findById(patient_id)
+				.orElseThrow(() -> new NotFoundException("Hospital with id: " + patient_id + ", not found!!!"));
+		patientRepository.delete(patient);
+		return "Patient with id: " + patient_id + ", deleted successfully";
+	}
 
 }

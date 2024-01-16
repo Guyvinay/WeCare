@@ -25,7 +25,7 @@ public class ConnectionInterceptor implements HandshakeInterceptor {
 
 	@Autowired
 	private AppointmentRepository appointmentRepository;
-	
+
 	@Override
 	public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,
 			Map<String, Object> attributes) throws Exception {
@@ -34,42 +34,43 @@ public class ConnectionInterceptor implements HandshakeInterceptor {
 		String userId = extractUserId(uri);
 		String appointmentId = extractAppointmentId(uri);
 
-		Appointment appointment = appointmentRepository.findById(appointmentId).orElseThrow(()->
-        new AppointmentNotFoundException("Appointment with id: "+appointmentId+", not found!!!")
-);
-		
-		if( appointment.getDoctor().getProfile_id().equals(userId)) return true;
-		else if(appointment.getPatient().getProfile_id().equals(userId)) return true;
-		else return false;
+		Appointment appointment = appointmentRepository.findById(appointmentId).orElseThrow(
+				() -> new AppointmentNotFoundException("Appointment with id: " + appointmentId + ", not found!!!"));
+
+		if (appointment.getDoctor().getProfile_id().equals(userId))
+			return true;
+		else if (appointment.getPatient().getProfile_id().equals(userId))
+			return true;
+		else
+			return false;
 	}
 
 	@Override
 	public void afterHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,
 			Exception exception) {
-		
+
 	}
 
-private String extractAppointmentId(String uri) {
-    	
-        Pattern pattern = Pattern.compile("/chat/(.*?)/(.*?)$");
-        Matcher matcher = pattern.matcher(uri);
-        String userId = "";
-        if (matcher.find() && matcher.groupCount()==2){
-            userId = matcher.group(1);
-        }
-        return userId;
-    }
-    
-   private String extractUserId(String uri) {
-    	
-    Pattern pattern = Pattern.compile("/chat/(.*?)/(.*?)$");
-    Matcher matcher = pattern.matcher(uri);
-    String problemId = "";
-    if (matcher.find() && matcher.groupCount()==2){
-        problemId = matcher.group(2);
-    }
-    return problemId;
-    }
-	
+	private String extractAppointmentId(String uri) {
+
+		Pattern pattern = Pattern.compile("/chat/(.*?)/(.*?)$");
+		Matcher matcher = pattern.matcher(uri);
+		String userId = "";
+		if (matcher.find() && matcher.groupCount() == 2) {
+			userId = matcher.group(1);
+		}
+		return userId;
+	}
+
+	private String extractUserId(String uri) {
+
+		Pattern pattern = Pattern.compile("/chat/(.*?)/(.*?)$");
+		Matcher matcher = pattern.matcher(uri);
+		String problemId = "";
+		if (matcher.find() && matcher.groupCount() == 2) {
+			problemId = matcher.group(2);
+		}
+		return problemId;
+	}
 
 }

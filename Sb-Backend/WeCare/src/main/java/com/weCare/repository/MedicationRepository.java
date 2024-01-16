@@ -13,7 +13,8 @@ public interface MedicationRepository extends JpaRepository<Medication, String> 
 	@Query("SELECT m FROM Medication m WHERE m.medication_id IN :ids")
 	public List<Medication> findByMedication_idIn(List<String> ids);
 
-	//After renaming primary key of Medication from medication_id to id, this would work;
+	// After renaming primary key of Medication from medication_id to id, this would
+	// work;
 //	public List<Medication> findByMedication_idIn(List<String> ids);
-	
+
 }
