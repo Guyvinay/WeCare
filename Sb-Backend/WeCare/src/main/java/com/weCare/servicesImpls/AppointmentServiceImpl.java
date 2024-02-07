@@ -8,6 +8,7 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.weCare.exceptions.AppointmentNotFoundException;
 import com.weCare.exceptions.NotFoundException;
 import com.weCare.modals.Appointment;
 import com.weCare.modals.AppointmentStatus;
@@ -149,7 +150,24 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 	@Override
 	public Appointment updateAppointment(String appointment_id, Appointment appointment) {
-		return null;
+		Appointment retrieved_appointment = appointmentRepository.findById(appointment_id)
+		.orElseThrow(() -> new NotFoundException("Appointment with id: " + appointment_id + ", not found!!!"));
+		String hospital_id = retrieved_appointment.getHospital().getHospital_id();
+		String profile_id = retrieved_appointment.getPatient().getProfile_id();
+		List<Appointment> appointments = retrieved_appointment.getDoctor().getAppointments();
+		
+		if(appointment.getAppointment_date()!=null)
+			retrieved_appointment.setAppointment_date(appointment.getAppointment_date());
+		if(
+			appointment.getDepartment()!=null&&
+			!appointment.getDepartment().equals(retrieved_appointment.getDepartment())
+				) {
+			retrieved_appointment.setDepartment(appointment.getDepartment());
+			Appointment updatedAppointment = bookAppointment(retrieved_appointment, hospital_id, profile_id);			
+			return updatedAppointment;
+		}
+		throw new AppointmentNotFoundException("Appointment Couldn't update!!!");
+		
 	}
 
 	@Override

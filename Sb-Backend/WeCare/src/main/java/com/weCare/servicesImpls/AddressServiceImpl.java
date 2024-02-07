@@ -40,7 +40,16 @@ public class AddressServiceImpl implements AddressService {
 
 	@Override
 	public Address updateAddress(String address_id, Address address) {
-		return null;
+		Address retrieved_address = addressRepository.findById(address_id)
+				.orElseThrow(() -> new NotFoundException("Address with id: " + address_id + ", not found!!!"));
+		
+		if(address.getCity()!=null)retrieved_address.setCity(address.getCity());
+		if(address.getCountry()!=null)retrieved_address.setCountry(address.getCountry());
+		if(address.getState()!=null)retrieved_address.setState(address.getState());
+		if(address.getLocality()!=null)retrieved_address.setLocality(address.getLocality());
+		if(address.getZip_code()!=null)retrieved_address.setZip_code(address.getZip_code());
+		
+		return addressRepository.save(retrieved_address);
 	}
 
 	@Override
