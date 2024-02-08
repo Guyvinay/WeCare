@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,12 +50,12 @@ public class ProfileController {
 		return new ResponseEntity<String>(profileService.deleteProfileById(profile_id), HttpStatus.ACCEPTED);
 	}
 	
-	@GetMapping(value = "/signIn")
-	public String signInUsingbasicAuth(Authentication authentication ) {
-		if(authentication.getName()!=null)
-			return authentication.getName() +"  Successfully Logged in..";
-		return " Login Failed ...";
-		
-	}
+//	@GetMapping(value = "/signIn")
+//	public String signInUsingbasicAuth(Authentication authentication ) {
+//		if(authentication.getName()!=null)
+//			return authentication.getName() +"  Successfully Logged in..";
+//		return " Login Failed ...";
+//		
+//	}
 
 }
