@@ -15,6 +15,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -29,6 +30,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @Table(name = "doctors")
+@PrimaryKeyJoinColumn(name = "doctor_id")
 public class Doctor extends Profile {
 
 	@NotBlank(message = "Doctor name cannot be blank!!!")

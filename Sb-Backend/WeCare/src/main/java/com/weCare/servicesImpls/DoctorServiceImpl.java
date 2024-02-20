@@ -3,6 +3,7 @@ package com.weCare.servicesImpls;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.weCare.exceptions.DoctorNotFoundException;
@@ -29,15 +30,15 @@ public class DoctorServiceImpl implements DoctorService {
 	@Autowired
 	private AddressRepository addressRepository;
 
-//	@Autowired
-//	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Override
 	public Doctor saveDoctor(Doctor doctor) {
 
 		Address address = addressRepository.save(doctor.getAddress());
 		doctor.setAddress(address);
-//		doctor.setPassWord(passwordEncoder.encode(doctor.getPassWord()));
+		doctor.setPassWord(passwordEncoder.encode(doctor.getPassWord()));
 		return doctorRepository.save(doctor);
 	}
 
@@ -54,6 +55,7 @@ public class DoctorServiceImpl implements DoctorService {
 			doctor.setAddress(addressRepository.save(doctor.getAddress()));
 			doctor.setHospital(hospital);
 			doctor.setAvailability(Availability.AVAILABLE);
+			doctor.setPassWord(passwordEncoder.encode(doctor.getPassWord()));
 
 			hospital.getDoctors().add(doctor);
 		}
@@ -71,6 +73,7 @@ public class DoctorServiceImpl implements DoctorService {
 		doctor.setAvailability(Availability.AVAILABLE);
 		doctor.setAddress(address);
 		doctor.setHospital(hospital);
+		doctor.setPassWord(passwordEncoder.encode(doctor.getPassWord()));
 
 		hospital.getDoctors().add(doctor);
 

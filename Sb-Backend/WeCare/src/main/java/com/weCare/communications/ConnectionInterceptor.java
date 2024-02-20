@@ -8,11 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.socket.WebSocketHandler;
-import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.server.HandshakeInterceptor;
 
 import com.weCare.exceptions.AppointmentNotFoundException;
-import com.weCare.exceptions.NotFoundException;
 import com.weCare.modals.Appointment;
 import com.weCare.repository.AppointmentRepository;
 
@@ -25,6 +23,7 @@ public class ConnectionInterceptor implements HandshakeInterceptor {
 
 	@Autowired
 	private AppointmentRepository appointmentRepository;
+	
 
 	@Override
 	public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,

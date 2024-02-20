@@ -52,13 +52,13 @@ public class Appointment {
 
 	@ManyToOne
 	@JoinColumn(name = "doctor_id")
-	@JsonIgnore
+//	@JsonIgnore
 	@ToString.Exclude
 	private Doctor doctor;
 
 	@ManyToOne
 	@JoinColumn(name = "patient_id")
-	@JsonIgnore
+//	@JsonIgnore
 	@ToString.Exclude
 	private Patient patient;
 
