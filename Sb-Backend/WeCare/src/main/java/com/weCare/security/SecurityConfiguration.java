@@ -11,12 +11,14 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
 import jakarta.servlet.http.HttpServletRequest;
 
 @Configuration
+//@EnableWebSecurity(debug = true)
 public class SecurityConfiguration {
 
 	@Bean
@@ -39,12 +41,13 @@ public class SecurityConfiguration {
 				}).authorizeHttpRequests(auth -> {
 					auth
 					.requestMatchers("/swagger-ui*/**", "/v3/api-docs/**").permitAll()
-					.requestMatchers("/profiles/signIn").permitAll()
-					.requestMatchers("/patients*/**", "/doctors*/**", "/hospitals*/**").permitAll()
+//					.requestMatchers("/patients*/**", "/doctors*/**", "/hospitals*/**").permitAll()
 					.anyRequest()
 					.authenticated();	
 				})
 				.csrf(csrf->csrf.disable())
+				.addFilterBefore(new JWTValidatorFilter(), BasicAuthenticationFilter.class)
+				.addFilterAfter(new JWTTokenGeneratorFilter(), BasicAuthenticationFilter.class)
 				.formLogin(Customizer.withDefaults())
 				.httpBasic(Customizer.withDefaults());
 
