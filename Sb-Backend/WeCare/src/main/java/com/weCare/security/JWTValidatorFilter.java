@@ -24,9 +24,6 @@ public class JWTValidatorFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		String jwtToken = request.getHeader(SecurityConstants.JWT_HEADER);
-//		System.out.println(jwtToken);
-		System.out.println("From Validator");
-
 		
 		if(jwtToken!=null) {
 			jwtToken = jwtToken.substring(7);

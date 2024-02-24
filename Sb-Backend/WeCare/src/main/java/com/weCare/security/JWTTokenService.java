@@ -1,6 +1,5 @@
 package com.weCare.security;
 
-import java.awt.RenderingHints.Key;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -26,12 +25,12 @@ public class JWTTokenService {
 	private long expirationTime;
 	
 	public String generateJWTToken(Authentication authentication) {
-	
+		
 		String username = authentication.getName();
 
         Date currentDate = new Date();
 
-        Date expireDate = new Date(new Date().getTime()+ expirationTime);
+        Date expireDate = new Date(new Date().getTime()+ 300000);
         
         String token = Jwts
   			  .builder()
@@ -48,7 +47,8 @@ public class JWTTokenService {
 	}
 	
 	public SecretKey getSecretKey() {
-		return Keys.hmacShaKeyFor(jwtSecretKey.getBytes());
+//		return Keys.hmacShaKeyFor(jwtSecretKey.getBytes());
+		return Keys.hmacShaKeyFor(SecurityConstants.JWT_KEY.getBytes());
 	}
 	
 	public String populateAuthorities(Collection<? extends GrantedAuthority> collection) {

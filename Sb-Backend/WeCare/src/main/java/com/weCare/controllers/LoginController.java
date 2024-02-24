@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.weCare.modals.LoginDto;
+import com.weCare.modals.LoginResponse;
+import com.weCare.services.LoginService;
 import com.weCare.services.ProfileService;
 
 @RestController
@@ -20,8 +22,9 @@ import com.weCare.services.ProfileService;
 public class LoginController {
 
 	
+	
 	@Autowired
-    private AuthenticationManager authenticationManager;
+	private LoginService loginService;
 	
 	@PostMapping(value = "/basic")
 	public ResponseEntity<String> loginWithBasicAuthentication(Authentication authentication){
@@ -31,16 +34,12 @@ public class LoginController {
 		return new ResponseEntity<String>(name+" Logged-In", HttpStatus.ACCEPTED);
 	}
 	@PostMapping(value = "/custom")
-	public ResponseEntity<String> customLoginWithAuthenticationManager(@RequestBody LoginDto loginDto){
+	public ResponseEntity<LoginResponse> customLoginWithAuthenticationManager(@RequestBody LoginDto loginDto){
 		
-		Authentication authentication = authenticationManager.authenticate(
-				new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword())
-				);
 		
-		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
-		String name = authentication.getName();
+		LoginResponse customLogin = loginService.customLogin(loginDto);
 		
-		return new ResponseEntity<String>(name+" Logged-In", HttpStatus.ACCEPTED);
+		return new ResponseEntity<LoginResponse>(customLogin, HttpStatus.ACCEPTED);
 	}
 }
