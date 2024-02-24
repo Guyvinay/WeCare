@@ -45,6 +45,7 @@ public class PatientServiceImpl implements PatientService {
 
 		for (Patient patient : patients) {
 			patient.setAddress(addressRepository.save(patient.getAddress()));
+			patient.setPassWord(passwordEncoder.encode(patient.getPassWord()));
 		}
 
 		return patientRepository.saveAll(patients);

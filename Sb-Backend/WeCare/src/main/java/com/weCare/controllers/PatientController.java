@@ -64,11 +64,11 @@ public class PatientController {
 		return new ResponseEntity<String>(patientService.deletePatientById(patient_id), HttpStatus.ACCEPTED);
 	}
 	
-	@PostMapping(value = "/basicLogin")
-	public ResponseEntity<String> loginWithBasicAuthentication(Authentication authentication){
-		
-		String name = authentication.getName();
-		
-		return new ResponseEntity<String>(name+" Logged-In", HttpStatus.ACCEPTED);
-	}
+//	@PostMapping(value = "/basicLogin")
+//	public ResponseEntity<String> loginWithBasicAuthentication(Authentication authentication){
+//		
+//		String name = authentication.getName();
+//		
+//		return new ResponseEntity<String>(name+" Logged-In", HttpStatus.ACCEPTED);
+//	}
 }
