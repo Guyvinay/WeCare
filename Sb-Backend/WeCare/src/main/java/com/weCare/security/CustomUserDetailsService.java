@@ -28,7 +28,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		
 		Profile profile = profileRepository.findByEmail(username)
 				.orElseThrow(() -> new NotFoundException("Profile with email: " + username + ", not found!!!"));
-		
+		System.out.println(profile);
 		List<GrantedAuthority> grantedAuthority = new ArrayList<>();
 		grantedAuthority.add(new SimpleGrantedAuthority(profile.getRole().toString()));
 		

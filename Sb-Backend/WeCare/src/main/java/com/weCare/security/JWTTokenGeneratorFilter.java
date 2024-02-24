@@ -25,10 +25,12 @@ public class JWTTokenGeneratorFilter extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
-
+		
+//		System.out.println("From Generator");
+		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
-//		System.out.println(authentication);
+		System.out.println(authentication);
 		
 		if(authentication!=null) {
 			
@@ -41,9 +43,11 @@ public class JWTTokenGeneratorFilter extends OncePerRequestFilter {
 			  .claim("username", authentication.getName())
 			  .claim("authority", populateAuthorities(authentication.getAuthorities()))
 			  .setIssuedAt(new Date())
-			  .setExpiration(new Date(new Date().getTime()+ 30000000))
+			  .setExpiration(new Date(new Date().getTime()+ 300000))//Set 5 Mins of expiration time
 			  .signWith(secretKey)
 			  .compact();
+			
+//			System.out.println("From Generator");
 			
 			response.setHeader(SecurityConstants.JWT_HEADER, tokenString);
 		}
@@ -67,7 +71,11 @@ public class JWTTokenGeneratorFilter extends OncePerRequestFilter {
 	@Override
 	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
 //		System.out.println(request.getServletPath());
-		return !request.getServletPath().equals("/doctors/basicLogin");
+//		return !request.getServletPath().equals("/doctors/basicLogin")||
+//		      return !request.getServletPath().equals("/doctors/customLogin");
+		boolean shouldNotFilter = request.getServletPath().equals("/login/basic") || request.getServletPath().equals("/login/custom");
+//		System.out.println(shouldFilter);
+		return !shouldNotFilter;
 	}
 
 }

@@ -24,10 +24,20 @@ public class GlobalExceptionHandling {
 						ex.getMessage(),
 						wb.getDescription(false)
 				),
-				HttpStatus.BAD_REQUEST
+				HttpStatus.BAD_GATEWAY
 		);
 	}
-	
+	@ExceptionHandler(CredsWentWrongException.class)
+	public ResponseEntity<ExceptionDefinition> globalExceptionHandle(CredsWentWrongException ex, WebRequest wb){
+		return new ResponseEntity<ExceptionDefinition>(
+				new ExceptionDefinition(
+						LocalDateTime.now(),
+						ex.getMessage(),
+						wb.getDescription(false)
+				),
+				HttpStatus.UNAUTHORIZED
+		);
+	}
 	@ExceptionHandler(NoHandlerFoundException.class)
 	public ResponseEntity<ExceptionDefinition> noHandlerFoundException(NoHandlerFoundException ex, WebRequest wb){
 		return new ResponseEntity<ExceptionDefinition>(

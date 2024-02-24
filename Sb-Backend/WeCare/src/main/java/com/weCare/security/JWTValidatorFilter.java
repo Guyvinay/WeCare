@@ -25,6 +25,8 @@ public class JWTValidatorFilter extends OncePerRequestFilter {
 			throws ServletException, IOException {
 		String jwtToken = request.getHeader(SecurityConstants.JWT_HEADER);
 //		System.out.println(jwtToken);
+		System.out.println("From Validator");
+
 		
 		if(jwtToken!=null) {
 			jwtToken = jwtToken.substring(7);
@@ -52,7 +54,8 @@ public class JWTValidatorFilter extends OncePerRequestFilter {
 	@Override
 	protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
 //		System.out.println(request.getServletPath());
-		return request.getServletPath().equals("/doctors/basicLogin");
+		return request.getServletPath().equals("/login/basic") ||
+			       request.getServletPath().equals("/login/custom");
 	}
 
 }

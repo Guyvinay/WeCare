@@ -5,7 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -17,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.weCare.modals.Doctor;
+import com.weCare.modals.LoginDto;
 import com.weCare.services.DoctorService;
 
 import jakarta.validation.Valid;
@@ -28,6 +33,9 @@ public class DoctorController {
     
     @Autowired
     private DoctorService doctorService;
+    
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     @PostMapping()
     public ResponseEntity<Doctor> saveDoctor( @Valid @RequestBody Doctor doctor){
@@ -116,12 +124,26 @@ public class DoctorController {
         );
     }
     
-    @PostMapping(value = "/basicLogin")
-	public ResponseEntity<String> loginWithBasicAuthentication(Authentication authentication){
-		
-		String name = authentication.getName();
-		
-		return new ResponseEntity<String>(name+" Logged-In", HttpStatus.ACCEPTED);
-	}
+//    @PostMapping(value = "/basicLogin")
+//	public ResponseEntity<String> loginWithBasicAuthentication(Authentication authentication){
+//		
+//		String name = authentication.getName();
+//		
+//		return new ResponseEntity<String>(name+" Logged-In", HttpStatus.ACCEPTED);
+//	}
+    
+//    @PostMapping(value = "/customLogin")
+//	public ResponseEntity<String> customLoginWithAuthenticationManager(@RequestBody LoginDto loginDto){
+//		
+//		Authentication authentication = authenticationManager.authenticate(
+//				new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword())
+//				);
+//		
+//		SecurityContextHolder.getContext().setAuthentication(authentication);
+//		
+//		System.out.println(authentication);
+//		
+//		return new ResponseEntity<String>(" Logged-In", HttpStatus.ACCEPTED);
+//	}
     
 }

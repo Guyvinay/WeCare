@@ -33,6 +33,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		
 		String userName = authentication.getName();
 		String password = authentication.getCredentials().toString();
+		System.out.println(userName);
 		
 		Optional<Profile> optional = profileRepository.findByEmail(userName);
 		
