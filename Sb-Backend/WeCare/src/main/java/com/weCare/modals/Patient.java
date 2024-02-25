@@ -75,5 +75,7 @@ public class Patient extends Profile {
 	@OneToMany(mappedBy = "patient")
 	@JsonIgnore
 	private List<Message> messages = new ArrayList<>();
+	
+	
 
 }

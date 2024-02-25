@@ -27,7 +27,6 @@ import lombok.ToString;
 @Entity
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @Table(name = "doctors")
 @PrimaryKeyJoinColumn(name = "doctor_id")
@@ -54,6 +53,7 @@ public class Doctor extends Profile {
 	@OneToOne
 //	@JsonIgnore
 	@ToString.Exclude
+	@JoinColumn(name = "address_id")
 	private Address address;
 
 	@ManyToMany()
@@ -82,6 +82,15 @@ public class Doctor extends Profile {
 	@ToString.Exclude
 //	@JsonBackReference
 	private Hospital hospital;
+	
+	/*
+	@ManyToMany()
+	@JoinTable(
+			name = "doctor_slots",
+			joinColumns = @JoinColumn(name="slotId"),
+			inverseJoinColumns = @JoinColumn(name="doctor_id")
+			)
+	private List<Slot> slots;*/
 	
 	@OneToMany(mappedBy = "doctor")
 	@JsonIgnore
