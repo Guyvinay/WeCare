@@ -38,10 +38,10 @@ public class LoginServiceImpl implements LoginService {
 				new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword())
 				);
 		
-//		SecurityContextHolder.getContext().setAuthentication(authentication);
+		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
 		String name = authentication.getName();
-		System.out.println(name);
+//		System.out.println(name);
 		
 		String jwtToken = jwtTokenService.generateJWTToken(authentication);
 		
