@@ -30,7 +30,7 @@ public class JWTTokenService {
 
         Date currentDate = new Date();
 
-        Date expireDate = new Date(new Date().getTime()+ 300000);
+        Date expireDate = new Date(new Date().getTime()+ 30000000);
         
         String token = Jwts
   			  .builder()

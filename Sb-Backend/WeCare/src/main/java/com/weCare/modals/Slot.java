@@ -1,5 +1,6 @@
 package com.weCare.modals;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -12,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,6 +36,8 @@ public class Slot {
 	
 	private LocalDateTime startTime;
     private LocalDateTime endTime;
+    
+    private LocalDate slotDate;
 	
     @Enumerated(EnumType.STRING)
 	private SlotPeriod slotPeriod;
@@ -45,6 +49,10 @@ public class Slot {
 	@ManyToOne
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
+	
+	@JsonIgnore
+    @OneToOne(mappedBy = "slot")
+    private Appointment appointment;
 	
 	/*
 	@ManyToMany(mappedBy = "slots")

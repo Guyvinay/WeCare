@@ -18,10 +18,10 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -55,13 +55,13 @@ public class Appointment {
 
 	@ManyToOne
 	@JoinColumn(name = "doctor_id")
-//	@JsonIgnore
+	@JsonIgnore
 	@ToString.Exclude
 	private Doctor doctor;
 
 	@ManyToOne
 	@JoinColumn(name = "patient_id")
-//	@JsonIgnore
+	@JsonIgnore
 	@ToString.Exclude
 	private Patient patient;
 
@@ -76,9 +76,14 @@ public class Appointment {
 	@ToString.Exclude
 	private Hospital hospital;
 	
-//	@OneToOne(mappedBy = "appointment")
-//	private Slot slot;
-
+	@Transient
+	private SlotPeriod slotPeriod;
+	
+	@JsonIgnore
+	@OneToOne
+    @JoinColumn(name = "slot_id")
+    private Slot slot;
+	
 	@OneToMany(mappedBy = "appointment")
 	@JsonIgnore
 	@ToString.Exclude

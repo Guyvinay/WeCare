@@ -2,6 +2,7 @@ package com.weCare.servicesImpls;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -17,10 +18,13 @@ import com.weCare.modals.Department;
 import com.weCare.modals.Doctor;
 import com.weCare.modals.Hospital;
 import com.weCare.modals.Patient;
+import com.weCare.modals.Slot;
+import com.weCare.modals.SlotStatus;
 import com.weCare.repository.AppointmentRepository;
 import com.weCare.repository.DoctorRepository;
 import com.weCare.repository.HospitalRepository;
 import com.weCare.repository.PatientRepository;
+import com.weCare.repository.SlotRepository;
 import com.weCare.services.AppointmentService;
 
 @Service
@@ -37,36 +41,69 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 	@Autowired
 	private AppointmentRepository appointmentRepository;
+	
+	@Autowired
+	private SlotRepository slotRepository;
 
 	@Override
 	public Appointment bookAppointment(Appointment appointment, String hospital_id, String patient_id) {
+		
 		Hospital hospital = hospitalRepository.findById(hospital_id)
 				.orElseThrow(() -> new NotFoundException("Hospital with id: " + hospital_id + ", not found!!!"));
 
 		Patient patient = patientRepository.findById(patient_id)
 				.orElseThrow(() -> new NotFoundException("Patient with id: " + patient_id + ", not found!!!"));
 
+		// Set appointment date to today if not provided
+		if (appointment.getAppointment_date() == null)
+			appointment.setAppointment_date(LocalDate.now());
+		
+		
+		
 		Department department = appointment.getDepartment();
 
 		List<Doctor> doctors_with_same_department = doctorRepository.findByDepartmentAvailabilityAndHospital(department,
 				Availability.AVAILABLE, hospital_id);
+		
 		if (doctors_with_same_department.isEmpty())
 			throw new NotFoundException("Doctors with:" + department + ", not found");
 
 		Doctor random_doctor = doctors_with_same_department
 				.get(new Random().nextInt(doctors_with_same_department.size()));
 
+		/*
+		LocalDate appointment_date = appointment.getAppointment_date();
+//		System.out.println(appointment_date);
+		
+		int slotsForDoctor = slotRepository.countSlotsForDoctor(appointment_date, appointment.getSlotPeriod(), random_doctor.getProfile_id());
+		System.out.println(slotsForDoctor);
+		
+		if(slotsForDoctor!=0)
+			throw new NotFoundException(appointment.getSlotPeriod()+", is Booked on "+appointment_date);
+		
+		Slot slot = new Slot();
+		
+		slot.setSlotStatus(SlotStatus.BOOKED);
+		slot.setSlotPeriod(appointment.getSlotPeriod());
+		slot.setDoctor(random_doctor);
+		slot.setSlotDate(appointment_date);
+		slot.setAppointment(appointment);
+		
+		Slot saved_slot = slotRepository.save(slot);
+		
+		 */
 		patient.getDoctors().add(random_doctor);
 		patient.getAppointments().add(appointment);
 
 		random_doctor.getPatients().add(patient);
 		random_doctor.getAppointments().add(appointment);
+//		random_doctor.getSlots().add(saved_slot);
 
 		hospital.getAppointments().add(appointment);
 		hospital.getPatients().add(patient);
 
-		if (appointment.getAppointment_date() == null)
-			appointment.setAppointment_date(LocalDate.now());
+		
+//		appointment.setSlot(saved_slot);
 		appointment.setPatient(patient);
 		appointment.setDoctor(random_doctor);
 		appointment.setBooking_time(LocalDateTime.now());
@@ -128,7 +165,8 @@ public class AppointmentServiceImpl implements AppointmentService {
 		appointment.setStatus(AppointmentStatus.APPOINTMENT_BOOKED);
 		appointment.setDoctor(doctor);
 		appointment.setHospital(hospital);
-
+		
+//		return appointment;
 		return appointmentRepository.save(appointment);
 
 	}
