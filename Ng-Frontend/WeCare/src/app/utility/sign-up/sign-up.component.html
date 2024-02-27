@@ -1,34 +1,121 @@
+<!-- Image Background -->
 <div class="fixed top-0 left-0 right-0-z-10 w-full">
-    <img src="../../../assets/pictured/pexels-moose-photos-1037995.jpg" alt="">
+  <img src="../../../assets/pictured/pexels-moose-photos-1037995.jpg" alt="" />
 </div>
-<div class="lg:m-10 max-w-xl">
-    <form
-        class="relative border border-gray-100 space-y-3 max-w-screen-md mx-auto rounded-md bg-white p-6 shadow-xl lg:p-10">
-        <h1 class="mb-6 text-xl font-semibold lg:text-2xl">Register</h1>
 
-        <div class="grid gap-3 md:grid-cols-2">
-            <div>
-                <label class=""> First Name </label>
-                <input type="text" placeholder="Your Name" class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3" />
-            </div>
-            <div>
-                <label class=""> Last Name </label>
-                <input type="text" placeholder="Last  Name" class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3" />
-            </div>
-        </div>
-        <div class="grid gap-3 md:grid-cols-2">
-            <div>
-                <label class=""> Email Address </label>
-                <input type="email" placeholder="Info@example.com"
-                    class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3" />
-            </div>
-            <div>
-                <label class=""> Password </label>
-                <input type="password" placeholder="******" class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3" />
-            </div>
-        </div>
-        <div class="grid gap-3 lg:grid-cols-2">
-            <div>
+<div class="lg:m-10 max-w-xl">
+  <!-- Form Inits here -->
+  <form
+    class="relative border border-gray-100 space-y-3 max-w-screen-md mx-auto rounded-md bg-white p-6 shadow-xl lg:p-10"
+  >
+    <div class="grid gap-3 lg:grid-cols-2">
+      <!-- heading -->
+      <h1 class="mb-6 text-xl text-center font-bold lg:text-2xl">
+        REGISTER <span>{{ selectedRole }}</span>
+      </h1>
+
+      <!-- category -->
+      <div>
+        <label for="category" class="">Role</label>
+        <select
+          [(ngModel)]="selectedRole"
+          (change)="onRoleChange()"
+          id="status"
+          name="status"
+          class="border border-gray-400 text-gray-900 text-sm focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 rounded-md bg-gray-100 px-3"
+        >
+          <option selected="">Choose status</option>
+          <option value="DOCTOR">Doctor</option>
+          <option value="PATIENT">Patient</option>
+          <option value="STAFF">Staff</option>
+          <option value="ADMIN">Admin</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="grid gap-3 md:grid-cols-2">
+      <div>
+        <label class=""> First Name </label>
+        <input
+          type="text"
+          placeholder="Your Name"
+          class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
+        />
+      </div>
+      <div>
+        <label class=""> Last Name </label>
+        <input
+          type="text"
+          placeholder="Last  Name"
+          class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
+        />
+      </div>
+    </div>
+
+    <div class="grid gap-3 md:grid-cols-2">
+      <div>
+        <label class=""> Email Address </label>
+        <input
+          type="email"
+          placeholder="Info@example.com"
+          class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
+        />
+      </div>
+      <div>
+        <label class=""> Password </label>
+        <input
+          type="password"
+          placeholder="******"
+          class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
+        />
+      </div>
+    </div>
+
+    <div *ngIf="selectedRole=='DOCTOR'" class="grid gap-3 lg:grid-cols-2">
+      <div>
+        <label class=""> Qualification </label>
+        <input
+          type="text"
+          placeholder="Qualification"
+          class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
+        />
+      </div>
+      <div>
+        <label for="department" class="">Department</label>
+        <select
+          id="department"
+          name="department"
+          class="border border-gray-400 text-gray-900 text-sm focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 rounded-md bg-gray-100 px-3 mt-2 h-12"
+        >
+          <option selected="">Choose Department</option>
+          <option value="Pending">Pending</option>
+          <option value="Completed">Completed</option>
+          <option value="Overdue">Overdue</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="grid gap-3 lg:grid-cols-2">
+      <div>
+        <label class=""> Profile </label>
+        <input
+          type="text"
+          placeholder="Profile Picture"
+          class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
+        />
+      </div>
+      <div>
+        <label class=""> Phone </label>
+        <input
+          type="text"
+          placeholder="+543 5445 0543"
+          class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
+        />
+      </div>
+    </div>
+
+    <div class="grid gap-3 lg:grid-cols-2">
+      <!-- <div>
                 <label class=""> Gender </label>
                 <div class="relative w-56 mt-2 bg-gray-100 rounded-lg">
                     <input class="peer hidden" type="checkbox" name="select-1" id="select-1" />
@@ -54,73 +141,116 @@
                         </li>
                     </ul>
                 </div>
-            </div>
-            <div>
-                <label class="">
-                    Phone: <span class="text-sm text-gray-400">(optional)</span>
-                </label>
-                <input type="text" placeholder="+543 5445 0543" class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3" />
-            </div>
-        </div>
+            </div> -->
+      <div>
+        <label for="gender" class="">Gender</label>
+        <select
+          id="gender"
+          name="gender"
+          class="border border-gray-400 text-gray-900 text-sm focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 rounded-md bg-gray-100 px-3"
+        >
+          <option selected="">Choose status</option>
+          <option value="Pending">Pending</option>
+          <option value="Completed">Completed</option>
+          <option value="Overdue">Overdue</option>
+        </select>
+      </div>
+      <div *ngIf="selectedRole=='PATIENT'">
+        <label for="Date_of_birth">Date-Of-Birth</label>
+        <input
+          type="date"
+          id="Date_of_birth"
+          name="Date_of_birth"
+          required
+          class="border border-gray-400 text-gray-900 text-sm focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 rounded-md bg-gray-100 px-3"
+        />
+      </div>
+    </div>
 
-        <div class="checkbox">
-            <input type="checkbox" id="chekcbox1" checked="" />
-            <label for="checkbox1">I agree to the
-                <a href="#" target="_blank" class="text-blue-600">
-                    Terms and Conditions
-                </a>
-            </label>
-        </div>
+    
 
-        <div>
-            <button data-modal-target="defaultModal" data-modal-toggle="defaultModal"
-                class="block mt-5 w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                type="button">
-                Toggle modal
-            </button>
-        </div>
-    </form>
+    <div class="checkbox">
+      <input type="checkbox" id="chekcbox1" checked="" />
+      <label for="checkbox1"
+        >I agree to the
+        <a href="#" target="_blank" class="text-blue-600">
+          Terms and Conditions
+        </a>
+      </label>
+    </div>
+
+    <div>
+      <button
+        data-modal-target="defaultModal"
+        data-modal-toggle="defaultModal"
+        class="block mt-5 w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        type="button"
+      >
+        Toggle modal
+      </button>
+    </div>
+  </form>
 </div>
 
 <!-- Main modal -->
-<div id="defaultModal" tabindex="-1" aria-hidden="true"
-    class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative w-full max-w-2xl max-h-full">
-        <div class="lg:m-10 max-w-xl">
-            <form
-                class="relative border border-gray-100 space-y-3 max-w-screen-md mx-auto rounded-md bg-white p-6 shadow-xl lg:p-10">
-                <h1 class="mb-6 text-xl font-semibold lg:text-2xl">Add Address</h1>
-        
-                <div class="grid gap-3 md:grid-cols-2">
-                    <div>
-                        <label class=""> Street </label>
-                        <input type="text" placeholder="Street" class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3" />
-                    </div>
-                    <div>
-                        <label class=""> City </label>
-                        <input type="text" placeholder="Last  Name" class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3" />
-                    </div>
-                </div>
-                <div class="grid gap-3 md:grid-cols-2">
-                    <div>
-                        <label class=""> State </label>
-                        <input type="text" placeholder="Your State"
-                            class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3" />
-                    </div>
-                    <div>
-                        <label class=""> Zip COde </label>
-                        <input type="number" placeholder="Your Zip Code" class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3" />
-                    </div>
-                </div>
-                <div>
-                    <button
-                        class="block mt-5 w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                        type="button">
-                        Submit
-                    </button>
-                </div>
-            </form>
+<div
+  id="defaultModal"
+  tabindex="-1"
+  aria-hidden="true"
+  class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"
+>
+  <div class="relative w-full max-w-2xl max-h-full">
+    <div class="lg:m-10 max-w-xl">
+      <form
+        class="relative border border-gray-100 space-y-3 max-w-screen-md mx-auto rounded-md bg-white p-6 shadow-xl lg:p-10"
+      >
+        <h1 class="mb-6 text-xl font-semibold lg:text-2xl">Add Address</h1>
+
+        <div class="grid gap-3 md:grid-cols-2">
+          <div>
+            <label class=""> Street </label>
+            <input
+              type="text"
+              placeholder="Street"
+              class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
+            />
+          </div>
+          <div>
+            <label class=""> City </label>
+            <input
+              type="text"
+              placeholder="Last  Name"
+              class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
+            />
+          </div>
         </div>
-        
+        <div class="grid gap-3 md:grid-cols-2">
+          <div>
+            <label class=""> State </label>
+            <input
+              type="text"
+              placeholder="Your State"
+              class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
+            />
+          </div>
+          <div>
+            <label class=""> Zip COde </label>
+            <input
+              type="number"
+              placeholder="Your Zip Code"
+              class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
+            />
+          </div>
+        </div>
+        <div>
+          <button
+            class="block mt-5 w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            type="button"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
     </div>
+  </div>
 </div>
