@@ -1,10 +1,5 @@
 package com.weCare.modals;
 
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Map;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
@@ -21,7 +16,6 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -55,7 +49,6 @@ public class Profile {
 	private Role role;
 
 	public Profile(String email, String passWord, String profile_picture, Role role) {
-		super();
 		this.email = email;
 		this.passWord = passWord;
 		this.profile_picture = profile_picture;

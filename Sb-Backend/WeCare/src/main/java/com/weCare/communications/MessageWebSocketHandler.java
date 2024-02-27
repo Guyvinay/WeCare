@@ -68,12 +68,12 @@ public class MessageWebSocketHandler extends TextWebSocketHandler {
 		ObjectNode objectNode = (ObjectNode) jsonNode;
 
 		if (appointment.getDoctor().getProfile_id().equals(userId)) {
-			String doctor_name = appointment.getDoctor().getDoctor_name();
+			String doctor_name = appointment.getDoctor().getName();
 			objectNode.put("Sender", doctor_name);
 			objectNode.put("By", "Doctor");
 			chat_message.setSender(doctor_name);
 		} else {
-			String patient_name = appointment.getPatient().getPatient_name();
+			String patient_name = appointment.getPatient().getName();
 			objectNode.put("Sender", patient_name);
 			objectNode.put("By", "Patient");
 			chat_message.setSender(patient_name);

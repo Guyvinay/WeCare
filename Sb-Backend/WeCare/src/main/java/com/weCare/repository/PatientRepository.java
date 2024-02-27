@@ -9,7 +9,7 @@ import com.weCare.modals.Patient;
 
 public interface PatientRepository extends JpaRepository<Patient, String> {
 
-	@Query("SELECT p FROM Patient p WHERE p.patient_name LIKE :name")
+	@Query("SELECT p FROM Patient p WHERE p.name LIKE :name")
 	public List<Patient> findByNamePattern(String name);
 
 }

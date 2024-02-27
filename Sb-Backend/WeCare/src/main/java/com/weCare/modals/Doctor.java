@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -33,11 +34,15 @@ import lombok.ToString;
 public class Doctor extends Profile {
 
 	@NotBlank(message = "Doctor name cannot be blank!!!")
-	private String doctor_name;
+	private String name;
 
 	@NotNull(message = "Department cannot be blank!!!")
 	@Enumerated(EnumType.STRING)
 	private Department department;
+	
+	@NotNull(message = "Gender cannot be blank!!!")
+	@Enumerated(EnumType.STRING)
+	private Gender gender;
 
 	@NotBlank(message = "Qualification cannot be blank!!!")
 	private String qualification;
@@ -49,6 +54,24 @@ public class Doctor extends Profile {
 	@NotNull(message = "Availability cannot be null!!!")
 	@Enumerated(EnumType.STRING)
 	private Availability availability;
+	
+	
+
+	public Doctor(String email, String passWord, String profile_picture, Role role,
+			@NotBlank(message = "Doctor name cannot be blank!!!") String name,
+			@NotNull(message = "Department cannot be blank!!!") Department department,
+			@NotNull(message = "Gender cannot be blank!!!") Gender gender,
+			@NotBlank(message = "Qualification cannot be blank!!!") String qualification,
+			@NotBlank(message = "Mobile cannot be blank!!!") String mobile,
+			@NotNull(message = "Availability cannot be null!!!") Availability availability) {
+		super(email, passWord, profile_picture, role);
+		this.name = name;
+		this.department = department;
+		this.gender = gender;
+		this.qualification = qualification;
+		this.mobile = mobile;
+		this.availability = availability;
+	}
 
 	@OneToOne
 //	@JsonIgnore
@@ -83,6 +106,10 @@ public class Doctor extends Profile {
 //	@JsonBackReference
 	private Hospital hospital;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
+    private List<Slot> slots = new ArrayList<>();
+	
 	/*
 	@ManyToMany()
 	@JoinTable(
@@ -97,14 +124,5 @@ public class Doctor extends Profile {
 	@ToString.Exclude
 	private List<Message> messages = new ArrayList<>();
 
-	public Doctor(String email, String passWord, String profile_picture, Role role,
-			String doctor_name, Department department, String qualification, String mobile, Availability availability) {
-		super(email, passWord, profile_picture, role);
-		this.doctor_name = doctor_name;
-		this.department = department;
-		this.qualification = qualification;
-		this.mobile = mobile;
-		this.availability = availability;
-	}
 	
 }

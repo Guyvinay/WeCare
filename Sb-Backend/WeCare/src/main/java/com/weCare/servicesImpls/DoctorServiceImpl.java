@@ -120,8 +120,8 @@ public class DoctorServiceImpl implements DoctorService {
 		if (doctor.getAvailability() != null) {
 			retrieved_doctor.setAvailability(doctor.getAvailability());
 		}
-		if (doctor.getDoctor_name() != null && doctor.getDoctor_name().length() > 0) {
-			retrieved_doctor.setDoctor_name(doctor.getDoctor_name());
+		if (doctor.getName() != null && doctor.getName().length() > 0) {
+			retrieved_doctor.setName(doctor.getName());
 		}
 		if (doctor.getDepartment() != null) {
 			retrieved_doctor.setDepartment(doctor.getDepartment());

@@ -30,25 +30,28 @@ import lombok.Setter;
 public class Patient extends Profile {
 
 	@NotBlank(message = "Patient name cannot be blank!!!")
-	private String patient_name;
+	private String name;
 
 	@NotNull(message = "Gender cannot be blank!!!")
 	@Enumerated(EnumType.STRING)
-	private Gender patient_gender;
+	private Gender gender;
 
 	@NotNull(message = "date_of_birth cannot be blank!!!")
-	private LocalDate date_of_birth;
+	private LocalDate dateOfBirth;
 
 	@NotBlank(message = "Mobile cannot be blank!!!")
 	@Column(unique = true)
 	private String mobile;
-
-	public Patient(String email, String userName, String passWord, String profile_picture, Role role,
-			String patient_name, Gender patient_gender, LocalDate date_of_birth, String mobile) {
-		super(email, userName, passWord, profile_picture, role);
-		this.patient_name = patient_name;
-		this.patient_gender = patient_gender;
-		this.date_of_birth = date_of_birth;
+	
+	public Patient(String email, String passWord, String profile_picture, Role role,
+			@NotBlank(message = "Patient name cannot be blank!!!") String name,
+			@NotNull(message = "Gender cannot be blank!!!") Gender gender,
+			@NotNull(message = "date_of_birth cannot be blank!!!") LocalDate dateOfBirth,
+			@NotBlank(message = "Mobile cannot be blank!!!") String mobile) {
+		super(email, passWord, profile_picture, role);
+		this.name = name;
+		this.gender = gender;
+		this.dateOfBirth = dateOfBirth;
 		this.mobile = mobile;
 	}
 

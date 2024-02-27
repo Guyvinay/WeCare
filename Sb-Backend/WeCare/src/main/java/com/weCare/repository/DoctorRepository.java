@@ -20,7 +20,7 @@ public interface DoctorRepository extends JpaRepository<Doctor, String> {
 	@Query("SELECT d FROM Doctor d WHERE UPPER(d.department) LIKE UPPER(CONCAT('%', :department, '%'))")
 	public List<Doctor> findByDepartmentContaining(String department);
 
-	@Query("SELECT d FROM Doctor d  WHERE LOWER(d.doctor_name) LIKE LOWER(CONCAT('%',:doctor_name,'%'))")
-	public List<Doctor> findByNamePattern(@Param("doctor_name") String doctor_name);
+	@Query("SELECT d FROM Doctor d  WHERE LOWER(d.name) LIKE LOWER(CONCAT('%',:name,'%'))")
+	public List<Doctor> findByNamePattern(@Param("name") String name);
 
 }
