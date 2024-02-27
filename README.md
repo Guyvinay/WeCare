@@ -73,37 +73,30 @@ The application exposes RESTful endpoints for various functionalities:
 1. **User Management:**
    - `POST /api/users`: Create a new user.
    - `GET /api/users/{userId}`: Get user details.
-   - ...
 
 2. **Patient Management:**
    - `POST /api/patients`: Add a new patient.
    - `GET /api/patients/{patientId}`: Retrieve patient information.
-   - ...
 
 3. **Doctor Management:**
    - `POST /api/doctors`: Add a new doctor.
    - `GET /api/doctors/{doctorId}`: Retrieve doctor information.
-   - ...
 
 4. **Appointment Management:**
    - `POST /api/appointments`: Schedule a new appointment.
    - `GET /api/appointments/{appointmentId}`: Retrieve appointment details.
-   - ...
 
 5. **Invoice Management:**
    - `POST /api/invoices`: Generate a new invoice.
    - `GET /api/invoices/{invoiceId}`: Retrieve invoice details.
-   - ...
 
 6. **Hospital Information:**
    - `POST /api/hospitals`: Add a new hospital.
    - `GET /api/hospitals/{hospitalId}`: Retrieve hospital details.
-   - ...
 
 7. **Prescription Handling:**
    - `POST /api/prescriptions`: Create a new prescription.
    - `GET /api/prescriptions/{prescriptionId}`: Retrieve prescription details.
-   - ...
 
 ## Installation
 
@@ -125,17 +118,13 @@ Contributions are welcome! If you'd like to contribute to the project, please fo
 This project is licensed under the [MIT License](LICENSE).
 
 ## Acknowledgements
-
 - The project is built using [Spring Boot](https://spring.io/projects/spring-boot) for the backend.
 - [Angular](https://angular.io/) is used for the frontend user interface.
 - The database is managed with [Hibernate](https://hibernate.org/) as the ORM tool.
 - [Thymeleaf](https://www.thymeleaf.org/) is used for server-side templating.
 
 ## Contact
-
-For any inquiries or feedback, feel free to contact us at [your.email@example.com](mailto:your.email@example.com).
-
----
+For any inquiries or feedback, feel free to contact us at [mrsinghvinay563@gmail.com](mrsinghvinay563@gmail.com).
 
 **Note:** Customize the contact email and other details as needed.
 
