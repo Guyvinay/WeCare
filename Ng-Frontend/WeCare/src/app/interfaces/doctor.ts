@@ -27,3 +27,18 @@ export interface DoctorDTO {
     qualification:string
     address:AddressDTO
 }
+export interface SignUpDTO {
+    email:string;
+    passWord:string; 
+    profile_picture:string;
+    role:string;
+    firstName:string;
+    lastName:string;
+    dateOfBirth:string;
+	department:string;
+	gender:string;
+	mobile:string;
+    availability:string
+    qualification:string
+    address:AddressDTO
+}

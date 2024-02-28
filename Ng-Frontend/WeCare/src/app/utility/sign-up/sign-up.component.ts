@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PatientDTO } from '../../interfaces/patient';
-import { DoctorDTO } from '../../interfaces/doctor';
+import { DoctorDTO, SignUpDTO } from '../../interfaces/doctor';
 
 @Component({
   selector: 'app-sign-up',
@@ -11,7 +11,12 @@ import { DoctorDTO } from '../../interfaces/doctor';
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css'
 })
-export class SignUpComponent {
+export class SignUpComponent implements OnInit {
+
+  ngOnInit(): void {
+    console.log("HII");
+  }
+  
 
   selectedRole:string='';
   patientDTO:PatientDTO={
@@ -52,10 +57,35 @@ export class SignUpComponent {
     },
   }
 
+  signUpDTO:SignUpDTO={
+    email: '',
+    passWord: '',
+    profile_picture: '',
+    role: '',
+    firstName: '',
+    lastName: '',
+    department: '',
+    gender: '',
+    mobile: '',
+    qualification: '',
+    availability: '',
+    dateOfBirth: '',
+    address: {
+      locality: '',
+      city: '',
+      zip_code: 0,
+      state: '',
+      country: ''
+    },
+  }
+
   onRoleChange(){
 
   }
 
+  onSubmit() {
+    console.log("HII");
+  }
 
 
 }

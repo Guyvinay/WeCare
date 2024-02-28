@@ -37,15 +37,19 @@
       <div>
         <label class=""> First Name </label>
         <input
+          [(ngModel)]="signUpDTO.firstName"
           type="text"
-          placeholder="Your Name"
+          name="firstName"
+          placeholder="First Name"
           class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
         />
       </div>
       <div>
         <label class=""> Last Name </label>
         <input
+          [(ngModel)]="signUpDTO.lastName"
           type="text"
+          name="lastName"
           placeholder="Last  Name"
           class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
         />
@@ -56,7 +60,9 @@
       <div>
         <label class=""> Email Address </label>
         <input
+          [(ngModel)]="signUpDTO.email"
           type="email"
+          name="email"
           placeholder="Info@example.com"
           class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
         />
@@ -64,18 +70,25 @@
       <div>
         <label class=""> Password </label>
         <input
+          [(ngModel)]="signUpDTO.passWord"
           type="password"
+          name="passWord"
           placeholder="******"
           class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
         />
       </div>
     </div>
-
-    <div *ngIf="selectedRole=='DOCTOR'" class="grid gap-3 lg:grid-cols-2">
+    <div
+      *ngIf="selectedRole == 'DOCTOR'"
+      class="grid gap-3 lg:grid-cols-2"
+      name="qual"
+    >
       <div>
         <label class=""> Qualification </label>
         <input
+          [(ngModel)]="signUpDTO.qualification"
           type="text"
+          name="qualification"
           placeholder="Qualification"
           class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
         />
@@ -83,6 +96,7 @@
       <div>
         <label for="department" class="">Department</label>
         <select
+          [(ngModel)]="signUpDTO.department"
           id="department"
           name="department"
           class="border border-gray-400 text-gray-900 text-sm focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 rounded-md bg-gray-100 px-3 mt-2 h-12"
@@ -99,6 +113,7 @@
       <div>
         <label class=""> Profile </label>
         <input
+          [(ngModel)]="signUpDTO.profile_picture"
           type="text"
           placeholder="Profile Picture"
           class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
@@ -107,6 +122,7 @@
       <div>
         <label class=""> Phone </label>
         <input
+          [(ngModel)]="signUpDTO.mobile"
           type="text"
           placeholder="+543 5445 0543"
           class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
@@ -145,6 +161,7 @@
       <div>
         <label for="gender" class="">Gender</label>
         <select
+          [(ngModel)]="signUpDTO.gender"
           id="gender"
           name="gender"
           class="border border-gray-400 text-gray-900 text-sm focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 rounded-md bg-gray-100 px-3"
@@ -155,9 +172,10 @@
           <option value="Overdue">Overdue</option>
         </select>
       </div>
-      <div *ngIf="selectedRole=='PATIENT'">
+      <div *ngIf="selectedRole == 'PATIENT'" name="qual">
         <label for="Date_of_birth">Date-Of-Birth</label>
         <input
+          [(ngModel)]="signUpDTO.dateOfBirth"
           type="date"
           id="Date_of_birth"
           name="Date_of_birth"
@@ -166,8 +184,6 @@
         />
       </div>
     </div>
-
-    
 
     <div class="checkbox">
       <input type="checkbox" id="chekcbox1" checked="" />
@@ -186,7 +202,7 @@
         class="block mt-5 w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         type="button"
       >
-        Toggle modal
+        NEXT
       </button>
     </div>
   </form>
@@ -202,24 +218,27 @@
   <div class="relative w-full max-w-2xl max-h-full">
     <div class="lg:m-10 max-w-xl">
       <form
+        (ngSubmit)="onSubmit()"
         class="relative border border-gray-100 space-y-3 max-w-screen-md mx-auto rounded-md bg-white p-6 shadow-xl lg:p-10"
       >
         <h1 class="mb-6 text-xl font-semibold lg:text-2xl">Add Address</h1>
 
         <div class="grid gap-3 md:grid-cols-2">
           <div>
-            <label class=""> Street </label>
+            <label class=""> Locality </label>
             <input
+              [(ngModel)]="signUpDTO.address.locality"
               type="text"
-              placeholder="Street"
+              placeholder="Locality"
               class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
             />
           </div>
           <div>
             <label class=""> City </label>
             <input
+              [(ngModel)]="signUpDTO.address.city"
               type="text"
-              placeholder="Last  Name"
+              placeholder="City"
               class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
             />
           </div>
@@ -228,16 +247,29 @@
           <div>
             <label class=""> State </label>
             <input
+              [(ngModel)]="signUpDTO.address.state"
               type="text"
               placeholder="Your State"
               class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
             />
           </div>
           <div>
-            <label class=""> Zip COde </label>
+            <label class=""> Zip Code </label>
             <input
+              [(ngModel)]="signUpDTO.address.zip_code"
               type="number"
               placeholder="Your Zip Code"
+              class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
+            />
+          </div>
+        </div>
+        <div class="grid gap-3 md:grid-cols-1">
+          <div>
+            <label class=""> Country </label>
+            <input
+              [(ngModel)]="signUpDTO.address.country"
+              type="text"
+              placeholder="Country"
               class="mt-2 h-12 w-full rounded-md bg-gray-100 px-3"
             />
           </div>
@@ -247,7 +279,7 @@
             class="block mt-5 w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             type="button"
           >
-            Submit
+            REGISTER
           </button>
         </div>
       </form>
