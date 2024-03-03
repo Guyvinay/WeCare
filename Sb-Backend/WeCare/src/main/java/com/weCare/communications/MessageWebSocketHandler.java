@@ -38,7 +38,7 @@ public class MessageWebSocketHandler extends TextWebSocketHandler {
 	@Autowired
 	private MessageRepository messageRepository;
 
-	private static final Map<String, Map<String, WebSocketSession>> appointmentSessions = new HashMap<>();
+	public static final Map<String, Map<String, WebSocketSession>> appointmentSessions = new HashMap<>();
 
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
