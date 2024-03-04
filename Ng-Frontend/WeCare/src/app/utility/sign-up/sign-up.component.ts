@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { PatientDTO } from '../../interfaces/patient';
+import { Patient, PatientDTO } from '../../interfaces/patient';
 import { DoctorDTO, SignUpDTO } from '../../interfaces/doctor';
+import { PatientService } from '../../services/patient.service';
+import { DoctorService } from '../../services/doctor.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -16,6 +18,13 @@ export class SignUpComponent implements OnInit {
   ngOnInit(): void {
   }
   
+
+
+  constructor(
+    private patientService : PatientService,
+    private doctorService : DoctorService
+  ){}
+
   selectedRole:string='';
 
 /*
@@ -86,7 +95,7 @@ export class SignUpComponent implements OnInit {
   }
   onSubmit() :void {
     if(this.selectedRole=='DOCTOR'){
-      
+
       let doctorDTO:DoctorDTO={
         email: this.signUpDTO.email,
         passWord: this.signUpDTO.passWord,
@@ -128,6 +137,20 @@ export class SignUpComponent implements OnInit {
               country: this.signUpDTO.address.country
         }
       }
+
+
+      this.patientService.getAllPatients()
+                          .subscribe({
+                            next : (patient)=>{
+                              console.log(patient)
+                            },
+                            error :(err:any)=> {
+                                console.log(err)
+                            },
+                            complete:()=>{
+                              console.log("Completed")
+                            }
+                          })
 
       console.log(patientDTO);
     }
