@@ -14,11 +14,11 @@ import { DoctorDTO, SignUpDTO } from '../../interfaces/doctor';
 export class SignUpComponent implements OnInit {
 
   ngOnInit(): void {
-    console.log("HII");
   }
   
-
   selectedRole:string='';
+
+/*
   patientDTO:PatientDTO={
     email: '',
     passWord: '',
@@ -57,6 +57,8 @@ export class SignUpComponent implements OnInit {
     },
   }
 
+  */
+
   signUpDTO:SignUpDTO={
     email: '',
     passWord: '',
@@ -80,12 +82,54 @@ export class SignUpComponent implements OnInit {
   }
 
   onRoleChange(){
-
+    this.signUpDTO.role = this.selectedRole;
   }
+  onSubmit() :void {
+    if(this.selectedRole=='DOCTOR'){
+      
+      let doctorDTO:DoctorDTO={
+        email: this.signUpDTO.email,
+        passWord: this.signUpDTO.passWord,
+        profile_picture: this.signUpDTO.profile_picture,
+        role: this.signUpDTO.role,
+        name: this.signUpDTO.firstName+" "+this.signUpDTO.lastName,
+        department: this.signUpDTO.department,
+        gender: this.signUpDTO.gender,
+        mobile: this.signUpDTO.mobile,
+        qualification: this.signUpDTO.qualification,
+        availability: "AVAILABLE",
+        address: {
+          locality: this.signUpDTO.address.locality,
+              city: this.signUpDTO.address.city,
+              zip_code: this.signUpDTO.address.zip_code,
+              state: this.signUpDTO.address.state,
+              country: this.signUpDTO.address.country
+        },
+      }
+      console.log(doctorDTO)
 
-  onSubmit() {
-    console.log("HII");
+    }
+    else if(this.selectedRole=='PATIENT'){
+
+      let patientDTO:PatientDTO={
+        email: this.signUpDTO.email,
+        passWord: this.signUpDTO.passWord,
+        profile_picture: this.signUpDTO.profile_picture,
+        role: this.signUpDTO.role,
+        name: this.signUpDTO.firstName+" "+this.signUpDTO.lastName,
+        gender: this.signUpDTO.gender,
+        dateOfBirth: this.signUpDTO.dateOfBirth,
+        mobile: this.signUpDTO.mobile,
+        address:{
+              locality: this.signUpDTO.address.locality,
+              city: this.signUpDTO.address.city,
+              zip_code: this.signUpDTO.address.zip_code,
+              state: this.signUpDTO.address.state,
+              country: this.signUpDTO.address.country
+        }
+      }
+
+      console.log(patientDTO);
+    }
   }
-
-
 }
