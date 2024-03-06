@@ -106,11 +106,11 @@ public class Doctor extends Profile {
 //	@JsonBackReference
 	private Hospital hospital;
 	
+	/*
 	@JsonIgnore
 	@OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
     private List<Slot> slots = new ArrayList<>();
 	
-	/*
 	@ManyToMany()
 	@JoinTable(
 			name = "doctor_slots",

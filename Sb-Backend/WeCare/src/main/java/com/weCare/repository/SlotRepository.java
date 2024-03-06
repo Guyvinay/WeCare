@@ -14,10 +14,8 @@ public interface SlotRepository extends JpaRepository<Slot, String> {
 	@Query("SELECT COUNT(s) FROM Slot s " +
 	           "WHERE s.slotDate = :slotDate " +
 	           "AND s.slotPeriod = :slotPeriod " +
-	           "AND s.slotStatus = 'OPEN'"+
-	           "AND s.doctor.profile_id = :doctorId")
+	           "AND s.slotStatus = 'BOOKED' " )
 	    int countSlotsForDoctor(@Param("slotDate") LocalDate slotDate,
-	                            @Param("slotPeriod") SlotPeriod slotPeriod,
-	                            @Param("doctorId") String doctorId);
+	                            @Param("slotPeriod") SlotPeriod slotPeriod);
 	
 }

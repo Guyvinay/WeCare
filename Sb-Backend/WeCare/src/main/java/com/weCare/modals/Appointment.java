@@ -55,13 +55,13 @@ public class Appointment {
 
 	@ManyToOne
 	@JoinColumn(name = "doctor_id")
-	@JsonIgnore
+//	@JsonIgnore
 	@ToString.Exclude
 	private Doctor doctor;
 
 	@ManyToOne
 	@JoinColumn(name = "patient_id")
-	@JsonIgnore
+//	@JsonIgnore
 	@ToString.Exclude
 	private Patient patient;
 
@@ -79,9 +79,8 @@ public class Appointment {
 	@Transient
 	private SlotPeriod slotPeriod;
 	
-	@JsonIgnore
-	@OneToOne
-    @JoinColumn(name = "slot_id")
+//	@JsonIgnore
+	@OneToOne(mappedBy = "appointment")
     private Slot slot;
 	
 	@OneToMany(mappedBy = "appointment")

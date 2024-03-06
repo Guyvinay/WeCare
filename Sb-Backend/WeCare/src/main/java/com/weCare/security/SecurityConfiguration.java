@@ -49,7 +49,7 @@ public class SecurityConfiguration {
 				.authorizeHttpRequests(auth -> {
 					auth
 					.requestMatchers("/swagger-ui*/**", "/v3/api-docs/**").permitAll()
-					.requestMatchers( HttpMethod.POST,"/doctors*/**" , "/patients*/**").permitAll()
+					.requestMatchers( "/doctors*/**" , "/patients*/**").permitAll()
 					.requestMatchers("/login/custom").permitAll()
 					.requestMatchers("/chat/**").permitAll()
 					.anyRequest()

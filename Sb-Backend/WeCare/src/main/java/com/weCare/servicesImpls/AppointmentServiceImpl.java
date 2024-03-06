@@ -2,7 +2,6 @@ package com.weCare.servicesImpls;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -72,10 +71,11 @@ public class AppointmentServiceImpl implements AppointmentService {
 				.get(new Random().nextInt(doctors_with_same_department.size()));
 
 		/*
+		
 		LocalDate appointment_date = appointment.getAppointment_date();
 //		System.out.println(appointment_date);
 		
-		int slotsForDoctor = slotRepository.countSlotsForDoctor(appointment_date, appointment.getSlotPeriod(), random_doctor.getProfile_id());
+		int slotsForDoctor = slotRepository.countSlotsForDoctor(appointment_date, appointment.getSlotPeriod());
 		System.out.println(slotsForDoctor);
 		
 		if(slotsForDoctor!=0)
@@ -85,13 +85,13 @@ public class AppointmentServiceImpl implements AppointmentService {
 		
 		slot.setSlotStatus(SlotStatus.BOOKED);
 		slot.setSlotPeriod(appointment.getSlotPeriod());
-		slot.setDoctor(random_doctor);
 		slot.setSlotDate(appointment_date);
-		slot.setAppointment(appointment);
+//		slot.setAppointment(appointment);
 		
 		Slot saved_slot = slotRepository.save(slot);
-		
-		 */
+		System.out.println(saved_slot);
+		*/
+		 
 		patient.getDoctors().add(random_doctor);
 		patient.getAppointments().add(appointment);
 
@@ -159,9 +159,14 @@ public class AppointmentServiceImpl implements AppointmentService {
 		hospital.getAppointments().add(appointment);
 		hospital.getPatients().add(patient);
 
+		// Set appointment date to today if not provided
+		if (appointment.getAppointment_date() == null)
+			    appointment.setAppointment_date(LocalDate.now());
+		
 		// Persisting Appointment details
 		appointment.setPatient(patient);
 		appointment.setBooking_time(LocalDateTime.now());
+//		appointment.setAppointment_date(LocalDate.now());
 		appointment.setStatus(AppointmentStatus.APPOINTMENT_BOOKED);
 		appointment.setDoctor(doctor);
 		appointment.setHospital(hospital);

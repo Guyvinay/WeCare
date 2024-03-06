@@ -2,6 +2,8 @@ package com.weCare;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -28,6 +30,13 @@ import io.swagger.v3.oas.annotations.servers.Server;
 })
 public class WeCareApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(WeCareApplication.class, args);
+		ApplicationContext applicationContext = SpringApplication.run(WeCareApplication.class, args);
+		
+		/*
+		String[] beansNames = applicationContext.getBeanDefinitionNames();
+		for(String bean:beansNames) {
+			System.out.println(bean);
+		}
+		*/
 	}
 }

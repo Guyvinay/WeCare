@@ -19,10 +19,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Getter
 @Setter
 @Table(name = "slots")
@@ -44,14 +46,10 @@ public class Slot {
 	
 	@Enumerated(EnumType.STRING)
 	private SlotStatus slotStatus;
-	
+
 	@JsonIgnore
-	@ManyToOne
-    @JoinColumn(name = "doctor_id")
-    private Doctor doctor;
-	
-	@JsonIgnore
-    @OneToOne(mappedBy = "slot")
+    @OneToOne
+    @JoinColumn(name = "appointment_id")
     private Appointment appointment;
 	
 	/*
