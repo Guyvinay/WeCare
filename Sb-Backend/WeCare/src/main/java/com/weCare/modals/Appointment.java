@@ -42,6 +42,10 @@ public class Appointment {
 	private LocalDateTime booking_time;
 
 	private LocalDate appointment_date;
+	
+	private String appointmentStarts;
+	
+	private String appointmentEnds;
 
 	@Column(nullable = false)
 	@NotNull(message = "Department cannot be blank!!!")
@@ -53,6 +57,12 @@ public class Appointment {
 
 	@Enumerated(EnumType.STRING)
 	private AppointmentStatus status;
+	
+//	@Transient
+	@Column(nullable = false)
+	@NotNull(message = "Slot Cannot be Null!!!")
+	@Enumerated(EnumType.STRING)
+	private SlotPeriod slot;
 
 	@ManyToOne
 	@JoinColumn(name = "doctor_id")
@@ -76,12 +86,6 @@ public class Appointment {
 	@JsonIgnore
 	@ToString.Exclude
 	private Hospital hospital;
-	
-//	@Transient
-	@Column(nullable = false)
-	@NotNull(message = "Slot Cannot be Null!!!")
-	@Enumerated(EnumType.STRING)
-	private SlotPeriod slot;
 	
 //	@JsonIgnore
 //	@OneToOne(mappedBy = "appointment")

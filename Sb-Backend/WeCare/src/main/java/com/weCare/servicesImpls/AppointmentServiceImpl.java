@@ -2,6 +2,7 @@ package com.weCare.servicesImpls;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -18,6 +19,7 @@ import com.weCare.modals.Department;
 import com.weCare.modals.Doctor;
 import com.weCare.modals.Hospital;
 import com.weCare.modals.Patient;
+import com.weCare.modals.SlotPeriod;
 import com.weCare.repository.AppointmentRepository;
 import com.weCare.repository.DoctorRepository;
 import com.weCare.repository.HospitalRepository;
@@ -67,28 +69,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 		Doctor random_doctor = doctors_with_same_department
 				.get(new Random().nextInt(doctors_with_same_department.size()));
-
-		/*
 		
-		LocalDate appointment_date = appointment.getAppointment_date();
-//		System.out.println(appointment_date);
-		
-		int slotsForDoctor = slotRepository.countSlotsForDoctor(appointment_date, appointment.getSlotPeriod());
-		System.out.println(slotsForDoctor);
-		
-		if(slotsForDoctor!=0)
-			throw new NotFoundException(appointment.getSlotPeriod()+", is Booked on "+appointment_date);
-		
-		Slot slot = new Slot();
-		
-		slot.setSlotStatus(SlotStatus.BOOKED);
-		slot.setSlotPeriod(appointment.getSlotPeriod());
-		slot.setSlotDate(appointment_date);
-//		slot.setAppointment(appointment);
-		
-		Slot saved_slot = slotRepository.save(slot);
-		System.out.println(saved_slot);
-		*/
 		
 		List<Appointment> appointmentOptional = appointmentRepository.findAppointmentByDateAndSlot(random_doctor.getProfile_id(), appointment.getSlot(), appointment.getAppointment_date());
 		
@@ -96,6 +77,9 @@ public class AppointmentServiceImpl implements AppointmentService {
 		if(!appointmentOptional.isEmpty())
 			throw new AppointmentNotFoundException(appointment.getSlot()+", Already Booked on "+appointment.getAppointment_date()+", try different slot or date");
 		 
+		
+		String[] slotPeriod = appointment.getSlot().getSlotRange().split("-");
+		
 		patient.getDoctors().add(random_doctor);
 		patient.getAppointments().add(appointment);
 
@@ -107,7 +91,8 @@ public class AppointmentServiceImpl implements AppointmentService {
 		hospital.getPatients().add(patient);
 
 		
-//		appointment.setSlot(saved_slot);
+		appointment.setAppointmentStarts(slotPeriod[0]);
+		appointment.setAppointmentEnds(slotPeriod[1]);
 		appointment.setPatient(patient);
 		appointment.setDoctor(random_doctor);
 		appointment.setBooking_time(LocalDateTime.now());
@@ -151,12 +136,18 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 		}
 		
+
 			List<Appointment> appointmentOptional = appointmentRepository.findAppointmentByDateAndSlot(doctor_id, appointment.getSlot(), appointment.getAppointment_date());
 					
-					System.out.println(appointmentOptional);
+//					System.out.println(appointmentOptional);
+			
 					if(!appointmentOptional.isEmpty())
 						throw new AppointmentNotFoundException(appointment.getSlot()+", Already Booked on "+appointment.getAppointment_date()+", try different slot or date");
 
+					
+		String[] slotPeriod = appointment.getSlot().getSlotRange().split("-");
+		
+		
 		// Persisting Patient details
 		patient.getDoctors().add(doctor);
 		patient.getAppointments().add(appointment);
@@ -174,6 +165,8 @@ public class AppointmentServiceImpl implements AppointmentService {
 			    appointment.setAppointment_date(LocalDate.now());
 		
 		// Persisting Appointment details
+		appointment.setAppointmentStarts(slotPeriod[0]);
+		appointment.setAppointmentEnds(slotPeriod[1]);
 		appointment.setPatient(patient);
 		appointment.setBooking_time(LocalDateTime.now());
 //		appointment.setAppointment_date(LocalDate.now());
