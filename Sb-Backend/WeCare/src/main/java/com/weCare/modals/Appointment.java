@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -18,7 +19,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -43,6 +43,7 @@ public class Appointment {
 
 	private LocalDate appointment_date;
 
+	@Column(nullable = false)
 	@NotNull(message = "Department cannot be blank!!!")
 	@Enumerated(EnumType.STRING)
 	private Department department;
@@ -55,13 +56,13 @@ public class Appointment {
 
 	@ManyToOne
 	@JoinColumn(name = "doctor_id")
-//	@JsonIgnore
+	@JsonIgnore
 	@ToString.Exclude
 	private Doctor doctor;
 
 	@ManyToOne
 	@JoinColumn(name = "patient_id")
-//	@JsonIgnore
+	@JsonIgnore
 	@ToString.Exclude
 	private Patient patient;
 
@@ -76,12 +77,15 @@ public class Appointment {
 	@ToString.Exclude
 	private Hospital hospital;
 	
-	@Transient
-	private SlotPeriod slotPeriod;
+//	@Transient
+	@Column(nullable = false)
+	@NotNull(message = "Slot Cannot be Null!!!")
+	@Enumerated(EnumType.STRING)
+	private SlotPeriod slot;
 	
 //	@JsonIgnore
-	@OneToOne(mappedBy = "appointment")
-    private Slot slot;
+//	@OneToOne(mappedBy = "appointment")
+//    private Slot slot;
 	
 	@OneToMany(mappedBy = "appointment")
 	@JsonIgnore

@@ -3,6 +3,7 @@ package com.weCare.servicesImpls;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +18,10 @@ import com.weCare.modals.Department;
 import com.weCare.modals.Doctor;
 import com.weCare.modals.Hospital;
 import com.weCare.modals.Patient;
-import com.weCare.modals.Slot;
-import com.weCare.modals.SlotStatus;
 import com.weCare.repository.AppointmentRepository;
 import com.weCare.repository.DoctorRepository;
 import com.weCare.repository.HospitalRepository;
 import com.weCare.repository.PatientRepository;
-import com.weCare.repository.SlotRepository;
 import com.weCare.services.AppointmentService;
 
 @Service
@@ -41,8 +39,8 @@ public class AppointmentServiceImpl implements AppointmentService {
 	@Autowired
 	private AppointmentRepository appointmentRepository;
 	
-	@Autowired
-	private SlotRepository slotRepository;
+//	@Autowired
+//	private SlotRepository slotRepository;
 
 	@Override
 	public Appointment bookAppointment(Appointment appointment, String hospital_id, String patient_id) {
@@ -91,6 +89,12 @@ public class AppointmentServiceImpl implements AppointmentService {
 		Slot saved_slot = slotRepository.save(slot);
 		System.out.println(saved_slot);
 		*/
+		
+		List<Appointment> appointmentOptional = appointmentRepository.findAppointmentByDateAndSlot(random_doctor.getProfile_id(), appointment.getSlot(), appointment.getAppointment_date());
+		
+//		System.out.println(appointmentOptional);
+		if(!appointmentOptional.isEmpty())
+			throw new AppointmentNotFoundException(appointment.getSlot()+", Already Booked on "+appointment.getAppointment_date()+", try different slot or date");
 		 
 		patient.getDoctors().add(random_doctor);
 		patient.getAppointments().add(appointment);
@@ -146,6 +150,12 @@ public class AppointmentServiceImpl implements AppointmentService {
 					+ doctor_depart + ". Perhaps, You can choose any of these, " + doctors_available);
 
 		}
+		
+			List<Appointment> appointmentOptional = appointmentRepository.findAppointmentByDateAndSlot(doctor_id, appointment.getSlot(), appointment.getAppointment_date());
+					
+					System.out.println(appointmentOptional);
+					if(!appointmentOptional.isEmpty())
+						throw new AppointmentNotFoundException(appointment.getSlot()+", Already Booked on "+appointment.getAppointment_date()+", try different slot or date");
 
 		// Persisting Patient details
 		patient.getDoctors().add(doctor);
