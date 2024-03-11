@@ -58,7 +58,7 @@ public class MessageWebSocketHandler extends TextWebSocketHandler {
 		Message chat_message = new Message();
 
 		Appointment appointment = appointmentRepository.findById(appointmentId)
-				.orElseThrow(() -> new NotFoundException("Doctor with id: " + appointmentId + ", not found!!!"));
+				.orElseThrow(() -> new NotFoundException("Appointment with id: " + appointmentId + ", not found!!!"));
 
 		String message_payload = message.getPayload();
 		ObjectMapper objectMapper = new ObjectMapper();

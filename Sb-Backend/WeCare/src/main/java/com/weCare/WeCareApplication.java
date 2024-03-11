@@ -30,7 +30,8 @@ import io.swagger.v3.oas.annotations.servers.Server;
 })
 public class WeCareApplication {
 	public static void main(String[] args) {
-		ApplicationContext applicationContext = SpringApplication.run(WeCareApplication.class, args);
+		SpringApplication.run(WeCareApplication.class, args);
+//		ApplicationContext applicationContext = SpringApplication.run(WeCareApplication.class, args);
 		
 		/*
 		String[] beansNames = applicationContext.getBeanDefinitionNames();
