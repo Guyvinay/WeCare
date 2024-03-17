@@ -1,6 +1,5 @@
+{
 
- {
-   
    "medications":[
        
             {
@@ -132,8 +131,7 @@
                 "expirationDate": "2025-11-30"
             }
     ],
-    
-    
+
     "hospitals":[
         {
             "hospital_name": "Mount Sinai Hospital",
@@ -196,7 +194,6 @@
             }
         }
     ],
-
 
     "doctors":[
         {
@@ -409,7 +406,6 @@
             }
         }
     ],
-
 
     "patients":[
         {
@@ -634,4 +630,4 @@
             }
         }
     ]
- }
+}

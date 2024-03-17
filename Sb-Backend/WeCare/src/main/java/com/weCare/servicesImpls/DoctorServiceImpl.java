@@ -149,4 +149,12 @@ public class DoctorServiceImpl implements DoctorService {
 		return "Doctor with id: " + doctor_id + ", deleted successfully";
 	}
 
+	
+	 @Override 
+	 public List<Doctor> getDoctorByHospitalId(String hospital_id) {
+	 List<Doctor> doctors = doctorRepository.findDoctorByHospitalId(hospital_id);
+	 if (doctors.isEmpty()) throw new NotFoundException("No Doctors Found!!!");
+	 return doctors; }
+	 
+
 }

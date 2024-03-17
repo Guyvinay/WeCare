@@ -19,6 +19,8 @@ public interface DoctorService {
 	public List<Doctor> getDoctorByDepartmentPattern(String doctor_department);
 
 	public List<Doctor> getDoctorByNamePattern(String doctor_name);
+	
+	public List<Doctor> getDoctorByHospitalId(String doctor_name);
 
 	public List<Doctor> getAllDoctors();
 

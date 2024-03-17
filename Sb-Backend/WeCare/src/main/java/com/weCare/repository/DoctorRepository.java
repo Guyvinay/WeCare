@@ -22,5 +22,7 @@ public interface DoctorRepository extends JpaRepository<Doctor, String> {
 
 	@Query("SELECT d FROM Doctor d  WHERE LOWER(d.name) LIKE LOWER(CONCAT('%',:name,'%'))")
 	public List<Doctor> findByNamePattern(@Param("name") String name);
-
+	
+	@Query("SELECT d FROM Doctor d WHERE d.hospital.hospital_id=:hospital_id")
+	public List<Doctor> findDoctorByHospitalId(@Param("hospital_id")String hospital_id);
 }
