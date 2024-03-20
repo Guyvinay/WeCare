@@ -6,6 +6,7 @@ import { DoctorDTO, SignUpDTO } from '../../interfaces/doctor';
 import { PatientService } from '../../services/patient.service';
 import { DoctorService } from '../../services/doctor.service';
 import { AppComponent } from '../../app.component';
+import { partition } from 'rxjs';
 
 @Component({
   selector: 'app-sign-up',
@@ -17,10 +18,8 @@ import { AppComponent } from '../../app.component';
 export class SignUpComponent implements OnInit {
 
   ngOnInit(): void {
+
   }
-  
-
-
   constructor(
     private patientService : PatientService,
     private doctorService : DoctorService,
@@ -28,47 +27,6 @@ export class SignUpComponent implements OnInit {
   ){}
 
   selectedRole:string='';
-
-/*
-  patientDTO:PatientDTO={
-    email: '',
-    passWord: '',
-    profile_picture: '',
-    role: '',
-    name: '',
-    gender: '',
-    dateOfBirth: '',
-    mobile: '',
-    address:{
-          locality: '',
-          city: '',
-          zip_code: 0,
-          state: '',
-          country: ''
-    }
-  }
-
-  doctorDTO:DoctorDTO={
-    email: '',
-    passWord: '',
-    profile_picture: '',
-    role: '',
-    name: '',
-    department: '',
-    gender: '',
-    mobile: '',
-    qualification: '',
-    availability: '',
-    address: {
-      locality: '',
-      city: '',
-      zip_code: 0,
-      state: '',
-      country: ''
-    },
-  }
-
-  */
 
   signUpDTO:SignUpDTO={
     email: '',
@@ -95,7 +53,9 @@ export class SignUpComponent implements OnInit {
   onRoleChange(){
     this.signUpDTO.role = this.selectedRole;
   }
+
   onSubmit() :void {
+    
     this.appComponent.bubbleLoadsTrue();
 
     if(this.selectedRole=='DOCTOR'){
@@ -119,6 +79,7 @@ export class SignUpComponent implements OnInit {
               country: this.signUpDTO.address.country
         },
       }
+      console.log(doctorDTO);
 
     }
     else if(this.selectedRole=='PATIENT'){
@@ -140,41 +101,42 @@ export class SignUpComponent implements OnInit {
               country: this.signUpDTO.address.country
         }
       }
+      console.log(patientDTO);
       
-      this.patientService.registerPatient(patientDTO)
-                          .subscribe({
-                            next:(patient:Patient)=>{
-                              console.log(patient);
-                                this.signUpDTO={
-                                  email: '',
-                                  passWord: '',
-                                  profile_picture: '',
-                                  role: '',
-                                  firstName: '',
-                                  lastName: '',
-                                  department: '',
-                                  gender: '',
-                                  mobile: '',
-                                  qualification: '',
-                                  availability: '',
-                                  dateOfBirth: '',
-                                  address: {
-                                    locality: '',
-                                    city: '',
-                                    zip_code: 0,
-                                    state: '',
-                                    country: ''
-                                  },
-                                }
-                            },
-                            error:(error:any)=>{
-                              console.log(error);
-                              this.appComponent.bubbleLoadsFalse()
-                            },
-                            complete:()=>{
-                              this.appComponent.bubbleLoadsFalse()
-                            }
-                          })
+      // this.patientService.registerPatient(patientDTO)
+      //                     .subscribe({
+      //                       next:(patient:Patient)=>{
+      //                         console.log(patient);
+      //                           this.signUpDTO={
+      //                             email: '',
+      //                             passWord: '',
+      //                             profile_picture: '',
+      //                             role: '',
+      //                             firstName: '',
+      //                             lastName: '',
+      //                             department: '',
+      //                             gender: '',
+      //                             mobile: '',
+      //                             qualification: '',
+      //                             availability: '',
+      //                             dateOfBirth: '',
+      //                             address: {
+      //                               locality: '',
+      //                               city: '',
+      //                               zip_code: 0,
+      //                               state: '',
+      //                               country: ''
+      //                             },
+      //                           }
+      //                       },
+      //                       error:(error:any)=>{
+      //                         console.log(error);
+      //                         this.appComponent.bubbleLoadsFalse()
+      //                       },
+      //                       complete:()=>{
+      //                         this.appComponent.bubbleLoadsFalse()
+      //                       }
+      //                     })
 
       // this.patientService.getAllPatients()
       //                     .subscribe({

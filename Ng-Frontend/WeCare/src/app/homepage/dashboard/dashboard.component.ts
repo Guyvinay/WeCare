@@ -24,9 +24,12 @@ export class DashboardComponent implements OnInit {
       { iconUrl: '..//..//../assets/department-icons/dermatology.svg', name: 'Dermatology', doctorsUrl:"" },
       { iconUrl: '..//..//../assets/department-icons/ent.svg', name: 'ENT', doctorsUrl:"" },
       { iconUrl: '..//..//../assets/department-icons/psychiatry.svg', name: 'Psychiatry', doctorsUrl:"" },
-      { iconUrl: '..//..//../assets/department-icons/paediatricurology.svg', name: 'Paediatrics', doctorsUrl:"" }
-      
-      // Add 9 more departments here...
+      { iconUrl: '..//..//../assets/department-icons/paediatricurology.svg', name: 'Paediatrics', doctorsUrl:"" },
+      { iconUrl: '..//..//../assets/department-icons/cardiology_icon.svg', name: 'Cardiology', doctorsUrl:"" },
+      { iconUrl: '..//..//../assets/department-icons/neurology.svg', name: 'Neurology', doctorsUrl:"" },
+      { iconUrl: '..//..//../assets/department-icons/dentistry.svg', name: 'Dentistry', doctorsUrl:"" },
+      { iconUrl: '..//..//../assets/department-icons/dermatology.svg', name: 'Dermatology', doctorsUrl:"" },
+      { iconUrl: '..//..//../assets/department-icons/ent.svg', name: 'ENT', doctorsUrl:"" }
     ];
   }
 
