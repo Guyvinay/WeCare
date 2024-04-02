@@ -2,6 +2,7 @@ package com.weCare.controllers;
 
 import java.util.List;
 
+import com.weCare.modals.Appointment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +35,12 @@ public class DoctorController {
 	@PostMapping()
 	public ResponseEntity<Doctor> saveDoctor(@Valid @RequestBody Doctor doctor) {
 		return new ResponseEntity<Doctor>(doctorService.saveDoctor(doctor), HttpStatus.ACCEPTED);
+	}
+
+	@GetMapping(value = "/appointments/{doctor_id}")
+	public ResponseEntity<List<Appointment>> getAllAppointments(
+			@PathVariable("doctor_id")String doctor_id){
+		return new ResponseEntity<>(doctorService.getBookedAppointment(doctor_id), HttpStatus.ACCEPTED);
 	}
 
 	@PostMapping(value = "/save_all_doctors/{hospital_id}")

@@ -2,6 +2,7 @@ package com.weCare.servicesImpls;
 
 import java.util.List;
 
+import com.weCare.modals.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -9,10 +10,6 @@ import org.springframework.stereotype.Service;
 import com.weCare.exceptions.DoctorNotFoundException;
 import com.weCare.exceptions.HospitalNotFoundException;
 import com.weCare.exceptions.NotFoundException;
-import com.weCare.modals.Address;
-import com.weCare.modals.Availability;
-import com.weCare.modals.Doctor;
-import com.weCare.modals.Hospital;
 import com.weCare.repository.AddressRepository;
 import com.weCare.repository.DoctorRepository;
 import com.weCare.repository.HospitalRepository;
@@ -102,6 +99,18 @@ public class DoctorServiceImpl implements DoctorService {
 		if (doctorList.isEmpty())
 			throw new DoctorNotFoundException("Doctors '" + doctor_name + "', not found!!!");
 		return doctorList;
+	}
+
+	@Override
+	public List<Appointment> getBookedAppointment(String doctor_id) {
+		Doctor doctor =  doctorRepository.findById(doctor_id)
+							.orElseThrow(() ->
+									new NotFoundException("Doctor with id: " + doctor_id + ", not found!!!")
+							);
+		if(doctor.getAppointments().isEmpty())
+			throw new NotFoundException("No appointments found!!!");
+
+		return doctor.getAppointments();
 	}
 
 	@Override

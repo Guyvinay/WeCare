@@ -2,6 +2,7 @@ package com.weCare.services;
 
 import java.util.List;
 
+import com.weCare.modals.Appointment;
 import com.weCare.modals.Doctor;
 
 public interface DoctorService {
@@ -19,7 +20,9 @@ public interface DoctorService {
 	public List<Doctor> getDoctorByDepartmentPattern(String doctor_department);
 
 	public List<Doctor> getDoctorByNamePattern(String doctor_name);
-	
+
+	public List<Appointment> getBookedAppointment(String doctor_id);
+
 	public List<Doctor> getDoctorByHospitalId(String doctor_name);
 
 	public List<Doctor> getAllDoctors();
