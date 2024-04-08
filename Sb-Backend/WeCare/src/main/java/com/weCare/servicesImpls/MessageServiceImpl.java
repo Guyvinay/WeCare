@@ -13,6 +13,7 @@ import com.weCare.exceptions.MessageNotFoundException;
 import com.weCare.modals.Message;
 import com.weCare.repository.MessageRepository;
 import com.weCare.services.MessageService;
+import org.springframework.util.CollectionUtils;
 
 @Service
 public class MessageServiceImpl implements MessageService {
@@ -47,8 +48,10 @@ public class MessageServiceImpl implements MessageService {
 
 	@Override
 	public List<Message> getAllMessagesByAppointmentId(String appointment_id) {
-
-		return null;
+		List<Message> messages =  messageRepository.findMessagesByAppointmentId(appointment_id);
+		if(CollectionUtils.isEmpty(messages))
+			throw new MessageNotFoundException("Messages not found for "+appointment_id);
+		return messages;
 	}
 
 	@Override

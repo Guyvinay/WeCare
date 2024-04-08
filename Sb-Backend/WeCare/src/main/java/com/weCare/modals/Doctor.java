@@ -54,8 +54,6 @@ public class Doctor extends Profile {
 	@NotNull(message = "Availability cannot be null!!!")
 	@Enumerated(EnumType.STRING)
 	private Availability availability;
-	
-	
 
 	public Doctor(String email, String passWord, String profile_picture, Role role,
 			@NotBlank(message = "Doctor name cannot be blank!!!") String name,
