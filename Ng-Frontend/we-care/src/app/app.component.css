@@ -2,3 +2,17 @@ mat-toolbar {
     display: flex;
     justify-content: space-between;
 }
+.wecare{
+    text-decoration: none;
+    color: aqua;
+}
+.nav-tool-items a{
+    margin: 4px;
+}
+.nav-tool-items a:nth-child(1):hover{
+    background-color: rgb(39, 37, 37);
+    
+}
+.nav-tool-items a:nth-child(2):hover{
+    background-color: rgb(221, 78, 102);
+}
