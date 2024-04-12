@@ -39,14 +39,14 @@ public class AppointmentController {
     }
     
     @PostMapping(value = "/{hospital_id}/{patient_id}/{doctor_id}")
-    public ResponseEntity<Appointment> bookAppointmentWithDoctor(
+    public ResponseEntity<AppointmentResponseDTO> bookAppointmentWithDoctor(
                                 @PathVariable("patient_id")String patient_id,
                                 @PathVariable("doctor_id")String doctor_id,
                                 @PathVariable("hospital_id")String hospital_id,
                                 @RequestBody Appointment appointment
                                         ){
 
-        return new ResponseEntity<Appointment>(
+        return new ResponseEntity<AppointmentResponseDTO>(
                 appointmentService.bookAppointmentWithDoctor(appointment, hospital_id, patient_id,doctor_id),
                 HttpStatus.ACCEPTED
         );

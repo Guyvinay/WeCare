@@ -144,7 +144,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 	}
 
 	@Override
-	public Appointment bookAppointmentWithDoctor(Appointment appointment, String hospital_id, String patient_id,
+	public AppointmentResponseDTO bookAppointmentWithDoctor(Appointment appointment, String hospital_id, String patient_id,
 			String doctor_id) {
 
 		Hospital hospital = hospitalRepository.findById(hospital_id)
@@ -152,12 +152,21 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 		Patient patient = patientRepository.findById(patient_id)
 				.orElseThrow(() -> new NotFoundException("Patient with id: " + patient_id + ", not found!!!"));
+
 		Doctor doctor = doctorRepository.findById(doctor_id)
 				.orElseThrow(() -> new NotFoundException("Doctor with id: " + doctor_id + ", not found!!!"));
 
 		Department appointment_depart = appointment.getDepartment();
 		Department doctor_depart = doctor.getDepartment();
 
+		// Set appointment date to today if not provided
+		if (appointment.getAppointment_date() == null)
+			appointment.setAppointment_date(LocalDate.now());
+
+		/*
+		   If appointment department differs or doctor not available the
+		   to show available doctors
+		 */
 		if (!doctor_depart.equals(appointment_depart) || doctor.getAvailability() != Availability.AVAILABLE) {
 
 			List<Doctor> doctors_with_same_department = doctorRepository
@@ -176,11 +185,11 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 		}
 
-			List<Appointment> appointmentOptional = appointmentRepository.findAppointmentByDateAndSlot(doctor_id, appointment.getSlot(), appointment.getAppointment_date());
-					
-//					System.out.println(appointmentOptional);
-					if(!appointmentOptional.isEmpty())
-						throw new AppointmentNotFoundException(appointment.getSlot()+", Already Booked on "+appointment.getAppointment_date()+", try different slot or date");
+		List<Appointment> appointmentOptional = appointmentRepository.findAppointmentByDateAndSlot(doctor_id, appointment.getSlot(), appointment.getAppointment_date());
+
+				// System.out.println(appointmentOptional);
+		if(!appointmentOptional.isEmpty())
+			throw new AppointmentNotFoundException(appointment.getSlot()+", Already Booked on "+appointment.getAppointment_date()+", try different slot or date");
 
 		String[] slotPeriod = appointment.getSlot().getSlotRange().split("-");
 
@@ -196,9 +205,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 		hospital.getAppointments().add(appointment);
 		hospital.getPatients().add(patient);
 
-		// Set appointment date to today if not provided
-		if (appointment.getAppointment_date() == null)
-			    appointment.setAppointment_date(LocalDate.now());
+
 		
 		// Persisting Appointment details
 		appointment.setAppointmentStarts(slotPeriod[0]);
@@ -209,11 +216,15 @@ public class AppointmentServiceImpl implements AppointmentService {
 		appointment.setStatus(AppointmentStatus.APPOINTMENT_BOOKED);
 		appointment.setDoctor(doctor);
 		appointment.setHospital(hospital);
-		
-//		return appointment;
-		return appointmentRepository.save(appointment);
 
+		Appointment bookedAppointment =  appointmentRepository.save(appointment);
+
+//		return appointment;
+// 		return appointmentRepository.save(appointment);
+// 		return new AppointmentResponseDTO();
+		return makeAppointmentResponseDTO(bookedAppointment);
 	}
+
 
 	@Override
 	public AppointmentResponseDTO getAppointmentById(String appointment_id) {
