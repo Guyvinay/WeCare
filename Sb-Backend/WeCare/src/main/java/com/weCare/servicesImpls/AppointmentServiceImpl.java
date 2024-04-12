@@ -2,11 +2,17 @@ package com.weCare.servicesImpls;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Collectors;
 
+import com.weCare.dto.AppointmentResponseDTO;
+import com.weCare.dto.DoctorDTO;
+import com.weCare.dto.HospitalDTO;
+import com.weCare.dto.PatientDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +51,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 //	private SlotRepository slotRepository;
 
 	@Override
-	public Appointment bookAppointment(Appointment appointment, String hospital_id, String patient_id) {
+	public AppointmentResponseDTO bookAppointment(Appointment appointment, String hospital_id, String patient_id) {
 		
 		Hospital hospital = hospitalRepository.findById(hospital_id)
 				.orElseThrow(() -> new NotFoundException("Hospital with id: " + hospital_id + ", not found!!!"));
@@ -95,7 +101,46 @@ public class AppointmentServiceImpl implements AppointmentService {
 		appointment.setStatus(AppointmentStatus.APPOINTMENT_BOOKED);
 
 //        return appointment;
-		return appointmentRepository.save(appointment);
+		Appointment bookedAppointment = appointmentRepository.save(appointment);
+
+		return makeAppointmentResponseDTO(bookedAppointment);
+	}
+
+	private AppointmentResponseDTO makeAppointmentResponseDTO(Appointment bookedAppointment) {
+		Doctor doc = bookedAppointment.getDoctor();
+		Patient patient = bookedAppointment.getPatient();
+		Hospital hospital = bookedAppointment.getHospital();
+		DoctorDTO doctorDTO = new DoctorDTO(
+				doc.getProfile_id(),
+				doc.getName(),
+				doc.getEmail(),
+				doc.getMobile()
+		);
+		PatientDTO patientDTO = new PatientDTO(
+				patient.getProfile_id(),
+				patient.getName(),
+				patient.getEmail(),
+				patient.getMobile()
+		);
+		HospitalDTO hospitalDTO = new HospitalDTO(
+				hospital.getHospital_id(),
+				hospital.getHospital_name(),
+				hospital.getContact()
+		);
+		return new AppointmentResponseDTO(
+				bookedAppointment.getAppointment_id(),
+				bookedAppointment.getBooking_time(),
+				bookedAppointment.getAppointment_date(),
+				bookedAppointment.getAppointmentStarts(),
+				bookedAppointment.getAppointmentEnds(),
+				bookedAppointment.getDepartment(),
+				bookedAppointment.getAilment_description(),
+				bookedAppointment.getStatus(),
+				bookedAppointment.getSlot(),
+				doctorDTO,
+				patientDTO,
+				hospitalDTO
+		);
 	}
 
 	@Override
@@ -121,9 +166,9 @@ public class AppointmentServiceImpl implements AppointmentService {
 			if (doctors_with_same_department.isEmpty())
 				throw new NotFoundException("Doctors with:" + appointment_depart + ", not found");
 
-			String doctors_available = "";
+			StringBuilder doctors_available = new StringBuilder();
 			for (Doctor doc : doctors_with_same_department) {
-				doctors_available += doc.getProfile_id() + ", ";
+				doctors_available.append(doc.getProfile_id()).append(", ");
 			}
 
 			throw new NotFoundException("You chose " + appointment_depart + ", but Selected Doctor sees "
@@ -171,22 +216,33 @@ public class AppointmentServiceImpl implements AppointmentService {
 	}
 
 	@Override
-	public Appointment getAppointmentById(String appointment_id) {
+	public AppointmentResponseDTO getAppointmentById(String appointment_id) {
 
-		return appointmentRepository.findById(appointment_id)
+		Appointment bookedAppointment = appointmentRepository.findById(appointment_id)
 				.orElseThrow(() -> new NotFoundException("Appointment with id: " + appointment_id + ", not found!!!"));
+		return makeAppointmentResponseDTO(bookedAppointment);
 	}
 
 	@Override
-	public List<Appointment> getAllAppointments() {
+	public List<AppointmentResponseDTO> getAllAppointments() {
 		List<Appointment> appointments = appointmentRepository.findAll();
 		if (appointments.isEmpty())
 			throw new NotFoundException("Appointment Not Found!!!");
-		return appointments;
+		// List<AppointmentResponseDTO> appointmentResponseDTOS = new ArrayList<>();
+		// for(Appointment appointment:appointments){
+		// 	appointmentResponseDTOS.add(
+		// 			makeAppointmentResponseDTO(appointment)
+		// 	);
+		// }
+		// return appointmentResponseDTOS;
+		// return	appointments.stream().map(
+		// 				p->this.makeAppointmentResponseDTO(p)
+		// 		).collect(Collectors.toList());
+		return appointments.stream().map(this::makeAppointmentResponseDTO).collect(Collectors.toList());
 	}
 
 	@Override
-	public Appointment updateAppointment(String appointment_id, Appointment appointment) {
+	public AppointmentResponseDTO updateAppointment(String appointment_id, Appointment appointment) {
 		Appointment retrieved_appointment = appointmentRepository.findById(appointment_id)
 		.orElseThrow(() -> new NotFoundException("Appointment with id: " + appointment_id + ", not found!!!"));
 		String hospital_id = retrieved_appointment.getHospital().getHospital_id();
