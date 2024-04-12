@@ -66,7 +66,12 @@ const materialModules = [
     MatGridListModule,
     MatRadioModule,
     MatDatepickerModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatButtonModule, MatCheckboxModule, MatToolbarModule, 
+    MatChipsModule, MatGridListModule, MatMenuModule, 
+    MatSnackBarModule, MatSelectModule, MatInputModule, 
+    MatSidenavModule, MatCardModule, MatIconModule, MatRadioModule, 
+    MatProgressSpinnerModule, MatTabsModule,MatListModule
   ];
   @NgModule({
     imports: [

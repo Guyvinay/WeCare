@@ -1,20 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Department } from '../../interfaces/department';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { Department } from '../../core/interface/department';
 
 @Component({
-  selector: 'app-dashboard',
-  standalone: true,
-  imports: [FormsModule, CommonModule],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  selector: 'wc-home',
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.css'
 })
-export class DashboardComponent implements OnInit {
+export class HomeComponent implements OnInit {
 
   departments: Department[] = [];
-
-  constructor() { }
 
   ngOnInit(): void {
     this.departments = [
@@ -32,6 +26,9 @@ export class DashboardComponent implements OnInit {
       { iconUrl: '..//..//../assets/department-icons/ent.svg', name: 'ENT', doctorsUrl:"" }
     ];
   }
+
+  
+
 
 
 }
