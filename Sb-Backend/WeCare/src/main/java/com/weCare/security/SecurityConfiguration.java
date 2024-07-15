@@ -24,53 +24,69 @@ import jakarta.servlet.http.HttpServletRequest;
 //@EnableWebSecurity(debug = true)
 public class SecurityConfiguration {
 
-	@Bean
-	SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+    @Bean
+    SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
-		httpSecurity
-				.sessionManagement(session ->
-				                    session.sessionCreationPolicy(
-				                        SessionCreationPolicy.STATELESS)
-				                   )
-				.cors(cors -> {
-					cors.configurationSource(new CorsConfigurationSource() {
-						@Override
-						public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
-							CorsConfiguration cfg = new CorsConfiguration();
-							cfg.setAllowedOriginPatterns(Collections.singletonList("*"));
-							cfg.setAllowedMethods(Collections.singletonList("*"));
-							cfg.setAllowCredentials(true);
-							cfg.setAllowedHeaders(Collections.singletonList("*"));
-							cfg.setExposedHeaders(Arrays.asList("Authorization"));
-							return cfg;
-						}
-					});
-				})
-				.authorizeHttpRequests(auth -> {
-					auth
-					.requestMatchers("/swagger-ui*/**", "/v3/api-docs/**").permitAll()
-					.requestMatchers( "/doctors*/**" , "/patients*/**").permitAll()
-					.requestMatchers("/login/custom").permitAll()
-					.requestMatchers("/chat/**").permitAll()
-					.anyRequest()
-					.authenticated();	
-				})
-				.csrf(csrf->csrf.disable())
-				.addFilterBefore(new JWTValidatorFilter(), BasicAuthenticationFilter.class)
-				.addFilterAfter(new JWTTokenGeneratorFilter(), BasicAuthenticationFilter.class)
-				.formLogin(Customizer.withDefaults())
-				.httpBasic(Customizer.withDefaults());
+        httpSecurity
+                .sessionManagement(session ->
+                        session.sessionCreationPolicy(
+                                SessionCreationPolicy.STATELESS)
+                )
+                .cors(cors -> {
+                    cors.configurationSource(new CorsConfigurationSource() {
+                        @Override
+                        public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+                            CorsConfiguration cfg = new CorsConfiguration();
+                            cfg.setAllowedOriginPatterns(Collections.singletonList("*"));
+                            cfg.setAllowedMethods(Collections.singletonList("*"));
+                            cfg.setAllowCredentials(true);
+                            cfg.setAllowedHeaders(Collections.singletonList("*"));
+                            cfg.setExposedHeaders(Arrays.asList("Authorization"));
+                            return cfg;
+                        }
+                    });
+                })
+/*
+                .cors(cors -> {
+                    cors.configurationSource(new CorsConfigurationSource() {
+                        @Override
+                        public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+                            CorsConfiguration cfg = new CorsConfiguration();
+                            cfg.setAllowedOriginPatterns(Arrays.asList("https://example.com", "https://another-example.com"));
+                            cfg.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+                            cfg.setAllowCredentials(true);
+                            cfg.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));
+                            cfg.setExposedHeaders(Arrays.asList("Authorization", "Content-Disposition"));
+                            return cfg;
+                        }
+                    });
+                })
+*/
+                .authorizeHttpRequests(auth -> {
+                    auth
+                            .requestMatchers("/swagger-ui*/**", "/v3/api-docs/**").permitAll()
+                            .requestMatchers("/doctors*/**", "/patients*/**").permitAll()
+                            .requestMatchers("/login/custom").permitAll()
+                            .requestMatchers("/chat/**").permitAll()
+                            .anyRequest()
+                            .authenticated();
+                })
+                .csrf(csrf -> csrf.disable())
+                .addFilterBefore(new JWTValidatorFilter(), BasicAuthenticationFilter.class)
+                .addFilterAfter(new JWTTokenGeneratorFilter(), BasicAuthenticationFilter.class)
+                .formLogin(Customizer.withDefaults())
+                .httpBasic(Customizer.withDefaults());
 
-		return httpSecurity.build();
-	}
-	
-	@Bean
+        return httpSecurity.build();
+    }
+
+    @Bean
     PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
-	
-	@Bean
-	AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-		return authenticationConfiguration.getAuthenticationManager();
-	}
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
 }
