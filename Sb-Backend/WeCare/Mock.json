@@ -1,136 +1,136 @@
 {
 
    "medications":[
-       
-            {
-                "medication_name": "Ibuprofen",
-                "medication_description": "Pain and fever reducer",
-                "medication_manufacturer": "Johnson & Johnson",
-                "medication_price": 8.99,
-                "medication_quantity": 200,
-                "expirationDate": "2025-11-15"
-            },
-            {
-                "medication_name": "Lisinopril",
-                "medication_description": "Blood pressure medication",
-                "medication_manufacturer": "AstraZeneca",
-                "medication_price": 15.50,
-                "medication_quantity": 200,
-                "expirationDate": "2024-05-22"
-            },
-            {
-                "medication_name": "Cetirizine",
-                "medication_description": "Antihistamine for allergies",
-                "medication_manufacturer": "Novartis",
-                "medication_price": 7.25,
-                "medication_quantity": 220,
-                "expirationDate": "2025-09-08"
-            },
-            {
-                "medication_name": "Atorvastatin",
-                "medication_description": "Statin medication for heart health",
-                "medication_manufacturer": "Sanofi",
-                "medication_price": 22.50,
-                "medication_quantity": 230,
-                "expirationDate": "2025-10-15"
-            },
-            {
-                "medication_name": "Diazepam",
-                "medication_description": "Anxiety and muscle spasms medication",
-                "medication_manufacturer": "Roche",
-                "medication_price": 14.99,
-                "medication_quantity": 250,
-                "expirationDate": "2024-06-05"
-            },
-            {
-                "medication_name": "Acetaminophen",
-                "medication_description": "Pain reliever and fever reducer",
-                "medication_manufacturer": "Bayer",
-                "medication_price": 9.25,
-                "medication_quantity": 250,
-                "expirationDate": "2025-11-30"
-            },
-            {
-                "medication_name": "Levothyroxine",
-                "medication_description": "Thyroid hormone replacement",
-                "medication_manufacturer": "Abbott",
-                "medication_price": 16.99,
-                "medication_quantity": 290,
-                "expirationDate": "2026-03-20"
-            },
-            {
-                "medication_name": "Aspirin",
-                "medication_description": "Analgesic and anti-inflammatory",
-                "medication_manufacturer": "Bayer",
-                "medication_price": 5.49,
-                "medication_quantity": 150,
-                "expirationDate": "2025-09-30"
-            },
-            {
-                "medication_name": "Paracetamol",
-                "medication_description": "Fever reducer",
-                "medication_manufacturer": "Tylenol",
-                "medication_price": 6.75,
-                "medication_quantity": 180,
-                "expirationDate": "2025-12-25"
-            },
-            {
-                "medication_name": "Loratadine",
-                "medication_description": "Antihistamine",
-                "medication_manufacturer": "Claritin",
-                "medication_price": 10.25,
-                "medication_quantity": 220,
-                "expirationDate": "2025-08-15"
-            },
-            {
-                "medication_name": "Amoxicillin",
-                "medication_description": "Antibiotic",
-                "medication_manufacturer": "Pfizer",
-                "medication_price": 15.99,
-                "medication_quantity": 300,
-                "expirationDate": "2026-10-20"
-            },
-            {
-                "medication_name": "Omeprazole",
-                "medication_description": "Proton pump inhibitor",
-                "medication_manufacturer": "Prilosec",
-                "medication_price": 12.49,
-                "medication_quantity": 190,
-                "expirationDate": "2026-02-28"
-            },
-            {
-                "medication_name": "Simvastatin",
-                "medication_description": "Cholesterol-lowering medication",
-                "medication_manufacturer": "Zocor",
-                "medication_price": 14.75,
-                "medication_quantity": 180,
-                "expirationDate": "2025-09-15"
-            },
-            {
-                "medication_name": "Morphine",
-                "medication_description": "Pain reliever",
-                "medication_manufacturer": "Purdue Pharma",
-                "medication_price": 25.99,
-                "medication_quantity": 170,
-                "expirationDate": "2026-04-05"
-            },
-            {
-                "medication_name": "Metformin",
-                "medication_description": "Antidiabetic medication",
-                "medication_manufacturer": "Glucophage",
-                "medication_price": 9.99,
-                "medication_quantity": 160,
-                "expirationDate": "2025-01-12"
-            },
-            {
-                "medication_name": "Warfarin",
-                "medication_description": "Anticoagulant",
-                "medication_manufacturer": "Coumadin",
-                "medication_price": 7.49,
-                "medication_quantity": 150,
-                "expirationDate": "2025-11-30"
-            }
-    ],
+
+       {
+           "medication_name": "Ibuprofen",
+           "medication_description": "Pain and fever reducer",
+           "medication_manufacturer": "Johnson & Johnson",
+           "medication_price": 8.99,
+           "medication_quantity": 200,
+           "expirationDate": "2025-11-15"
+       },
+       {
+           "medication_name": "Lisinopril",
+           "medication_description": "Blood pressure medication",
+           "medication_manufacturer": "AstraZeneca",
+           "medication_price": 15.50,
+           "medication_quantity": 200,
+           "expirationDate": "2025-05-22"
+       },
+       {
+           "medication_name": "Cetirizine",
+           "medication_description": "Antihistamine for allergies",
+           "medication_manufacturer": "Novartis",
+           "medication_price": 7.25,
+           "medication_quantity": 220,
+           "expirationDate": "2025-09-08"
+       },
+       {
+           "medication_name": "Atorvastatin",
+           "medication_description": "Statin medication for heart health",
+           "medication_manufacturer": "Sanofi",
+           "medication_price": 22.50,
+           "medication_quantity": 230,
+           "expirationDate": "2025-10-15"
+       },
+       {
+           "medication_name": "Diazepam",
+           "medication_description": "Anxiety and muscle spasms medication",
+           "medication_manufacturer": "Roche",
+           "medication_price": 14.99,
+           "medication_quantity": 250,
+           "expirationDate": "2025-06-05"
+       },
+       {
+           "medication_name": "Acetaminophen",
+           "medication_description": "Pain reliever and fever reducer",
+           "medication_manufacturer": "Bayer",
+           "medication_price": 9.25,
+           "medication_quantity": 250,
+           "expirationDate": "2025-11-30"
+       },
+       {
+           "medication_name": "Levothyroxine",
+           "medication_description": "Thyroid hormone replacement",
+           "medication_manufacturer": "Abbott",
+           "medication_price": 16.99,
+           "medication_quantity": 290,
+           "expirationDate": "2026-03-20"
+       },
+       {
+           "medication_name": "Aspirin",
+           "medication_description": "Analgesic and anti-inflammatory",
+           "medication_manufacturer": "Bayer",
+           "medication_price": 5.49,
+           "medication_quantity": 150,
+           "expirationDate": "2025-09-30"
+       },
+       {
+           "medication_name": "Paracetamol",
+           "medication_description": "Fever reducer",
+           "medication_manufacturer": "Tylenol",
+           "medication_price": 6.75,
+           "medication_quantity": 180,
+           "expirationDate": "2025-12-25"
+       },
+       {
+           "medication_name": "Loratadine",
+           "medication_description": "Antihistamine",
+           "medication_manufacturer": "Claritin",
+           "medication_price": 10.25,
+           "medication_quantity": 220,
+           "expirationDate": "2025-08-15"
+       },
+       {
+           "medication_name": "Amoxicillin",
+           "medication_description": "Antibiotic",
+           "medication_manufacturer": "Pfizer",
+           "medication_price": 15.99,
+           "medication_quantity": 300,
+           "expirationDate": "2026-10-20"
+       },
+       {
+           "medication_name": "Omeprazole",
+           "medication_description": "Proton pump inhibitor",
+           "medication_manufacturer": "Prilosec",
+           "medication_price": 12.49,
+           "medication_quantity": 190,
+           "expirationDate": "2026-02-28"
+       },
+       {
+           "medication_name": "Simvastatin",
+           "medication_description": "Cholesterol-lowering medication",
+           "medication_manufacturer": "Zocor",
+           "medication_price": 14.75,
+           "medication_quantity": 180,
+           "expirationDate": "2025-09-15"
+       },
+       {
+           "medication_name": "Morphine",
+           "medication_description": "Pain reliever",
+           "medication_manufacturer": "Purdue Pharma",
+           "medication_price": 25.99,
+           "medication_quantity": 170,
+           "expirationDate": "2026-04-05"
+       },
+       {
+           "medication_name": "Metformin",
+           "medication_description": "Antidiabetic medication",
+           "medication_manufacturer": "Glucophage",
+           "medication_price": 9.99,
+           "medication_quantity": 160,
+           "expirationDate": "2025-01-12"
+       },
+       {
+           "medication_name": "Warfarin",
+           "medication_description": "Anticoagulant",
+           "medication_manufacturer": "Coumadin",
+           "medication_price": 7.49,
+           "medication_quantity": 150,
+           "expirationDate": "2025-11-30"
+       }
+   ],
 
     "hospitals":[
         {
