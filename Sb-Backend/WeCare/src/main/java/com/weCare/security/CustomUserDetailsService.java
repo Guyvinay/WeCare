@@ -17,11 +17,12 @@ import com.weCare.exceptions.NotFoundException;
 import com.weCare.modals.Profile;
 import com.weCare.repository.ProfileRepository;
 
-//@Component
+@Component
 public class CustomUserDetailsService implements UserDetailsService {
 
 	@Autowired
 	private ProfileRepository profileRepository;
+
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

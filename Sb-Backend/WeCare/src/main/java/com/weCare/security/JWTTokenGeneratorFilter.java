@@ -75,7 +75,7 @@ public class JWTTokenGeneratorFilter extends OncePerRequestFilter {
 //		      return !request.getServletPath().equals("/doctors/customLogin");
 		boolean shouldNotFilter = request.getServletPath().equals("/login/basic") || request.getServletPath().equals("/login/custom");
 //		System.out.println(shouldFilter);
-		return !shouldNotFilter;
+ 		return !shouldNotFilter;
 	}
 
 }

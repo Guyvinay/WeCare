@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -26,6 +27,10 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+
+
+	@Autowired
+	private CustomUserDetailsService customUserDetailsService;
 	
 
 	@Override
@@ -36,12 +41,14 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 //		System.out.println(userName);
 		
 		Optional<Profile> optional = profileRepository.findByEmail(userName);
-		
-		if(optional.isEmpty())
-			throw new BadCredentialsException("No user found with username: "+userName);
+
+		UserDetails userDetails = customUserDetailsService.loadUserByUsername(userName);
+
+//		if(optional.isEmpty())
+//			throw new BadCredentialsException("No user found with username: "+userName);
 		
 		Profile profile = optional.get();
-		boolean matches = passwordEncoder.matches(password, profile.getPassWord());
+		boolean matches = passwordEncoder.matches(password, userDetails.getPassword());
 		if(matches) {
 			List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 			grantedAuthorities.add(new SimpleGrantedAuthority(profile.getRole().toString()));
