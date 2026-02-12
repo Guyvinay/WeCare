@@ -8,7 +8,7 @@
            "medication_manufacturer": "Johnson & Johnson",
            "medication_price": 8.99,
            "medication_quantity": 200,
-           "expirationDate": "2025-11-15"
+           "expirationDate": "2027-11-15"
        },
        {
            "medication_name": "Lisinopril",
@@ -16,7 +16,7 @@
            "medication_manufacturer": "AstraZeneca",
            "medication_price": 15.50,
            "medication_quantity": 200,
-           "expirationDate": "2025-05-22"
+           "expirationDate": "2027-05-22"
        },
        {
            "medication_name": "Cetirizine",
@@ -24,7 +24,7 @@
            "medication_manufacturer": "Novartis",
            "medication_price": 7.25,
            "medication_quantity": 220,
-           "expirationDate": "2025-09-08"
+           "expirationDate": "2027-09-08"
        },
        {
            "medication_name": "Atorvastatin",
@@ -32,7 +32,7 @@
            "medication_manufacturer": "Sanofi",
            "medication_price": 22.50,
            "medication_quantity": 230,
-           "expirationDate": "2025-10-15"
+           "expirationDate": "2027-10-15"
        },
        {
            "medication_name": "Diazepam",
@@ -40,7 +40,7 @@
            "medication_manufacturer": "Roche",
            "medication_price": 14.99,
            "medication_quantity": 250,
-           "expirationDate": "2025-06-05"
+           "expirationDate": "2027-06-05"
        },
        {
            "medication_name": "Acetaminophen",
@@ -48,7 +48,7 @@
            "medication_manufacturer": "Bayer",
            "medication_price": 9.25,
            "medication_quantity": 250,
-           "expirationDate": "2025-11-30"
+           "expirationDate": "2027-11-30"
        },
        {
            "medication_name": "Levothyroxine",
@@ -56,7 +56,7 @@
            "medication_manufacturer": "Abbott",
            "medication_price": 16.99,
            "medication_quantity": 290,
-           "expirationDate": "2026-03-20"
+           "expirationDate": "2027-03-20"
        },
        {
            "medication_name": "Aspirin",
@@ -64,7 +64,7 @@
            "medication_manufacturer": "Bayer",
            "medication_price": 5.49,
            "medication_quantity": 150,
-           "expirationDate": "2025-09-30"
+           "expirationDate": "2027-09-30"
        },
        {
            "medication_name": "Paracetamol",
@@ -72,7 +72,7 @@
            "medication_manufacturer": "Tylenol",
            "medication_price": 6.75,
            "medication_quantity": 180,
-           "expirationDate": "2025-12-25"
+           "expirationDate": "2027-12-25"
        },
        {
            "medication_name": "Loratadine",
@@ -80,7 +80,7 @@
            "medication_manufacturer": "Claritin",
            "medication_price": 10.25,
            "medication_quantity": 220,
-           "expirationDate": "2025-08-15"
+           "expirationDate": "2027-08-15"
        },
        {
            "medication_name": "Amoxicillin",
@@ -88,7 +88,7 @@
            "medication_manufacturer": "Pfizer",
            "medication_price": 15.99,
            "medication_quantity": 300,
-           "expirationDate": "2026-10-20"
+           "expirationDate": "2027-10-20"
        },
        {
            "medication_name": "Omeprazole",
@@ -96,7 +96,7 @@
            "medication_manufacturer": "Prilosec",
            "medication_price": 12.49,
            "medication_quantity": 190,
-           "expirationDate": "2026-02-28"
+           "expirationDate": "2027-02-28"
        },
        {
            "medication_name": "Simvastatin",
@@ -104,7 +104,7 @@
            "medication_manufacturer": "Zocor",
            "medication_price": 14.75,
            "medication_quantity": 180,
-           "expirationDate": "2025-09-15"
+           "expirationDate": "2027-09-15"
        },
        {
            "medication_name": "Morphine",
@@ -112,7 +112,7 @@
            "medication_manufacturer": "Purdue Pharma",
            "medication_price": 25.99,
            "medication_quantity": 170,
-           "expirationDate": "2026-04-05"
+           "expirationDate": "2027-04-05"
        },
        {
            "medication_name": "Metformin",
@@ -120,7 +120,7 @@
            "medication_manufacturer": "Glucophage",
            "medication_price": 9.99,
            "medication_quantity": 160,
-           "expirationDate": "2025-01-12"
+           "expirationDate": "2027-01-12"
        },
        {
            "medication_name": "Warfarin",
@@ -128,7 +128,7 @@
            "medication_manufacturer": "Coumadin",
            "medication_price": 7.49,
            "medication_quantity": 150,
-           "expirationDate": "2025-11-30"
+           "expirationDate": "2027-11-30"
        }
    ],
 
